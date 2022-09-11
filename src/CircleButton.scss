@@ -1,0 +1,44 @@
+@import "./styles/colors.scss";
+@import "./styles/fonts.scss";
+@import "./styles/text.scss";
+@import "./styles/buttons.scss";
+
+.circle-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1.6rem;
+
+  .circle {
+    @include textColorAndShadow($colorYellow);
+    &:before {
+      content: "◎";
+    }
+  }
+
+  &.red {
+    .circle {
+      @include textColorAndShadow($colorRed);
+    }
+  }
+
+  &.small {
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+
+  &.disabled {
+    .circle {
+      @include textColorAndShadow($colorLightGray);
+    }
+  }
+
+  &:hover {
+    .circle {
+      &:before {
+        content: "◉";
+      }
+    }
+  }
+}

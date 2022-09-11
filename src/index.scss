@@ -1,0 +1,35 @@
+@import "./styles/colors.scss";
+@import "./styles/fonts.scss";
+@import "./styles/text.scss";
+@import "./styles/buttons.scss";
+@import "./styles/effects.scss";
+@import "./styles/separators.scss";
+@import "./styles/inputs.scss";
+
+body {
+  margin: 0;
+  background-color: $colorBlack;
+  font-family: "DotGothic16", sans-serif;
+  color: $colorGreen;
+}
+
+.panel {
+  border: 4px solid $colorGray;
+  border-top-color: $colorLightGray;
+  border-bottom-color: $colorDarkestGray;
+
+  background: linear-gradient(to bottom, $colorGray, $colorDarkGray),
+    url(./assets/noise.svg);
+}
+
+.grunge {
+  background-color: $colorDarkestGray;
+  background-image: url("./assets/subtle-grunge.png");
+  background-blend-mode: overlay;
+}
+
+.light-grunge {
+  background-color: $colorLightGray;
+  background-image: url("./assets/subtle-grunge.png");
+  background-blend-mode: overlay;
+}

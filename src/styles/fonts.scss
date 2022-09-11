@@ -1,0 +1,14 @@
+@font-face {
+  font-family: "Sofachrome";
+  src: url("./assets/fonts/sofhr.woff") format("woff");
+}
+
+@font-face {
+  font-family: "DotGothic16";
+  src: url("./assets/fonts/DotGothic16-Regular.ttf") format("truetype");
+}
+
+$headerFont: "Sofachrome", sans-serif;
+$bodyFont: "DotGothic16", sans-serif;
+$systemFont: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;

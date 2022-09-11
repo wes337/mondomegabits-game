@@ -1,0 +1,158 @@
+@import "./colors.scss";
+@import "./animations.scss";
+@import "./fonts.scss";
+
+@mixin textColorAndShadow($color) {
+  color: $color;
+  text-shadow: 0 0 25px $color;
+}
+
+@mixin defaultTextSizing() {
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  line-height: 20px;
+}
+
+p,
+label {
+  @include textColorAndShadow($colorGreen);
+  @include defaultTextSizing();
+
+  margin-left: 20px;
+  text-indent: -20px;
+}
+
+.green {
+  @include textColorAndShadow($colorGreen);
+}
+
+.white {
+  @include textColorAndShadow($colorWhite);
+  text-shadow: 0 0 25px rgba($colorWhite, 0.5);
+  font-weight: 600;
+}
+
+.yellow {
+  @include textColorAndShadow($colorYellow);
+}
+
+.red {
+  @include textColorAndShadow($colorRed);
+}
+
+.purple {
+  @include textColorAndShadow($colorPurple);
+}
+
+.pink {
+  @include textColorAndShadow($colorPink);
+}
+
+.teal {
+  @include textColorAndShadow($colorTeal);
+}
+
+.orange {
+  @include textColorAndShadow($colorOrange);
+}
+
+.blue {
+  @include textColorAndShadow($colorBlue);
+}
+
+.glow {
+  @include textColorAndShadow($colorTeal);
+  letter-spacing: 2.5px;
+
+  background: linear-gradient(
+    -89deg,
+    $colorTeal 5%,
+    $colorPurple 50%,
+    $colorTeal 90%
+  );
+
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 2px transparent;
+
+  animation: 1s linear infinite alternate backgroundPosition;
+}
+
+.color-change {
+  animation: colorChange 5s alternate infinite;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.wide {
+  letter-spacing: 10px;
+}
+
+.underline {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+.double-arrow {
+  &::before {
+    content: "«";
+    font-size: 24px;
+    line-height: 20px;
+    margin-right: 2px;
+  }
+
+  &::after {
+    content: "»";
+    font-size: 24px;
+    line-height: 20px;
+    margin-left: 2px;
+  }
+}
+
+.arrow {
+  &::before {
+    font-family: $systemFont;
+    content: "→";
+  }
+
+  &::after {
+    font-family: $systemFont;
+    content: "←";
+  }
+}
+
+.bracket {
+  &::before,
+  &::after {
+    font-family: $systemFont;
+  }
+
+  &::before {
+    content: "『";
+  }
+
+  &::after {
+    content: "』";
+  }
+}
+
+ul.list {
+  list-style: none;
+  margin: 5px 0;
+  padding-left: 20px;
+  @include textColorAndShadow($colorGreen);
+  @include defaultTextSizing();
+
+  li {
+    margin: 5px 0;
+
+    &::before {
+      content: "\25C6";
+      color: $colorYellow;
+      margin-right: 10px;
+    }
+  }
+}

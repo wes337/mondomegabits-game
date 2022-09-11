@@ -1,0 +1,42 @@
+@import "./styles/colors.scss";
+
+.card {
+  cursor: grab;
+  max-width: 180px;
+  transition: transform 0.2s ease-in-out;
+
+  &.opponent {
+    cursor: pointer;
+  }
+
+  &.tapped {
+    transform: rotate(90deg);
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  &.focus {
+    z-index: 0;
+
+    img {
+      outline: 4px solid $colorRed;
+    }
+  }
+
+  &:hover {
+    img {
+      outline: 2px solid $colorYellow;
+      filter: brightness(1.25);
+    }
+  }
+
+  &:active {
+    img {
+      outline: 4px solid $colorTeal;
+    }
+  }
+}

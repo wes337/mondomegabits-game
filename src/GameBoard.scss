@@ -1,0 +1,134 @@
+@import "./styles/colors.scss";
+@import "./styles/fonts.scss";
+
+.game-board {
+  display: grid;
+  grid-template-columns: 1fr 10fr 3fr;
+  grid-template-rows: 5% 75% 15%;
+  height: 100%;
+  width: 100%;
+
+  .header {
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+  }
+
+  .left-side-bar {
+    grid-column: 1 / 2;
+    grid-row: 1 / span all;
+    max-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    fieldset {
+      border: 1px solid $colorRed;
+    }
+
+    .stats {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .stat {
+        text-align: center;
+        padding: 0.5rem;
+        background-color: $colorGray;
+      }
+
+      .stat-number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0.25rem;
+        padding: 0.5rem;
+        font-size: 1.4rem;
+        font-family: $headerFont;
+        background-color: $colorBlack;
+        color: $colorWhite;
+        outline: 4px inset $colorGray;
+      }
+    }
+
+    .card-piles {
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    .turn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0.5rem;
+      background-color: $colorGray;
+
+      .turn-number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        font-family: $headerFont;
+        color: $colorWhite;
+        margin: 0.5rem;
+      }
+
+      .end-turn-button {
+        padding: 0;
+      }
+    }
+  }
+
+  .main {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+
+    display: flex;
+    flex-direction: column;
+
+    &.solo-play {
+      grid-row: 1 / span 2;
+    }
+
+    .middle {
+      width: 100%;
+      overflow: hidden;
+    }
+  }
+
+  .right-side-bar {
+    grid-column: 3 / 3;
+    grid-row: 1 / span all;
+
+    display: flex;
+    flex-direction: column;
+    max-height: 100vh;
+    overflow: clip;
+
+    &.chat-expanded {
+      grid-template-rows: auto 1fr 2fr;
+    }
+
+    .options {
+      margin-left: auto;
+    }
+
+    .game-chat {
+      display: flex;
+      flex-direction: column;
+      max-height: 50%;
+
+      .expand-button {
+        margin-left: auto;
+      }
+    }
+  }
+
+  .footer {
+    grid-column: 2 / 3;
+    grid-row: 3 / span all;
+    z-index: 0;
+  }
+}

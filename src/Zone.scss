@@ -1,0 +1,54 @@
+@import "./styles/colors.scss";
+
+.zone {
+  position: relative;
+  display: flex;
+  flex-grow: 1;
+  overflow: clip;
+  min-height: 25px;
+
+  &:after {
+    top: 0;
+    right: 0;
+
+    position: absolute;
+  }
+
+  &.the-think-tank {
+    background-color: $colorGray;
+
+    &:after {
+      content: "The Think Tank";
+    }
+
+    &.opponent {
+    }
+  }
+
+  &.buffer-zone {
+    background-color: rgba($colorGray, 0.5);
+    &:after {
+      content: "Buffer Zone";
+    }
+
+    &.opponent {
+    }
+  }
+
+  &.battle-zone {
+    background-color: rgba($colorGray, 0.05);
+
+    &:after {
+      content: "Battle Zone";
+    }
+
+    &.opponent {
+    }
+  }
+
+  &.drag-over {
+    outline: 4px solid $colorRed;
+    z-index: 1;
+    filter: saturate(4);
+  }
+}

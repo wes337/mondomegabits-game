@@ -1,0 +1,26 @@
+@import "./colors.scss";
+@import "./text.scss";
+@import "./fonts.scss";
+
+input {
+  font-family: "DotGothic16", sans-serif;
+  @include textColorAndShadow($colorGreen);
+  @include defaultTextSizing();
+
+  background: linear-gradient(
+    180deg,
+    $colorBlack 0%,
+    rgba($colorGreen, 0.15) 50%,
+    $colorBlack 100%
+  );
+
+  border: 4px solid $colorGray;
+  border-top-color: $colorLightGray;
+  border-bottom-color: $colorDarkestGray;
+  outline: 2px solid rgba($colorGreen, 0.25);
+
+  &:focus,
+  &:active {
+    outline: 2px solid rgba($colorGreen, 0.5);
+  }
+}

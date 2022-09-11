@@ -1,0 +1,18 @@
+.plasma {
+  --bg-size: 512px;
+  --steps: 512;
+
+  background-size: var(--bg-size);
+  background-image: url("./assets/moire1.png"), url("./assets/moire2.png");
+  background-size: contain;
+  animation: sliding 8s steps(var(--steps)) infinite;
+
+  @keyframes sliding {
+    from {
+      background-position: var(--bg-size) var(--bg-size), 0 var(--bg-size);
+    }
+    to {
+      background-position: 0 0, var(--bg-size) 0;
+    }
+  }
+}

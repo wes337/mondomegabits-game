@@ -1,0 +1,36 @@
+.hand {
+  display: flex;
+
+  .card {
+    cursor: grab;
+
+    &:hover {
+      transform: translateY(-75px);
+
+      img {
+        outline: 2px solid red;
+      }
+    }
+  }
+
+  &.opponent {
+    .card {
+      cursor: not-allowed;
+
+      transform: translateY(-80%);
+      z-index: 1;
+
+      img {
+        transform: rotate(180deg);
+      }
+
+      &:hover {
+        transform: translateY(-75%);
+
+        img {
+          outline: 2px solid red;
+        }
+      }
+    }
+  }
+}

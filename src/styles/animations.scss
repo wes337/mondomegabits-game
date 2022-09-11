@@ -1,0 +1,123 @@
+@import "./colors.scss";
+
+@keyframes backgroundPosition {
+  0% {
+    background-position: 0 200px;
+  }
+  50% {
+    background-position: 200px 0;
+  }
+  100% {
+    background-position: 0 200px;
+  }
+}
+
+@keyframes noise {
+  to {
+    background-position: 0 200px;
+  }
+}
+
+@keyframes flicker {
+  0%,
+  19%,
+  21%,
+  23%,
+  25%,
+  54%,
+  56%,
+  100% {
+    transform: translateX(0);
+    filter: drop-shadow(0px 0px 5px currentColor);
+  }
+
+  20%,
+  24%,
+  55% {
+    transform: translateX(0.5px);
+    filter: drop-shadow(0px 0px 20px currentColor) contrast(200%);
+  }
+}
+
+@keyframes colorChange {
+  // blue green yellow red purple
+  0% {
+    color: $colorBlue;
+    text-shadow: 0 0 25px rgba($colorBlue, 0.75);
+  }
+  20% {
+    color: $colorTeal;
+    text-shadow: 0 0 25px rgba($colorTeal, 0.75);
+  }
+  40% {
+    color: $colorGreen;
+    text-shadow: 0 0 25px rgba($colorGreen, 0.75);
+  }
+  60% {
+    color: $colorYellow;
+    text-shadow: 0 0 25px rgba($colorYellow, 0.75);
+  }
+  80% {
+    color: $colorRed;
+    text-shadow: 0 0 25px rgba($colorRed, 0.75);
+  }
+  100% {
+    color: $colorPurple;
+    text-shadow: 0 0 25px rgba($colorPurple, 0.75);
+  }
+}
+
+@keyframes backgroundOverlayIn {
+  0% {
+    background-color: rgba($colorBlack, 0);
+  }
+  100% {
+    background-color: rgba($colorBlack, 0.75);
+  }
+}
+
+@keyframes backgroundOverlayOut {
+  0% {
+    background-color: rgba($colorBlack, 0.75);
+  }
+  100% {
+    background-color: rgba($colorBlack, 0);
+  }
+}
+
+@keyframes spinIn {
+  0% {
+    left: 100vw;
+    transform: rotateY(360deg);
+  }
+  100% {
+    left: 0;
+    transform: rotateY(0deg);
+  }
+}
+
+@keyframes spinOut {
+  0% {
+    right: 0;
+    transform: rotateY(0deg);
+  }
+  100% {
+    right: 100vw;
+    transform: rotateY(-360deg);
+  }
+}
+
+@keyframes float {
+  0% {
+    box-shadow: 0 5px 15px 0px rgba($colorBlack, 0.6);
+    transform: translateY(0px);
+  }
+  50% {
+    box-shadow: 0 25px 15px 0px rgba($colorBlack, 0.2);
+    transform: translateY(-10px);
+  }
+  100% {
+    box-shadow: 0 5px 15px 0px rgba($colorBlack, 0.6);
+    transform: translateY(0px);
+  }
+}

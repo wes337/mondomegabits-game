@@ -1,0 +1,27 @@
+@import "./styles/fonts.scss";
+
+.countdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-transform: uppercase;
+
+  h1 {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+
+  .count {
+    font-family: $headerFont;
+    text-shadow: 0;
+    font-size: 3rem;
+    font-weight: 800;
+    padding: 1rem;
+
+    span {
+      text-shadow: none;
+    }
+  }
+}
