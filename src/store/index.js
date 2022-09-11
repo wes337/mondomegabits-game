@@ -11,13 +11,9 @@ function useStore() {
       connected: true,
     });
 
-    var t = setInterval(function () {
-      if (ws.readyState != 1) {
-        clearInterval(t);
-        return;
-      }
+    setInterval(() => {
       ws.send('{type:"ping"}');
-    }, 55000);
+    }, 40000);
   };
 
   ws.onclose = () => {
