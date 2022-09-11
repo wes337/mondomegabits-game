@@ -29,7 +29,8 @@
     display: grid;
     grid-template-columns: 1fr auto;
     justify-content: flex-start;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 
     grid-auto-rows: max-content;
   }
