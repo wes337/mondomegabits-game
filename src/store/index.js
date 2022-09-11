@@ -10,6 +10,14 @@ function useStore() {
     setState({
       connected: true,
     });
+
+    var t = setInterval(function () {
+      if (ws.readyState != 1) {
+        clearInterval(t);
+        return;
+      }
+      ws.send('{type:"ping"}');
+    }, 55000);
   };
 
   ws.onclose = () => {
