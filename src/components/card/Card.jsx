@@ -1,12 +1,13 @@
-import { createMemo } from "solid-js";
-import CardBack from "../../assets/card-back.png";
-import useStore from "../../store";
+import { createMemo, Show } from "solid-js";
 import { getCardImageById } from "../../utils";
+import useStore from "../../store";
+import CardBack from "../../assets/card-back.png";
 import "./Card.scss";
 
 function Card({ card, opponent, location }) {
   const { state, setState, sendMessage } = useStore();
   const faceDown = (location === "hand" && opponent) || card.faceDown;
+  const canExpand = location !== "hand" && !(faceDown && opponent);
 
   const cardIsOnBoard = createMemo(() =>
     ["battle-zone", "the-think-tank", "buffer-zone"].includes(location)
@@ -126,6 +127,16 @@ function Card({ card, opponent, location }) {
     }
   };
 
+  const expandCard = (event) => {
+    event.stopPropagation();
+    setState((state) => ({
+      focus: {
+        ...state.focus,
+        spotlight: card,
+      },
+    }));
+  };
+
   const cardClassName = () => {
     let className = "card";
 
@@ -153,6 +164,11 @@ function Card({ card, opponent, location }) {
       onDragStart={onDragStart}
       draggable
     >
+      <Show when={canExpand}>
+        <button class="expand-card" onClick={expandCard}>
+          ⇱
+        </button>
+      </Show>
       <img
         id={card.uuid}
         src={faceDown ? CardBack : getCardImageById(card.id)}

@@ -1,9 +1,33 @@
 @import "../../styles/colors.scss";
 
 .card {
+  position: relative;
   cursor: grab;
   max-width: 180px;
   transition: transform 0.2s ease-in-out;
+
+  .expand-card {
+    opacity: 0;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: $colorDarkGray;
+    color: $colorGreen;
+    padding: 0 0.25rem;
+    margin: 0.25rem;
+    border: 4px outset $colorGray;
+    z-index: 1;
+
+    &:hover {
+      background-color: $colorGray;
+      outline: 1px solid $colorGreen;
+    }
+
+    &:active {
+      border: 4px inset $colorGray;
+    }
+  }
 
   &.opponent {
     cursor: pointer;
@@ -20,7 +44,7 @@
   }
 
   &.focus {
-    z-index: 0;
+    z-index: 1;
 
     img {
       outline: 4px solid $colorRed;
@@ -31,6 +55,10 @@
     img {
       outline: 2px solid $colorYellow;
       filter: brightness(1.25);
+    }
+
+    .expand-card {
+      opacity: 1;
     }
   }
 
