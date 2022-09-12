@@ -37,7 +37,7 @@
     outline: 2px solid rgba($colorGreen, 0.25);
 
     background: linear-gradient(to bottom, $colorGray, $colorDarkGray),
-      url(./assets/noise.svg);
+      url(../../assets/noise.svg);
 
     .connect-button {
       @include defaultTextSizing();
