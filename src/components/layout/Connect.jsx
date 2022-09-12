@@ -1,5 +1,5 @@
 import { createSignal, onMount } from "solid-js";
-import useStore from "./store";
+import useStore from "../../store";
 import "./Connect.scss";
 
 function Connect() {

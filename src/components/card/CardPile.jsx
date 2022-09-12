@@ -1,5 +1,5 @@
-import useStore from "./store";
-import CardBack from "./assets/card-back.png";
+import useStore from "../../store";
+import CardBack from "../../assets/card-back.png";
 import "./CardPile.scss";
 
 function CardPile({ name, cards, opponent, canView }) {

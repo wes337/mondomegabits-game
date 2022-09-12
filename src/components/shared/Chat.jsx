@@ -1,5 +1,5 @@
 import { createSignal, onMount, createEffect, For } from "solid-js";
-import useStore from "./store";
+import useStore from "../../store";
 import "./Chat.scss";
 
 function Chat() {
@@ -74,7 +74,7 @@ function Chat() {
 
   return (
     <div class="chat">
-      <div class="messages" ref={messagesRef}>
+      <div class="messages grunge" ref={messagesRef}>
         <For each={state.room.chatMessages}>
           {(message) =>
             message.user.id === "SYSTEM" ? (

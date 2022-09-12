@@ -1,7 +1,7 @@
 import { createMemo } from "solid-js";
-import CardBack from "./assets/card-back.png";
-import useStore from "./store";
-import { getCardImageById } from "./utils";
+import CardBack from "../../assets/card-back.png";
+import useStore from "../../store";
+import { getCardImageById } from "../../utils";
 import "./Card.scss";
 
 function Card({ card, opponent, location }) {

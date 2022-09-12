@@ -1,6 +1,6 @@
 import { createMemo, For } from "solid-js";
-import useStore from "./store";
-import Card from "./Card";
+import useStore from "../../store";
+import Card from "../card/Card";
 import "./Hand.scss";
 
 function Hand({ opponent }) {

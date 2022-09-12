@@ -1,3 +1,5 @@
+@import "../../styles/colors.scss";
+
 .hand {
   display: flex;
 
@@ -8,7 +10,7 @@
       transform: translateY(-75px);
 
       img {
-        outline: 2px solid red;
+        outline: 2px solid $colorRed;
       }
     }
   }
@@ -28,7 +30,7 @@
         transform: translateY(-75%);
 
         img {
-          outline: 2px solid red;
+          outline: 2px solid $colorRed;
         }
       }
     }

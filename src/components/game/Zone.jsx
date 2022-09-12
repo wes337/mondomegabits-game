@@ -1,7 +1,7 @@
 import { createMemo } from "solid-js";
-import { hyphenToCamelCase } from "./utils";
-import useStore from "./store";
-import Card from "./Card";
+import { hyphenToCamelCase } from "../../utils";
+import useStore from "../../store";
+import Card from "../card/Card";
 import "./Zone.scss";
 
 function Zone({ name, opponent }) {

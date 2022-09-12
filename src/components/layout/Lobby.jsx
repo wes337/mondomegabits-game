@@ -1,8 +1,7 @@
 import { createSignal, For } from "solid-js";
-import useStore from "./store";
+import useStore from "../../store";
+import CircleButton from "../shared/CircleButton";
 import "./Lobby.scss";
-import CircleButton from "./CircleButton";
-import Plasma from "./Plasma";
 
 function Lobby() {
   const { state, sendMessage } = useStore();
@@ -26,7 +25,7 @@ function Lobby() {
 
   return (
     <div class="lobby">
-      <div class="rooms">
+      <div class="rooms grunge">
         <div class="headers yellow">
           <div class="header">Code</div>
           <div class="header">Users</div>

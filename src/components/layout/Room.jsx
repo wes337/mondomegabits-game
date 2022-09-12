@@ -1,9 +1,9 @@
 import { createSignal, createMemo, For, Show } from "solid-js";
-import useStore from "./store";
-import Chat from "./Chat";
+import useStore from "../../store";
+import Chat from "../shared/Chat";
+import CountDown from "../shared/CountDown";
+import CircleButton from "../shared/CircleButton";
 import "./Room.scss";
-import CountDown from "./CountDown";
-import CircleButton from "./CircleButton";
 
 function Room() {
   const [ready, setReady] = createSignal(false);

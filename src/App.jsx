@@ -1,10 +1,10 @@
 import { createMemo, Show } from "solid-js";
 import useStore from "./store";
-import Connect from "./Connect";
-import Lobby from "./Lobby";
+import Connect from "./components/layout/Connect";
+import Lobby from "./components/layout/Lobby";
+import Room from "./components/layout/Room";
+import GameBoard from "./components/game/GameBoard";
 import "./App.scss";
-import Room from "./Room";
-import GameBoard from "./GameBoard";
 
 function App() {
   const { state } = useStore();

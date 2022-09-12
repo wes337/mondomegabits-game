@@ -1,5 +1,5 @@
-import { createMemo, createEffect, For, Show } from "solid-js";
-import useStore from "./store";
+import { createMemo, Show } from "solid-js";
+import useStore from "../../store";
 import "./CardFocus.scss";
 
 function CardFocus() {

@@ -1,14 +1,13 @@
-import { createSignal, createMemo, onMount, For } from "solid-js";
-import useStore from "./store";
-import Chat from "./Chat";
-import OpponentHand from "./OpponentHand";
+import { createMemo } from "solid-js";
+import useStore from "../../store";
+import CardFocus from "../card/CardFocus";
+import CardPile from "../card/CardPile";
+import CircleButton from "../shared/CircleButton";
+import Chat from "../shared/Chat";
+import Plasma from "../shared/Plasma";
 import Hand from "./Hand";
-import CardFocus from "./CardFocus";
-import "./GameBoard.scss";
 import Zone from "./Zone";
-import CardPile from "./CardPile";
-import CircleButton from "./CircleButton";
-import Plasma from "./Plasma";
+import "./GameBoard.scss";
 
 function GameBoard() {
   let mainRef;

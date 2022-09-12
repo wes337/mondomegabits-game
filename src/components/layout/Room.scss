@@ -1,4 +1,4 @@
-@import "./styles/colors.scss";
+@import "../../styles/colors.scss";
 
 .room {
   display: grid;
@@ -81,7 +81,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(black, 0.5);
+    background-color: rgba($colorBlack, 0.5);
 
     .modal-footer {
       display: flex;

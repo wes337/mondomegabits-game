@@ -1,5 +1,5 @@
-@import "./styles/colors.scss";
-@import "./styles/text.scss";
+@import "../../styles/colors.scss";
+@import "../../styles/text.scss";
 
 .lobby {
   display: grid;
@@ -10,9 +10,6 @@
 
   .rooms {
     grid-column: 1 / 2;
-    background-color: $colorDarkestGray;
-    background-image: url("./assets/subtle-grunge.png");
-    background-blend-mode: overlay;
     padding: 1rem;
 
     .headers {
@@ -53,7 +50,7 @@
     outline: 2px solid rgba($colorBlack, 0.25);
 
     background: linear-gradient(to bottom, $colorGray, $colorDarkGray),
-      url(./assets/noise.svg);
+      url(../../assets/noise.svg);
 
     .room-join {
       margin: auto;
@@ -97,7 +94,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(black, 0.5);
+    background-color: rgba($colorBlack, 0.5);
 
     .modal-footer {
       display: flex;
