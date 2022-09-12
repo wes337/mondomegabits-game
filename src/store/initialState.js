@@ -14,4 +14,5 @@ export default {
     spotlight: null,
   },
   chatExpanded: false,
+  chatInput: "",
 };

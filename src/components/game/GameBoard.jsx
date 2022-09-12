@@ -13,9 +13,12 @@ function GameBoard() {
   const onClick = (event) => {
     // Remove focus from cards when clicking
     // something else inside the main board
+
+    const mainBoard = document.querySelector(".main-board");
+
     const clickedAnotherElementInsideMainBoard =
       event.target.id !== state.focus.current?.uuid &&
-      mainRef.contains(event.target);
+      mainBoard.contains(event.target);
 
     if (clickedAnotherElementInsideMainBoard) {
       setState((state) => ({

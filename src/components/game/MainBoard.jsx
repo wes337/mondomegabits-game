@@ -5,13 +5,12 @@ import Zone from "./Zone";
 import "./MainBoard.scss";
 
 function MainBoard() {
-  let mainRef;
   const { state } = useStore();
 
   const soloPlay = createMemo(() => state.game.puppetMasters.length === 1);
 
   return (
-    <div ref={mainRef} class={`main-board ${soloPlay() ? " solo-play" : ""}`}>
+    <div class={`main-board ${soloPlay() ? " solo-play" : ""}`}>
       <Show when={!soloPlay()}>
         <Zone name="the-think-tank" opponent />
         <Zone name="buffer-zone" opponent />

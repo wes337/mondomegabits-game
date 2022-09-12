@@ -1,4 +1,4 @@
-import { createSignal, onMount, createEffect, For } from "solid-js";
+import { onMount, createEffect, For } from "solid-js";
 import useStore from "../../store";
 import "./Chat.scss";
 
@@ -6,7 +6,6 @@ function Chat() {
   let messagesRef;
   let chatInputRef;
   const { state, setState, sendMessage } = useStore();
-  const [input, setInput] = createSignal("");
 
   onMount(() => {
     chatInputRef?.focus?.();
@@ -24,7 +23,7 @@ function Chat() {
   const sendChatMessage = (event) => {
     event.preventDefault();
 
-    const message = input();
+    const message = state.chatInput;
 
     if (message.length === 0) {
       return;
@@ -56,7 +55,7 @@ function Chat() {
       },
     });
 
-    setInput("");
+    setState({ chatInput: "" });
   };
 
   const systemMessage = (message) => {
@@ -101,8 +100,8 @@ function Chat() {
         <input
           ref={chatInputRef}
           type="text"
-          onChange={(event) => setInput(event.target.value)}
-          value={input()}
+          onChange={(event) => setState({ chatInput: event.target.value })}
+          value={state.chatInput}
         />
         <button class="button" type="submit">
           Send
