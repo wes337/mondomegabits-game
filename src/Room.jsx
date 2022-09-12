@@ -92,7 +92,6 @@ function Room() {
           onClick={toggleReady}
           color="red"
         />
-
         <CircleButton label="Leave" onClick={leaveRoom} />
       </div>
     </div>

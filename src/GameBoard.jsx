@@ -8,6 +8,7 @@ import "./GameBoard.scss";
 import Zone from "./Zone";
 import CardPile from "./CardPile";
 import CircleButton from "./CircleButton";
+import Plasma from "./Plasma";
 
 function GameBoard() {
   let mainRef;
@@ -136,7 +137,7 @@ function GameBoard() {
           <Zone name="buffer-zone" opponent />
           <Zone name="battle-zone" opponent />
           <div class="middle grunge">
-            <hr class="dotted-double" />
+            <Plasma />
           </div>
         </Show>
         <Zone name="battle-zone" />

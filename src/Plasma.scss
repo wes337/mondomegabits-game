@@ -1,18 +1,175 @@
+@import "./styles/colors.scss";
+@import "./styles/animations.scss";
+
+@keyframes animateBubble {
+  0% {
+    margin-top: 100px;
+  }
+  100% {
+    margin-top: -100px;
+  }
+}
+
+@keyframes sideWays {
+  0% {
+    margin-left: 0px;
+  }
+  100% {
+    margin-left: 50px;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 .plasma {
-  --bg-size: 512px;
-  --steps: 512;
+  position: relative;
+  background: radial-gradient(
+    lighten($colorTeal, 10%),
+    lighten($colorTeal, 30%),
+    $colorTeal
+  );
+  background-size: 400% 400%;
+  animation: gradient 10s ease infinite;
+  height: 1rem;
+  width: auto;
+  overflow: clip;
+  border: 4px ridge $colorGray;
 
-  background-size: var(--bg-size);
-  background-image: url("./assets/moire1.png"), url("./assets/moire2.png");
-  background-size: contain;
-  animation: sliding 8s steps(var(--steps)) infinite;
+  filter: brightness(1.5);
 
-  @keyframes sliding {
-    from {
-      background-position: var(--bg-size) var(--bg-size), 0 var(--bg-size);
+  .bubble {
+    $bubbleSize: 100px;
+    height: $bubbleSize;
+    position: absolute;
+    width: $bubbleSize;
+    border-radius: 50%;
+    box-shadow: 0 10px 15px rgba($colorBlack, 0.15),
+      inset 0px 5px 15px 2px $colorWhite;
+    z-index: 0;
+
+    &:after {
+      border-radius: 50%;
+      box-shadow: inset 0 10px 15px rgba($colorBlack, 0.15);
+      background: radial-gradient(
+        ellipse at center,
+        rgba($colorWhite, 0.5) 0%,
+        transparent 70%
+      );
+      content: "";
+      height: calc($bubbleSize - 20px);
+      left: 10px;
+      position: absolute;
+      width: calc($bubbleSize - 20px);
     }
-    to {
-      background-position: 0 0, var(--bg-size) 0;
+
+    &.x1 {
+      animation: animateBubble 10s linear infinite,
+        sideWays 2s ease-in-out infinite alternate;
+
+      left: -5%;
+      top: 5%;
+
+      transform: scale(0.6);
+    }
+
+    &.x2 {
+      animation: animateBubble 15s linear infinite,
+        sideWays 4s ease-in-out infinite alternate;
+
+      left: 5%;
+      top: 80%;
+
+      transform: scale(0.4);
+    }
+
+    &.x3 {
+      animation: animateBubble 14s linear infinite,
+        sideWays 2s ease-in-out infinite alternate;
+
+      left: 10%;
+      top: 40%;
+
+      transform: scale(0.7);
+    }
+
+    &.x4 {
+      animation: animateBubble 13s linear infinite,
+        sideWays 3s ease-in-out infinite alternate;
+
+      left: 20%;
+      top: 0;
+
+      transform: scale(0.3);
+    }
+
+    &.x5 {
+      animation: animateBubble 9s linear infinite,
+        sideWays 4s ease-in-out infinite alternate;
+
+      left: 30%;
+      top: 50%;
+
+      transform: scale(0.5);
+    }
+
+    &.x6 {
+      animation: animateBubble 10s linear infinite,
+        sideWays 2s ease-in-out infinite alternate;
+
+      left: 50%;
+      top: 0;
+
+      transform: scale(0.8);
+    }
+
+    &.x7 {
+      animation: animateBubble 6s linear infinite,
+        sideWays 2s ease-in-out infinite alternate;
+
+      left: 65%;
+      top: 70%;
+
+      transform: scale(0.4);
+    }
+
+    &.x8 {
+      animation: animateBubble 12s linear infinite,
+        sideWays 3s ease-in-out infinite alternate;
+
+      left: 80%;
+      top: 10%;
+
+      transform: scale(0.3);
+    }
+
+    &.x9 {
+      animation: animateBubble 9s linear infinite,
+        sideWays 4s ease-in-out infinite alternate;
+
+      left: 90%;
+      top: 50%;
+
+      transform: scale(0.6);
+    }
+
+    &.x10 {
+      animation: animateBubble 16s linear infinite,
+        sideWays 2s ease-in-out infinite alternate;
+
+      left: 80%;
+      top: 80%;
+
+      transform: scale(0.3);
     }
   }
 }
