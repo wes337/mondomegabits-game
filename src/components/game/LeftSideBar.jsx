@@ -1,6 +1,7 @@
 import { createMemo, Show } from "solid-js";
 import useStore from "../../store";
 import CardPile from "../card/CardPile";
+import "./LeftSideBar.scss";
 
 function LeftSideBar() {
   const { state, sendMessage } = useStore();
@@ -18,6 +19,9 @@ function LeftSideBar() {
       ? null
       : state.game.puppetMasters.find(({ id }) => id !== state.user.id)
   );
+
+  const getPuppetMasterName = (puppetMasterId) =>
+    state.room.users.find((user) => user.id === puppetMasterId)?.name;
 
   const opponentName = createMemo(() => {
     if (soloPlay()) {

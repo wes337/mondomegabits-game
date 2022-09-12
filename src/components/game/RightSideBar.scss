@@ -1,0 +1,27 @@
+.right-side-bar {
+  grid-column: 3 / 3;
+  grid-row: 1 / span all;
+
+  display: flex;
+  flex-direction: column;
+  max-height: 100vh;
+  overflow: clip;
+
+  &.chat-expanded {
+    grid-template-rows: auto 1fr 2fr;
+  }
+
+  .options {
+    margin-left: auto;
+  }
+
+  .game-chat {
+    display: flex;
+    flex-direction: column;
+    max-height: 50%;
+
+    .expand-button {
+      margin-left: auto;
+    }
+  }
+}

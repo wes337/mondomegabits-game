@@ -1,0 +1,16 @@
+.main-board {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+
+  display: flex;
+  flex-direction: column;
+
+  &.solo-play {
+    grid-row: 1 / span 2;
+  }
+
+  .middle {
+    width: 100%;
+    overflow: hidden;
+  }
+}
