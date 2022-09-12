@@ -1,10 +1,14 @@
 import { createStore } from "solid-js/store";
 import initialState from "./initialState";
 
-const ws = new WebSocket("wss://mondo-megabits.herokuapp.com");
+const ws = new WebSocket(import.meta.env.VITE_WS_SERVER);
 
 function useStore() {
   const [state, setState] = createStore(initialState);
+
+  const sendMessage = (message) => {
+    ws.send(JSON.stringify(message));
+  };
 
   ws.onopen = () => {
     setState({
@@ -12,7 +16,7 @@ function useStore() {
     });
 
     setInterval(() => {
-      ws.send('{type:"ping"}');
+      sendMessage({ type: "ping" });
     }, 40000);
   };
 
@@ -50,7 +54,7 @@ function useStore() {
           room: {
             code: roomCode,
             users,
-            chatMessages: [],
+            chatMessages: state.room?.chatMessages || [],
           },
         }));
         break;
@@ -85,7 +89,10 @@ function useStore() {
           setState((state) => ({
             room: {
               ...state.room,
-              chatMessages: [...state.room.chatMessages, params.chatMessage],
+              chatMessages: [
+                ...(state.room?.chatMessages || []),
+                params.chatMessage,
+              ],
             },
           }));
           break;
@@ -120,10 +127,6 @@ function useStore() {
         break;
       }
     }
-  };
-
-  const sendMessage = (message) => {
-    ws.send(JSON.stringify(message));
   };
 
   return { state, setState, sendMessage };

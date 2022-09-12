@@ -12,4 +12,5 @@ export default {
     current: null,
     hover: null,
   },
+  chatExpanded: false,
 };

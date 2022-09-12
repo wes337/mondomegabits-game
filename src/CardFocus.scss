@@ -10,7 +10,8 @@
   background-color: $colorRed;
   justify-content: center;
   align-items: flex-start;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 
   border-radius: 10px;
 

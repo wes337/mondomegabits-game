@@ -11,7 +11,6 @@ import CircleButton from "./CircleButton";
 
 function GameBoard() {
   let mainRef;
-  const [chatExpanded, setChatExpanded] = createSignal(false);
   const { state, setState, sendMessage } = useStore();
 
   const me = createMemo(() =>
@@ -145,7 +144,9 @@ function GameBoard() {
         <Zone name="the-think-tank" />
       </div>
       <div
-        class={`right-side-bar grunge${chatExpanded() ? " chat-expanded" : ""}`}
+        class={`right-side-bar grunge${
+          state.chatExpanded ? " chat-expanded" : ""
+        }`}
       >
         <div class="options">
           <CircleButton label="Leave" onClick={leaveGame} small />
@@ -154,11 +155,11 @@ function GameBoard() {
         <div class="game-chat">
           <button
             class="expand-button button"
-            onClick={() => setChatExpanded((expanded) => !expanded)}
+            onClick={() => setState({ chatExpanded: !state.chatExpanded })}
           >
-            {chatExpanded() ? "Hide Chat" : "Show Chat"}
+            {state.chatExpanded ? "Hide Chat" : "Show Chat"}
           </button>
-          <Show when={chatExpanded()}>
+          <Show when={state.chatExpanded}>
             <Chat />
           </Show>
         </div>

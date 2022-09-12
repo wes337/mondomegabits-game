@@ -10,11 +10,11 @@ function Room() {
   const { state, sendMessage } = useStore();
 
   const allUsersAreReady = createMemo(
-    () => !state.room.users.find((user) => user.status !== "ready")
+    () => !state.room?.users?.find((user) => user.status !== "ready")
   );
 
   const iAmReady = createMemo(() =>
-    state.room.users.find(
+    state.room?.users?.find(
       (user) => user.id === state.user.id && user.status === "ready"
     )
   );
