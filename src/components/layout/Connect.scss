@@ -1,5 +1,6 @@
 @import "../../styles/colors.scss";
 @import "../../styles/text.scss";
+@import "../../styles/animations.scss";
 
 .connect {
   position: relative;
@@ -43,6 +44,13 @@
       @include defaultTextSizing();
       padding: 0.25rem;
       width: 100%;
+    }
+
+    &.error {
+      input {
+        transition: box-shadow 0.2s ease-in-out;
+        box-shadow: 0px 0px 0.25rem 0.25rem $colorRed;
+      }
     }
   }
 }

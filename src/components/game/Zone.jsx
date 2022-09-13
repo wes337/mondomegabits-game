@@ -4,24 +4,24 @@ import useStore from "../../store";
 import Card from "../card/Card";
 import "./Zone.scss";
 
-function Zone({ name, opponent }) {
+function Zone(props) {
   let zoneRef;
   const { state, sendMessage } = useStore();
 
   const cardsInZone = createMemo(() => {
     const puppetMaster = state.game.puppetMasters.find((puppetMaster) =>
-      opponent
+      props.opponent
         ? puppetMaster.id !== state.user.id
         : puppetMaster.id === state.user.id
     );
-    const zoneKey = hyphenToCamelCase(name);
+    const zoneKey = hyphenToCamelCase(props.name);
     const cards = puppetMaster.board[zoneKey];
 
     return cards || [];
   });
 
   const onDragOver = (event) => {
-    if (opponent) {
+    if (props.opponent) {
       return;
     }
 
@@ -30,7 +30,7 @@ function Zone({ name, opponent }) {
   };
 
   const onDragLeave = () => {
-    if (opponent) {
+    if (props.opponent) {
       return;
     }
 
@@ -38,7 +38,7 @@ function Zone({ name, opponent }) {
   };
 
   const onDrop = (event) => {
-    if (opponent) {
+    if (props.opponent) {
       return;
     }
 
@@ -51,7 +51,7 @@ function Zone({ name, opponent }) {
       type: "play",
       params: {
         cardUuid,
-        destination: name,
+        destination: props.name,
         gameCode: state.game.id,
         roomCode: state.room.code,
       },
@@ -61,13 +61,15 @@ function Zone({ name, opponent }) {
   return (
     <div
       ref={zoneRef}
-      class={`zone panel grunge ${name}${opponent ? " opponent" : ""}`}
+      class={`zone panel grunge ${props.name}${
+        props.opponent ? " opponent" : ""
+      }`}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}
       onDrop={onDrop}
     >
       {cardsInZone().map((card) => (
-        <Card card={card} opponent={opponent} location={name} />
+        <Card card={card} opponent={props.opponent} location={props.name} />
       ))}
     </div>
   );

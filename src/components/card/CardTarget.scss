@@ -1,0 +1,14 @@
+.card-target {
+  position: fixed;
+  width: 5px;
+  height: 5px;
+  background-color: transparent;
+  visibility: hidden;
+  margin: -5px 0px 0px -5px;
+  backface-visibility: hidden;
+  pointer-events: none;
+}
+
+.leader-line {
+  z-index: 1;
+}

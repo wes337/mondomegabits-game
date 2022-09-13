@@ -2,7 +2,7 @@ import useStore from "../../store";
 import CardBack from "../../assets/card-back.png";
 import "./CardPile.scss";
 
-function CardPile({ name, cards, opponent, canView }) {
+function CardPile(props) {
   let cardPileRef;
   const { state, sendMessage } = useStore();
 
@@ -25,7 +25,7 @@ function CardPile({ name, cards, opponent, canView }) {
       type: "move",
       params: {
         cardUuid,
-        destination: name,
+        destination: props.name,
         gameCode: state.game.id,
         roomCode: state.room.code,
       },
@@ -33,7 +33,7 @@ function CardPile({ name, cards, opponent, canView }) {
   };
 
   const label = () => {
-    switch (name) {
+    switch (props.name) {
       case "deck":
         return "Deck";
       case "discard-pile":
@@ -46,15 +46,15 @@ function CardPile({ name, cards, opponent, canView }) {
   return (
     <div
       ref={cardPileRef}
-      class={`card-pile ${name}${opponent ? " opponent" : ""}`}
+      class={`card-pile ${props.name}${props.opponent ? " opponent" : ""}`}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}
       onDrop={onDrop}
     >
       <div class="card-pile-label">{label()}</div>
       <div class="card-back">
-        <div class="card-count">{cards.length}</div>
-        <img class={cards.length === 0 ? "empty" : ""} src={CardBack} />
+        <div class="card-count">{props.cards.length}</div>
+        <img class={props.cards.length === 0 ? "empty" : ""} src={CardBack} />
       </div>
     </div>
   );

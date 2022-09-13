@@ -7,7 +7,7 @@ import "./Room.scss";
 
 function Room() {
   const [ready, setReady] = createSignal(false);
-  const { state, sendMessage } = useStore();
+  const { state, setState, sendMessage } = useStore();
 
   const allUsersAreReady = createMemo(
     () => !state.room?.users?.find((user) => user.status !== "ready")
@@ -25,6 +25,19 @@ function Room() {
 
   const startGame = () => {
     sendMessage({ type: "start" });
+
+    // Clear cards in focus
+    setState({
+      focus: {
+        current: null,
+        hover: null,
+        spotlight: null,
+        target: {
+          from: null,
+          to: null,
+        },
+      },
+    });
   };
 
   const toggleReady = () => {
@@ -53,7 +66,7 @@ function Room() {
             <hr class="dotted-double" />
           </div>
           <Show when={allUsersAreReady()}>
-            <CountDown callback={startGame} />
+            <CountDown from={3} callback={startGame} />
           </Show>
         </div>
         <Chat />

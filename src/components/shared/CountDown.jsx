@@ -1,9 +1,9 @@
 import { createSignal, onMount, onCleanup, Show } from "solid-js";
 import "./CountDown.scss";
 
-function CountDown({ from = 5, callback = () => {} }) {
+function CountDown(props) {
   const [timer, setTimer] = createSignal();
-  const [count, setCount] = createSignal(from);
+  const [count, setCount] = createSignal(props.from);
 
   const startTimer = () => {
     if (!timer() && count() > 0) {
@@ -18,7 +18,7 @@ function CountDown({ from = 5, callback = () => {} }) {
 
     if (seconds === 0) {
       clearInterval(timer());
-      callback?.();
+      props.callback?.();
     }
   };
 

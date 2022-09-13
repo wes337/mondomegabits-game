@@ -1,28 +1,53 @@
-import { createMemo, Show } from "solid-js";
+import { Show } from "solid-js";
 import { getCardImageById } from "../../utils";
 import useStore from "../../store";
 import CardBack from "../../assets/card-back.png";
 import "./Card.scss";
 
-function Card({ card, opponent, location }) {
+function Card(props) {
   const { state, setState, sendMessage } = useStore();
-  const faceDown = (location === "hand" && opponent) || card.faceDown;
-  const canExpand = location !== "hand" && !(faceDown && opponent);
 
-  const cardIsOnBoard = createMemo(() =>
-    ["battle-zone", "the-think-tank", "buffer-zone"].includes(location)
-  );
+  const cardIsOnBoard = [
+    "battle-zone",
+    "the-think-tank",
+    "buffer-zone",
+  ].includes(props.location);
 
-  const playCard = (destination = "battle-zone") => {
-    if (opponent) {
+  const faceDown =
+    (props.location === "hand" && props.opponent) || props.card.faceDown;
+  const canExpand = props.location !== "hand" && !(faceDown && props.opponent);
+  const canTargetFrom = !props.opponent && props.location !== "hand";
+
+  const setTargetFromCard = (event) => {
+    if (!canTargetFrom) {
       return;
     }
 
+    event.stopPropagation();
+
+    setState({
+      target: {
+        from: props.card.uuid,
+        to: null,
+      },
+    });
+  };
+
+  const setTargetToCard = () => {
+    setState((state) => ({
+      target: {
+        ...state.target,
+        to: props.card.uuid,
+      },
+    }));
+
     sendMessage({
-      type: "play",
+      type: "target",
       params: {
-        cardUuid: card.uuid,
-        destination,
+        target: {
+          from: state.target.from,
+          to: props.card.uuid,
+        },
         gameCode: state.game.id,
         roomCode: state.room.code,
       },
@@ -30,14 +55,14 @@ function Card({ card, opponent, location }) {
   };
 
   const tapOrUntapCard = () => {
-    if (opponent) {
+    if (props.opponent) {
       return;
     }
 
     sendMessage({
       type: "tap",
       params: {
-        cardUuid: card.uuid,
+        cardUuid: props.card.uuid,
         gameCode: state.game.id,
         roomCode: state.room.code,
       },
@@ -45,31 +70,31 @@ function Card({ card, opponent, location }) {
   };
 
   const onDragStart = (event) => {
-    if (opponent) {
+    if (props.opponent) {
       return;
     }
-    event.dataTransfer.setData("text", card.uuid);
+    event.dataTransfer.setData("text", props.card.uuid);
   };
 
   const focusOnCard = () => {
-    if (opponent && faceDown) {
+    if (props.opponent && faceDown) {
       return;
     }
 
-    if (state.focus.current?.uuid === card.uuid) {
+    if (state.focus.current?.uuid === props.card.uuid) {
       removeFocusOnCard();
     } else {
       setState((state) => ({
         focus: {
           ...state.focus,
-          current: card,
+          current: props.card,
         },
       }));
     }
   };
 
   const removeFocusOnCard = () => {
-    if (opponent && faceDown) {
+    if (props.opponent && faceDown) {
       return;
     }
 
@@ -82,20 +107,20 @@ function Card({ card, opponent, location }) {
   };
 
   const onPointerEnter = () => {
-    if (opponent && faceDown) {
+    if (props.opponent && faceDown) {
       return;
     }
 
     setState((state) => ({
       focus: {
         ...state.focus,
-        hover: card,
+        hover: props.card,
       },
     }));
   };
 
   const onPointerLeave = () => {
-    if (opponent && faceDown) {
+    if (props.opponent && faceDown) {
       return;
     }
 
@@ -108,7 +133,7 @@ function Card({ card, opponent, location }) {
   };
 
   const handleDoubleClick = () => {
-    if (cardIsOnBoard()) {
+    if (cardIsOnBoard) {
       tapOrUntapCard();
     }
   };
@@ -118,12 +143,18 @@ function Card({ card, opponent, location }) {
     const DOUBLE_CLICK = 2;
 
     switch (event.detail) {
-      case SINGLE_CLICK:
+      case SINGLE_CLICK: {
+        const isChoosingCardToTarget = state.target.from && !state.target.to;
+        if (isChoosingCardToTarget) {
+          setTargetToCard();
+        }
         focusOnCard();
         break;
-      case DOUBLE_CLICK:
+      }
+      case DOUBLE_CLICK: {
         handleDoubleClick();
         break;
+      }
     }
   };
 
@@ -132,7 +163,7 @@ function Card({ card, opponent, location }) {
     setState((state) => ({
       focus: {
         ...state.focus,
-        spotlight: card,
+        spotlight: props.card,
       },
     }));
   };
@@ -140,15 +171,15 @@ function Card({ card, opponent, location }) {
   const cardClassName = () => {
     let className = "card";
 
-    if (opponent) {
+    if (props.opponent) {
       className += " opponent";
     }
 
-    if (state.focus.current?.uuid === card.uuid) {
+    if (state.focus.current?.uuid === props.card.uuid) {
       className += " focus";
     }
 
-    if (card.tapped) {
+    if (props.card.tapped) {
       className += " tapped";
     }
 
@@ -164,14 +195,21 @@ function Card({ card, opponent, location }) {
       onDragStart={onDragStart}
       draggable
     >
-      <Show when={canExpand}>
-        <button class="expand-card" onClick={expandCard}>
-          ⇱
-        </button>
-      </Show>
+      <div class="card-actions">
+        <Show when={canExpand}>
+          <button class="card-action-button" onClick={expandCard}>
+            ⇱
+          </button>
+        </Show>
+        <Show when={canTargetFrom}>
+          <button class="card-action-button" onClick={setTargetFromCard}>
+            ⌖
+          </button>
+        </Show>
+      </div>
       <img
-        id={card.uuid}
-        src={faceDown ? CardBack : getCardImageById(card.id)}
+        id={props.card.uuid}
+        src={faceDown ? CardBack : getCardImageById(props.card.id)}
       />
     </div>
   );

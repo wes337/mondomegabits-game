@@ -6,6 +6,7 @@ function Connect() {
   let inputRef;
   const { sendMessage, setState } = useStore();
   const [userName, setUserName] = createSignal("");
+  const [error, setError] = createSignal(false);
 
   onMount(() => {
     inputRef.focus();
@@ -14,19 +15,20 @@ function Connect() {
   const connect = (event) => {
     event.preventDefault();
 
-    if (userName().length === 0) {
+    if (userName().trim().length === 0) {
+      setError(true);
       return;
     }
 
     sendMessage({
       type: "lobby",
       params: {
-        userName: userName(),
+        userName: userName().trim(),
       },
     });
 
     setState((state) => ({
-      user: { ...state.user, name: userName() },
+      user: { ...state.user, name: userName().trim() },
     }));
   };
 
@@ -40,7 +42,10 @@ function Connect() {
           />
         </video>
       </div>
-      <form class="puppet-master-handle-input" onSubmit={connect}>
+      <form
+        class={`puppet-master-handle-input${error() ? " error" : ""}`}
+        onSubmit={connect}
+      >
         <label>Puppet Master Handle:</label>
         <input
           ref={inputRef}

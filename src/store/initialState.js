@@ -13,6 +13,10 @@ export default {
     hover: null,
     spotlight: null,
   },
+  target: {
+    from: null,
+    to: null,
+  },
   chatExpanded: false,
   chatInput: "",
 };

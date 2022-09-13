@@ -4,6 +4,7 @@ import Connect from "./components/layout/Connect";
 import Lobby from "./components/layout/Lobby";
 import Room from "./components/layout/Room";
 import GameBoard from "./components/game/GameBoard";
+import CardTarget from "./components/card/CardTarget";
 import "./App.scss";
 
 function App() {
@@ -16,23 +17,21 @@ function App() {
       !!state.room || !!state.lobby.find((user) => user.id === state.user.id)
   );
 
-  const renderMain = () => {
-    if (state.game) {
-      return <GameBoard />;
-    }
-    if (state.room) {
-      return <Room />;
-    }
-
-    return <Lobby />;
-  };
-
   return (
     <>
       <div class="app">
         <Show when={userIsInLobbyOrRoom()} fallback={<Connect />}>
-          {renderMain()}
+          <Show when={state.game}>
+            <GameBoard />
+          </Show>
+          <Show when={state.room && !state.game}>
+            <Room />
+          </Show>
+          <Show when={!state.room && !state.game}>
+            <Lobby />
+          </Show>
         </Show>
+        {/* <CardTarget /> */}
       </div>
       <div class="orientation">
         <h3>Please turn your device sideways to landscape mode.</h3>

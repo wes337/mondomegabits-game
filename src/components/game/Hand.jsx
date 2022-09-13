@@ -3,25 +3,28 @@ import useStore from "../../store";
 import Card from "../card/Card";
 import "./Hand.scss";
 
-function Hand({ opponent }) {
+function Hand(props) {
   const { state } = useStore();
 
-  const myHand = createMemo(
-    () => state.game.puppetMasters.find(({ id }) => id === state.user.id)?.hand
-  );
+  const hand = createMemo(() => {
+    const puppetMaster = state.game.puppetMasters.find(({ id }) => {
+      if (props.opponent) {
+        return id !== state.user.id;
+      }
+      return id === state.user.id;
+    });
 
-  const opponentHand = createMemo(
-    () => state.game.puppetMasters.find(({ id }) => id !== state.user.id)?.hand
-  );
+    return puppetMaster?.hand || [];
+  });
 
   return (
-    <div class={`hand${opponent ? " opponent" : ""}`}>
-      <For each={opponent ? opponentHand() : myHand()}>
+    <div class={`hand${props.opponent ? " opponent" : ""}`}>
+      <For each={hand()}>
         {(card) => (
           <Card
             card={card}
-            faceDown={opponent}
-            opponent={opponent}
+            faceDown={props.opponent}
+            opponent={props.opponent}
             location="hand"
           />
         )}

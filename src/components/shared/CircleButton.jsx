@@ -1,18 +1,18 @@
 import "./CircleButton.scss";
 
-function CircleButton({ label, onClick, disabled, color, small }) {
+function CircleButton(props) {
   const getClassName = () => {
     let className = "circle-button button";
 
-    if (color) {
-      className += ` ${color}`;
+    if (props.color) {
+      className += ` ${props.color}`;
     }
 
-    if (small) {
+    if (props.small) {
       className += " small";
     }
 
-    if (disabled) {
+    if (props.disabled) {
       className += " disabled";
     }
 
@@ -23,11 +23,11 @@ function CircleButton({ label, onClick, disabled, color, small }) {
     <button
       class={getClassName()}
       type="button"
-      onClick={onClick}
-      disabled={disabled}
+      onClick={props.onClick}
+      disabled={props.disabled}
     >
       <div class="circle"></div>
-      <div class="label">{label}</div>
+      <div class="label">{props.label}</div>
     </button>
   );
 }

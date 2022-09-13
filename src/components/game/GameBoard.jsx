@@ -1,11 +1,13 @@
+import { createEffect } from "solid-js";
 import useStore from "../../store";
+import CardSpotlight from "../card/CardSpotlight";
+import CardTarget from "../card/CardTarget";
 import GameHeader from "./GameHeader";
 import LeftSideBar from "./LeftSideBar";
 import RightSideBar from "./RightSideBar";
 import MainBoard from "./MainBoard";
 import GameFooter from "./GameFooter";
 import "./GameBoard.scss";
-import CardSpotlight from "../card/CardSpotlight";
 
 function GameBoard() {
   const { state, setState } = useStore();
@@ -40,6 +42,7 @@ function GameBoard() {
         <GameFooter />
       </div>
       <CardSpotlight />
+      <CardTarget />
     </>
   );
 }
