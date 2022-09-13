@@ -15,7 +15,9 @@ function Connect() {
   const connect = (event) => {
     event.preventDefault();
 
-    if (userName().trim().length === 0) {
+    const userNameTrimmed = userName().trim().slice(0, 30);
+
+    if (userNameTrimmed.length === 0) {
       setError(true);
       return;
     }
@@ -23,12 +25,12 @@ function Connect() {
     sendMessage({
       type: "lobby",
       params: {
-        userName: userName().trim(),
+        userName: userNameTrimmed,
       },
     });
 
     setState((state) => ({
-      user: { ...state.user, name: userName().trim() },
+      user: { ...state.user, name: userNameTrimmed },
     }));
   };
 
@@ -52,6 +54,8 @@ function Connect() {
           type="text"
           onChange={(event) => setUserName(event.target.value)}
           value={userName()}
+          minLength={3}
+          maxLength={30}
         />
         <button class="connect-button button" type="submit">
           Connect

@@ -14,7 +14,7 @@ function CardTarget() {
   let cardTargetRef;
   let line;
   let tempLine;
-  const { state, setState, sendMessage } = useStore();
+  const { state } = useStore();
 
   const isChoosingCardToTarget = createMemo(
     () => state.target.from && !state.target.to
@@ -49,14 +49,13 @@ function CardTarget() {
     if (isChoosingCardToTarget()) {
       tempLine?.remove?.();
 
-      // Create temporary line following cursor
-      tempLine = new LeaderLine(
-        document.getElementById(state.target.from),
-        cardTargetRef,
-        LINE_SETTINGS
-      );
+      const fromElement = document.getElementById(state.target.from);
+      if (fromElement && cardTargetRef) {
+        // Create temporary line following cursor
+        tempLine = new LeaderLine(fromElement, cardTargetRef, LINE_SETTINGS);
 
-      document.body.addEventListener("mousemove", moveTarget, true);
+        document.body.addEventListener("mousemove", moveTarget, true);
+      }
     }
   });
 
@@ -67,17 +66,18 @@ function CardTarget() {
 
       document.body.removeEventListener("mousemove", moveTarget, true);
 
-      line = new LeaderLine(
-        document.getElementById(state.target.from),
-        document.getElementById(state.target.to),
-        {
+      const fromElement = document.getElementById(state.target.from);
+      const toElement = document.getElementById(state.target.to);
+
+      if (fromElement && toElement) {
+        line = new LeaderLine(fromElement, toElement, {
           ...LINE_SETTINGS,
           dash: { animation: true },
-        }
-      );
+        });
 
-      // Remove temp line
-      tempLine = tempLine?.remove?.();
+        // Remove temp line
+        tempLine = tempLine?.remove?.();
+      }
     }
   });
 
