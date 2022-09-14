@@ -48,8 +48,6 @@ function Card(props) {
           from: state.target.from,
           to: props.card.uuid,
         },
-        gameCode: state.game.id,
-        roomCode: state.room.code,
       },
     });
   };
@@ -63,8 +61,6 @@ function Card(props) {
       type: "tap",
       params: {
         cardUuid: props.card.uuid,
-        gameCode: state.game.id,
-        roomCode: state.room.code,
       },
     });
   };

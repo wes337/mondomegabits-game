@@ -100,7 +100,7 @@ function useStore() {
         }
         break;
       }
-      case "ready": {
+      case "status": {
         const { userId, status } = params;
         setState((state) => ({
           room: {

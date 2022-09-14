@@ -34,10 +34,6 @@ function LeftSideBar() {
   const endTurn = () => {
     sendMessage({
       type: "end-turn",
-      params: {
-        gameCode: state.game.id,
-        roomCode: state.room.code,
-      },
     });
   };
 

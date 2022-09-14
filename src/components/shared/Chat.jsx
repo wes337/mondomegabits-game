@@ -50,7 +50,6 @@ function Chat() {
     sendMessage({
       type: "chat",
       params: {
-        roomCode: state.room.code,
         chatMessage,
       },
     });

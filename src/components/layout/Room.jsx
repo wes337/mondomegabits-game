@@ -46,9 +46,8 @@ function Room() {
     const status = nextValue ? "ready" : "waiting";
 
     sendMessage({
-      type: "ready",
+      type: "status",
       params: {
-        roomCode: state.room.code,
         status,
       },
     });

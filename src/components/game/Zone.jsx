@@ -52,8 +52,6 @@ function Zone(props) {
       params: {
         cardUuid,
         destination: props.name,
-        gameCode: state.game.id,
-        roomCode: state.room.code,
       },
     });
   };
