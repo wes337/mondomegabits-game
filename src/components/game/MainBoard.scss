@@ -7,14 +7,14 @@
   grid-row: 2 / 3;
   display: flex;
 
+  &.solo-play {
+    grid-row: 1 / span 2;
+  }
+
   .main-board-left {
     display: flex;
     flex-grow: 1;
     flex-direction: column;
-
-    &.solo-play {
-      grid-row: 1 / span 2;
-    }
 
     .main-board-separator {
       width: 100%;
