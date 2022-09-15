@@ -6,17 +6,15 @@ import "./Card.scss";
 
 function Card(props) {
   const { state, setState, sendMessage } = useStore();
-
   const cardIsOnBoard = [
     "battle-zone",
     "the-think-tank",
     "buffer-zone",
   ].includes(props.location);
-
-  const faceDown =
-    (props.location === "hand" && props.opponent) || props.card.faceDown;
-  const canExpand = props.location !== "hand" && !(faceDown && props.opponent);
-  const canTargetFrom = !props.opponent && props.location !== "hand";
+  const cardIsInHand = ["look-hand", "stowed-hand"].includes(props.location);
+  const faceDown = (cardIsInHand && props.opponent) || props.card.faceDown;
+  const canExpand = !cardIsInHand && !(faceDown && props.opponent);
+  const canTargetFrom = !props.opponent && !cardIsInHand;
 
   const setTargetFromCard = (event) => {
     if (!canTargetFrom) {
@@ -34,20 +32,18 @@ function Card(props) {
   };
 
   const setTargetToCard = () => {
-    setState((state) => ({
-      target: {
-        ...state.target,
-        to: props.card.uuid,
-      },
-    }));
+    const targetedSelf = state.target.from === props.card.uuid;
 
+    const target = {
+      from: targetedSelf ? null : state.target.from,
+      to: targetedSelf ? null : props.card.uuid,
+    };
+
+    setState({ target });
     sendMessage({
       type: "target",
       params: {
-        target: {
-          from: state.target.from,
-          to: props.card.uuid,
-        },
+        target,
       },
     });
   };

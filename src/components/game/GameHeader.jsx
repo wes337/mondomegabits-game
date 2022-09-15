@@ -12,6 +12,7 @@ function GameHeader() {
     <Show when={!soloPlay()}>
       <div class="game-header grunge">
         <Hand opponent />
+        <Hand stowed opponent />
       </div>
     </Show>
   );

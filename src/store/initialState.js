@@ -17,6 +17,6 @@ export default {
     from: null,
     to: null,
   },
-  chatExpanded: false,
+  chatExpanded: true,
   chatInput: "",
 };

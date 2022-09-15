@@ -11,17 +11,24 @@ function MainBoard() {
 
   return (
     <div class={`main-board ${soloPlay() ? " solo-play" : ""}`}>
-      <Show when={!soloPlay()}>
-        <Zone name="the-think-tank" opponent />
-        <Zone name="buffer-zone" opponent />
-        <Zone name="battle-zone" opponent />
-        <div class="middle grunge">
-          <Plasma />
+      <div class="main-board-left">
+        <Show when={!soloPlay()}>
+          <Zone name="the-think-tank" opponent />
+          <Zone name="battle-zone" opponent />
+          <div class="main-board-separator grunge">
+            <Plasma />
+          </div>
+        </Show>
+        <Zone name="battle-zone" />
+        <Zone name="the-think-tank" />
+      </div>
+      <div class="main-board-right panel light-grunge">
+        <div class="location-card">
+          <fieldset>
+            <legend>Location</legend>
+          </fieldset>
         </div>
-      </Show>
-      <Zone name="battle-zone" />
-      <Zone name="buffer-zone" />
-      <Zone name="the-think-tank" />
+      </div>
     </div>
   );
 }

@@ -21,18 +21,17 @@ function RightSideBar() {
       }`}
     >
       <div class="options">
-        <CircleButton label="Leave" onClick={leaveGame} small />
+        <CircleButton
+          label={state.chatExpanded ? "Hide Chat" : "Show Chat"}
+          onClick={() => setState({ chatExpanded: !state.chatExpanded })}
+          small
+        />
+        <CircleButton label="Leave" onClick={leaveGame} color="red" small />
       </div>
       <CardFocus />
       <div class="game-chat">
-        <button
-          class="expand-button button"
-          onClick={() => setState({ chatExpanded: !state.chatExpanded })}
-        >
-          {state.chatExpanded ? "Hide Chat" : "Show Chat"}
-        </button>
         <Show when={state.chatExpanded}>
-          <Chat />
+          <Chat small />
         </Show>
       </div>
     </div>

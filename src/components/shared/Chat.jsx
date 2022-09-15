@@ -2,7 +2,7 @@ import { onMount, createEffect, For } from "solid-js";
 import useStore from "../../store";
 import "./Chat.scss";
 
-function Chat() {
+function Chat(props) {
   let messagesRef;
   let chatInputRef;
   const { state, setState, sendMessage } = useStore();
@@ -71,7 +71,7 @@ function Chat() {
   };
 
   return (
-    <div class="chat">
+    <div class={`chat${props.small ? " small" : ""}`}>
       <div class="messages grunge" ref={messagesRef}>
         <For each={state.room.chatMessages}>
           {(message) =>
@@ -95,7 +95,7 @@ function Chat() {
           }
         </For>
       </div>
-      <form onSubmit={sendChatMessage}>
+      <form class={props.small ? "small" : ""} onSubmit={sendChatMessage}>
         <input
           ref={chatInputRef}
           type="text"

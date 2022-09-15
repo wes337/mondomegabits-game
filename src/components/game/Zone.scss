@@ -10,7 +10,7 @@
   &:after {
     top: 0;
     right: 0;
-
+    margin: 0 0.5rem;
     position: absolute;
   }
 
@@ -39,7 +39,7 @@
     background-color: rgba($colorGray, 0.05);
 
     &:after {
-      content: "Battle Zone";
+      content: "Active Zone";
     }
 
     &.opponent {

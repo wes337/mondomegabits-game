@@ -25,10 +25,16 @@
         margin-left: auto;
         gap: 1rem;
         text-transform: uppercase;
+
+        p {
+          text-align: right;
+          word-break: keep-all;
+        }
       }
 
       p {
         margin-top: 0;
+        word-break: break-all;
       }
     }
 
@@ -53,6 +59,19 @@
     button {
       padding: 1rem 3rem;
       font-size: 1rem;
+    }
+  }
+
+  &.small {
+    .message-date {
+      font-size: 0.9rem;
+    }
+
+    form {
+      button {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+      }
     }
   }
 }

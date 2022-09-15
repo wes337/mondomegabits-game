@@ -1,16 +1,39 @@
+@import "../../styles/colors.scss";
+@import "../../styles/animations.scss";
+@import "../../styles/text.scss";
+
 .main-board {
   grid-column: 2 / 3;
   grid-row: 2 / 3;
-
   display: flex;
-  flex-direction: column;
 
-  &.solo-play {
-    grid-row: 1 / span 2;
+  .main-board-left {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+
+    &.solo-play {
+      grid-row: 1 / span 2;
+    }
+
+    .main-board-separator {
+      width: 100%;
+      overflow: hidden;
+    }
   }
 
-  .middle {
-    width: 100%;
-    overflow: hidden;
+  .main-board-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba($colorGray, 0.5);
+
+    fieldset {
+      border: 1px solid $colorGreen;
+      color: $colorGreen;
+      min-height: 150px;
+      opacity: 0.75;
+      background-color: rgba($colorGreen, 0.1);
+    }
   }
 }

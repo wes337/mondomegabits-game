@@ -5,6 +5,7 @@ function GameFooter() {
   return (
     <div class="game-footer panel grunge">
       <Hand />
+      <Hand stowed />
     </div>
   );
 }

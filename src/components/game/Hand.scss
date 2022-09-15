@@ -1,7 +1,35 @@
 @import "../../styles/colors.scss";
+@import "../../styles/text.scss";
 
 .hand {
   display: flex;
+  border: 1px solid $colorRed;
+  @include defaultTextSizing();
+  @include textColorAndShadow($colorRed);
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  &.stowed {
+    border-color: $colorGreen;
+    @include textColorAndShadow($colorGreen);
+  }
+
+  &.drag-over {
+    filter: brightness(1.25);
+    transform: scale(1.05);
+    font-weight: 600;
+    border-color: $colorTeal;
+    @include textColorAndShadow($colorTeal);
+  }
+
+  legend {
+    display: flex;
+    font-size: 1rem;
+
+    .count {
+      color: $colorWhite;
+    }
+  }
 
   .card {
     cursor: grab;
@@ -16,18 +44,19 @@
   }
 
   &.opponent {
+    height: 25vh;
+    transform: rotate(180deg) translateY(calc(20vh + 1.5rem));
+
+    legend {
+      transform: rotate(180deg);
+    }
+
     .card {
       cursor: not-allowed;
-
-      transform: translateY(-80%);
-      z-index: 1;
-
-      img {
-        transform: rotate(180deg);
-      }
+      transform: translateY(-0.25rem);
 
       &:hover {
-        transform: translateY(-75%);
+        transform: translateY(-1rem);
 
         img {
           outline: 2px solid $colorRed;

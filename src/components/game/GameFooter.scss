@@ -2,4 +2,8 @@
   grid-column: 2 / 3;
   grid-row: 3 / span all;
   z-index: 0;
+  display: flex;
+  gap: 2rem;
+  justify-content: space-evenly;
+  padding: 0 0.25rem;
 }

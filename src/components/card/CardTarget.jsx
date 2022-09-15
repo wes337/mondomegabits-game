@@ -42,6 +42,9 @@ function CardTarget() {
     if (!state.target.to && !state.target.from) {
       line?.remove?.();
       line = null;
+
+      tempLine?.remove?.();
+      tempLine = null;
     }
   });
 
