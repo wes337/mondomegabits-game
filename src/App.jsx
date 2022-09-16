@@ -1,16 +1,20 @@
-import { createMemo, Show } from "solid-js";
+import { createMemo, onMount, Show } from "solid-js";
 import useStore from "./store";
 import Connect from "./components/layout/Connect";
 import Lobby from "./components/layout/Lobby";
 import Room from "./components/layout/Room";
 import GameBoard from "./components/game/GameBoard";
-import CardTarget from "./components/card/CardTarget";
+import { isMobileDevice } from "./utils";
 import "./App.scss";
 
 function App() {
   const { state } = useStore();
 
-  screen?.orientation?.lock?.("landscape");
+  onMount(() => {
+    if (isMobileDevice()) {
+      screen.orientation.lock("landscape");
+    }
+  });
 
   const userIsInLobbyOrRoom = createMemo(
     () =>
@@ -31,7 +35,6 @@ function App() {
             <Lobby />
           </Show>
         </Show>
-        {/* <CardTarget /> */}
       </div>
       <div class="orientation">
         <h3>Please turn your device sideways to landscape mode.</h3>

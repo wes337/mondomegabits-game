@@ -1785,3 +1785,32 @@ export const hyphenToCamelCase = (hyphenString) => {
     return g[1].toUpperCase();
   });
 };
+
+export const isMobileDevice = () => {
+  if (window.navigator?.userAgentData) {
+    if (window.navigator.userAgent.mobile) {
+      return window.navigator.userAgentData.mobile;
+    }
+
+    const mobileUserAgents = [
+      /Android/i,
+      /webOS/i,
+      /iPhone/i,
+      /iPad/i,
+      /iPod/i,
+      /BlackBerry/i,
+      /Windows Phone/i,
+      /Android/i,
+      /iPad/i,
+      /Playbook/i,
+      /Silk/i,
+    ];
+    return mobileUserAgents.some((mobileUserAgent) => {
+      return window.navigator.userAgent.match(mobileUserAgent);
+    });
+  }
+
+  // If browser doesn't support navigator.userAgent,
+  // fallback and check for really small screens
+  return window.innerWidth <= 800 && window.innerHeight <= 600;
+};
