@@ -15,12 +15,10 @@
   "devDependencies": {
     "gh-pages": "^4.0.0",
     "vite": "^3.0.9",
-    "vite-plugin-environment": "^1.1.2",
     "vite-plugin-solid": "^2.3.0"
   },
   "dependencies": {
     "leader-line2": "^1.0.7",
-    "odometer": "^0.4.8",
     "sass": "^1.54.8",
     "solid-js": "^1.5.1"
   }
