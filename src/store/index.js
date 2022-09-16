@@ -1,8 +1,10 @@
 import { createStore } from "solid-js/store";
 import initialState from "./initialState";
 
-const ws = new WebSocket("wss://mondo-megabits.herokuapp.com");
-// const ws = new WebSocket("ws://localhost:5000");
+//const ws = new WebSocket("wss://mondo-megabits.herokuapp.com");
+const ws = new WebSocket(process.env.WS_SERVER);
+
+console.log(process.env);
 
 function useStore() {
   const [state, setState] = createStore(initialState);
