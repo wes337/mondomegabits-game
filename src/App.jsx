@@ -60,7 +60,7 @@ function App() {
         </Switch>
       </div>
       <div class="orientation">
-        <img src="/images/icons/mobile.svg" width={64} height={64} />
+        <img src="images/icons/mobile.svg" width={64} height={64} />
         <h3>Please turn your device sideways to landscape mode.</h3>
       </div>
     </>
