@@ -120,7 +120,6 @@ function useStore() {
       }
       case "game": {
         const { game } = params;
-        console.log(game);
         setState({ game });
         break;
       }

@@ -37,8 +37,6 @@ function LeftSideBar() {
     });
   };
 
-  console.log(state.game);
-
   return (
     <div class="left-side-bar grunge">
       <Show when={!soloPlay()}>
