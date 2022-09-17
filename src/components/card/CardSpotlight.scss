@@ -34,6 +34,7 @@
     left: auto;
     right: -100%;
     transition: right 0.2s left 0.2s;
+    pointer-events: none;
 
     img {
       right: 0;

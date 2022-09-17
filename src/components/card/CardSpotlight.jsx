@@ -7,7 +7,7 @@ import "./CardSpotlight.scss";
 
 function CardSpotlight() {
   const { state } = useStore();
-  const { closeSpotlight } = useCardSpotlight();
+  const cardSpotlight = useCardSpotlight();
   const card = createMemo(() => state.focus.spotlight);
   const inDeckBuilder = createMemo(() => state.deck.open);
   const cardUuid = createMemo(() => card()?.uuid || generateKey());
@@ -66,7 +66,7 @@ function CardSpotlight() {
   };
 
   return (
-    <div class={getClassName()} onClick={closeSpotlight}>
+    <div class={getClassName()} onClick={cardSpotlight.close}>
       <img
         id={`${cardUuid()}-spotlight`}
         src={cardImg()}
