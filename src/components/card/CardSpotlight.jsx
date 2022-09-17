@@ -1,11 +1,17 @@
 import { createMemo, Show } from "solid-js";
-import { getCardImageById } from "../../utils";
+import CardBackLarge from "../../assets/card-back-large.png";
+import { generateKey, getCardImageById } from "../../utils";
 import useStore from "../../store";
 import "./CardSpotlight.scss";
 
 function CardSpotlight() {
   const { state, setState } = useStore();
   const card = createMemo(() => state.focus.spotlight);
+  const inDeckBuilder = createMemo(() => state.deck.open);
+  const cardUuid = createMemo(() => card()?.uuid || generateKey());
+  const cardImg = createMemo(() =>
+    card() ? getCardImageById(card().id) : CardBackLarge
+  );
 
   const closeSpotlight = () => {
     setState((state) => ({
@@ -52,18 +58,30 @@ function CardSpotlight() {
       "perspective(400px) rotateY(0deg) rotateX(0deg)";
   };
 
+  const getClassName = () => {
+    let className = "card-spotlight";
+
+    if (card()) {
+      className += " show";
+    }
+
+    if (inDeckBuilder()) {
+      className += " in-deck-builder";
+    }
+
+    return className;
+  };
+
   return (
-    <Show when={card()}>
-      <div class="card-spotlight" onClick={closeSpotlight}>
-        <img
-          id={`${card().uuid}-spotlight`}
-          src={getCardImageById(card().id)}
-          onPointerMove={onPointerMove}
-          onPointerEnter={onPointerEnter}
-          onPointerLeave={onPointerLeave}
-        />
-      </div>
-    </Show>
+    <div class={getClassName()} onClick={closeSpotlight}>
+      <img
+        id={`${cardUuid()}-spotlight`}
+        src={cardImg()}
+        onPointerMove={onPointerMove}
+        onPointerEnter={onPointerEnter}
+        onPointerLeave={onPointerLeave}
+      />
+    </div>
   );
 }
 

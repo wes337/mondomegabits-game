@@ -8,6 +8,11 @@ export default {
   room: null,
   rooms: {},
   game: undefined,
+  deck: {
+    cards: [],
+    name: "",
+    open: false,
+  },
   focus: {
     current: null,
     hover: null,

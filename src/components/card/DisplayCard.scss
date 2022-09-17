@@ -1,0 +1,67 @@
+@import "../../styles/colors.scss";
+@import "../../styles/animations.scss";
+
+.display-card {
+  border-radius: 0.25rem;
+  outline: 2px solid transparent;
+  transition: outline 0.2s;
+  background-color: rgba($colorBlack, 0.5);
+  position: relative;
+  z-index: 0;
+
+  img {
+    border-radius: 0.25rem;
+    content-visibility: auto;
+    width: auto;
+    max-height: 100%;
+  }
+
+  &.in-deck {
+    img {
+      height: auto;
+      max-width: 100%;
+    }
+  }
+
+  &.no-add {
+    filter: brightness(0.5);
+  }
+
+  &:hover,
+  &:focus {
+    cursor: pointer;
+    outline: 2px solid $colorYellow;
+    filter: brightness(1.25);
+    animation: float 2s ease-in-out infinite;
+
+    .card-stack img {
+      outline: 2px solid rgba($colorYellow, 0.75);
+    }
+
+    &.no-add {
+      filter: brightness(0.5);
+      outline: 2px solid rgba($colorRed, 0.75);
+    }
+  }
+
+  &:active {
+    img {
+      transform: scale(1.05);
+    }
+  }
+
+  .card-stack {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    filter: brightness(0.8);
+
+    img {
+      position: absolute;
+      transform: translateY(10px);
+      box-shadow: 0 3px 3px 0px rgba($colorBlack, 1);
+    }
+  }
+}

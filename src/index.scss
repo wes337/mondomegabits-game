@@ -6,6 +6,10 @@
 @import "./styles/separators.scss";
 @import "./styles/inputs.scss";
 
+:root {
+  color-scheme: dark;
+}
+
 body {
   margin: 0;
   background-color: $colorBlack;

@@ -2,10 +2,11 @@
 @import "./text.scss";
 @import "./fonts.scss";
 
-input {
+input[type="text"] {
   font-family: "DotGothic16", sans-serif;
   @include textColorAndShadow($colorGreen);
   @include defaultTextSizing();
+  z-index: 1;
 
   background: linear-gradient(
     180deg,
@@ -19,6 +20,25 @@ input {
   border-bottom-color: $colorDarkestGray;
   outline: 2px solid rgba($colorGreen, 0.25);
 
+  &:focus,
+  &:active {
+    outline: 2px solid rgba($colorGreen, 0.5);
+  }
+}
+
+::placeholder {
+  color: rgba($colorGreen, 0.8);
+}
+
+::-ms-input-placeholder {
+  color: rgba($colorGreen, 0.8);
+}
+
+fieldset {
+  border: 1px solid $colorRed;
+}
+
+textarea {
   &:focus,
   &:active {
     outline: 2px solid rgba($colorGreen, 0.5);

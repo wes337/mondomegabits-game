@@ -4,7 +4,7 @@ import CircleButton from "../shared/CircleButton";
 import "./Lobby.scss";
 
 function Lobby() {
-  const { state, sendMessage } = useStore();
+  const { state, setState, sendMessage } = useStore();
   const [showInput, setShowInput] = createSignal(false);
   const [input, setInput] = createSignal("");
 
@@ -21,6 +21,15 @@ function Lobby() {
     }
 
     sendMessage({ type: "join", params: { roomCode } });
+  };
+
+  const openDeckBuilder = () => {
+    setState((state) => ({
+      deck: {
+        ...state.deck,
+        open: true,
+      },
+    }));
   };
 
   return (
@@ -82,6 +91,11 @@ function Lobby() {
             setShowInput(true);
             setInput("");
           }}
+        />
+        <CircleButton
+          label="Deck Builder"
+          onClick={openDeckBuilder}
+          color="teal"
         />
       </div>
       <Show when={showInput()}>

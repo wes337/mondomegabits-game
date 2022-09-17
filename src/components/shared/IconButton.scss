@@ -1,0 +1,47 @@
+@import "../../styles/colors.scss";
+@import "../../styles/fonts.scss";
+@import "../../styles/text.scss";
+@import "../../styles/buttons.scss";
+
+.icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+
+  .icon {
+    padding: 0.25rem;
+    @include textColorAndShadow($colorYellow);
+  }
+
+  &.red {
+    .circle {
+      @include textColorAndShadow($colorRed);
+    }
+  }
+
+  &.teal {
+    .circle {
+      @include textColorAndShadow($colorTeal);
+    }
+  }
+
+  &.small {
+    padding: 0;
+  }
+
+  &.disabled {
+    .circle {
+      @include textColorAndShadow($colorLightGray);
+    }
+  }
+
+  &:hover {
+    .circle {
+      &:before {
+        content: "◉";
+      }
+    }
+  }
+}

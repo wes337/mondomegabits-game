@@ -24,7 +24,12 @@ function Room() {
   };
 
   const startGame = () => {
-    sendMessage({ type: "start" });
+    sendMessage({
+      type: "start",
+      params: {
+        deck: state.deck.cards,
+      },
+    });
 
     // Clear cards in focus
     setState({
