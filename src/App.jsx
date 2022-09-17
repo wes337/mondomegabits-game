@@ -1,4 +1,11 @@
-import { createMemo, onMount, Switch, Match } from "solid-js";
+import {
+  createSignal,
+  createMemo,
+  onMount,
+  onCleanup,
+  Switch,
+  Match,
+} from "solid-js";
 import { isMobileDevice } from "./utils";
 import useStore from "./store";
 import Connect from "./components/layout/Connect";
@@ -9,11 +16,27 @@ import DeckBuilder from "./components/layout/DeckBuilder";
 import "./App.scss";
 
 function App() {
+  const isMobile = isMobileDevice();
   const { state } = useStore();
+  const [deviceIsInPortrait, setDeviceIsInPortrait] = createSignal(
+    isMobile && !!screen?.orientation?.type?.match?.("portrait")
+  );
+
+  const updateOrientation = () => {
+    setDeviceIsInPortrait(
+      isMobile && !!screen?.orientation?.type?.match?.("portrait")
+    );
+  };
 
   onMount(() => {
-    if (isMobileDevice()) {
-      screen.orientation.lock("landscape");
+    if (isMobile && screen.orientation) {
+      screen.orientation.onchange = updateOrientation;
+    }
+  });
+
+  onCleanup(() => {
+    if (isMobile && screen.orientation) {
+      screen.orientation.onchange = null;
     }
   });
 
@@ -43,7 +66,7 @@ function App() {
 
   return (
     <>
-      <div class="app">
+      <div class={`app${deviceIsInPortrait() ? " hide" : ""}`}>
         <Switch fallback={<Connect />}>
           <Match when={screenToShow() === "deck"}>
             <DeckBuilder />
@@ -59,7 +82,7 @@ function App() {
           </Match>
         </Switch>
       </div>
-      <div class="orientation">
+      <div class={`orientation${deviceIsInPortrait() ? " show" : ""}`}>
         <img src="images/icons/mobile.svg" width={64} height={64} />
         <h3>Please turn your device sideways to landscape mode.</h3>
       </div>

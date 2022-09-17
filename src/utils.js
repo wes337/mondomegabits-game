@@ -59,9 +59,7 @@ export const isMobileDevice = () => {
     });
   }
 
-  // If browser doesn't support navigator.userAgent,
-  // fallback and check for really small screens
-  return window.innerWidth <= 800 && window.innerHeight <= 600;
+  return false;
 };
 
 export const generateKey = (length = 5) => {

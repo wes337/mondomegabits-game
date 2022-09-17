@@ -50,6 +50,11 @@ function DisplayCard(props) {
     }
   };
 
+  const onTouchStart = () => {
+    removeCardFromSpotlight();
+    addToOrRemoveFromDeck();
+  };
+
   const addCardToSpotlight = () => {
     spotlightCard = setTimeout(() => {
       setState((state) => ({
@@ -93,6 +98,7 @@ function DisplayCard(props) {
     <div
       class={getClassName()}
       onClick={onClick}
+      onTouchStart={onTouchStart}
       onPointerEnter={addCardToSpotlight}
       onPointerLeave={removeCardFromSpotlight}
     >

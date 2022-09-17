@@ -1,4 +1,4 @@
-import { createMemo, Show } from "solid-js";
+import { createMemo } from "solid-js";
 import CardBackLarge from "../../assets/card-back-large.png";
 import { generateKey, getCardImageById } from "../../utils";
 import useStore from "../../store";

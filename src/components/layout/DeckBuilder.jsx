@@ -198,16 +198,6 @@ function DeckBuilder() {
     debounceSetSearchQuery.clear();
   });
 
-  const getClassName = () => {
-    let className = "deck-builder";
-
-    if (deckPanel()) {
-      className += ` deck-${deckPanel()}`;
-    }
-
-    return className;
-  };
-
   const saveDeck = (event) => {
     event.preventDefault();
 
@@ -276,6 +266,16 @@ function DeckBuilder() {
     } catch {
       setShowModal("");
     }
+  };
+
+  const getClassName = () => {
+    let className = "deck-builder";
+
+    if (deckPanel()) {
+      className += ` deck-${deckPanel()}`;
+    }
+
+    return className;
   };
 
   return (
