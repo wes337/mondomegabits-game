@@ -1,11 +1,13 @@
 import { Show } from "solid-js";
+import CardBack from "../../assets/card-back.png";
+import useCardSpotlight from "../../hooks/useCardSpotlight";
 import { getCardImageById } from "../../utils";
 import useStore from "../../store";
-import CardBack from "../../assets/card-back.png";
 import "./Card.scss";
 
 function Card(props) {
   const { state, setState, sendMessage } = useStore();
+  const cardSpotlight = useCardSpotlight();
   const cardIsOnBoard = [
     "battle-zone",
     "the-think-tank",
@@ -152,12 +154,7 @@ function Card(props) {
 
   const spotlightCard = (event) => {
     event.stopPropagation();
-    setState((state) => ({
-      focus: {
-        ...state.focus,
-        spotlight: props.card,
-      },
-    }));
+    cardSpotlight.open(props.card);
   };
 
   const cardClassName = () => {

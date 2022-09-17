@@ -1,10 +1,12 @@
 import { createMemo, For, onCleanup } from "solid-js";
+import useCardSpotlight from "../../hooks/useCardSpotlight";
 import useStore from "../../store";
 import "./DisplayCard.scss";
 
 function DisplayCard(props) {
   let spotlightCard;
   const { state, setState } = useStore();
+  const cardSpotlight = useCardSpotlight();
   const canAddToDeck = createMemo(
     () =>
       state.deck.cards.filter((card) => card.id === props.card.id).length < 3
@@ -57,23 +59,13 @@ function DisplayCard(props) {
 
   const addCardToSpotlight = () => {
     spotlightCard = setTimeout(() => {
-      setState((state) => ({
-        focus: {
-          ...state.focus,
-          spotlight: props.card,
-        },
-      }));
+      cardSpotlight.open(props.card);
     }, 500);
   };
 
   const removeCardFromSpotlight = () => {
     clearTimeout(spotlightCard);
-    setState((state) => ({
-      focus: {
-        ...state.focus,
-        spotlight: null,
-      },
-    }));
+    cardSpotlight.close();
   };
 
   onCleanup(() => {

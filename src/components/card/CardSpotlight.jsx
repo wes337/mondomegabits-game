@@ -2,25 +2,18 @@ import { createMemo } from "solid-js";
 import CardBackLarge from "../../assets/card-back-large.png";
 import { generateKey, getCardImageById } from "../../utils";
 import useStore from "../../store";
+import useCardSpotlight from "../../hooks/useCardSpotlight";
 import "./CardSpotlight.scss";
 
 function CardSpotlight() {
-  const { state, setState } = useStore();
+  const { state } = useStore();
+  const { closeSpotlight } = useCardSpotlight();
   const card = createMemo(() => state.focus.spotlight);
   const inDeckBuilder = createMemo(() => state.deck.open);
   const cardUuid = createMemo(() => card()?.uuid || generateKey());
   const cardImg = createMemo(() =>
     card() ? getCardImageById(card().id) : CardBackLarge
   );
-
-  const closeSpotlight = () => {
-    setState((state) => ({
-      focus: {
-        ...state.focus,
-        spotlight: null,
-      },
-    }));
-  };
 
   const onPointerMove = (event) => {
     const transformAmount = 5;
