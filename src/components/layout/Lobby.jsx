@@ -16,7 +16,7 @@ function Lobby() {
   );
 
   const createRoom = () => {
-    sendMessage({ type: "create", params: { deck: selectedDeck() } });
+    sendMessage({ type: "create" });
   };
 
   const openDeckBuilder = () => {

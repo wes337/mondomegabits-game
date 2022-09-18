@@ -23,8 +23,8 @@ function MainBoard() {
 
       mainBoardRightPanel.style.backgroundImage = `url("${locationImage}")`;
       mainBoardRightPanel.style.backgroundRepeat = "no-repeat";
-      mainBoardRightPanel.style.backgroundPosition = "50% 10%";
-      mainBoardRightPanel.style.backgroundSize = "500%";
+      mainBoardRightPanel.style.backgroundPosition = "50% 15%";
+      mainBoardRightPanel.style.backgroundSize = "800%";
       mainBoardRightPanel.style.backgroundBlendMode = "luminosity";
     }
   });
@@ -69,7 +69,7 @@ function MainBoard() {
       <div class="main-board-right panel light-grunge">
         <div
           ref={locationRef}
-          class="location-card"
+          class={`location-card${state.game.location ? " has-location" : ""}`}
           onDragOver={onDragOver}
           onDragLeave={onDragLeave}
           onDrop={onDrop}

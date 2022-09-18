@@ -19,7 +19,7 @@ import CardSpotlight from "../card/CardSpotlight";
 import "./DeckBuilder.scss";
 
 function DeckBuilder() {
-  const { state, setState, sendMessage } = useStore();
+  const { setState } = useStore();
   const modal = useModal();
   const deckBuilder = useDeckBuilder();
   const cardFilter = useCardFilter();
@@ -45,19 +45,6 @@ function DeckBuilder() {
   const goBack = () => {
     setState({
       deckBuilderOpen: false,
-    });
-
-    const deck =
-      state.user.decks[0]?.cards?.length > 0
-        ? state.user.decks[0].cards.map((card) => card.id)
-        : null;
-
-    sendMessage({
-      type: "lobby",
-      params: {
-        userName: state.user.name,
-        deck,
-      },
     });
   };
 

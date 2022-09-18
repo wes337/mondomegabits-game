@@ -1,4 +1,3 @@
-import { createEffect } from "solid-js";
 import useStore from "../../store";
 import CardSpotlight from "../card/CardSpotlight";
 import CardTarget from "../card/CardTarget";

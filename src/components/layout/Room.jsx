@@ -28,15 +28,8 @@ function Room() {
   };
 
   const startGame = () => {
-    const deck = selectedDeck()
-      ? selectedDeck().cards.map((card) => card.id)
-      : null;
-
     sendMessage({
       type: "start",
-      params: {
-        deck,
-      },
     });
 
     // Clear cards in focus
@@ -45,10 +38,10 @@ function Room() {
         current: null,
         hover: null,
         spotlight: null,
-        target: {
-          from: null,
-          to: null,
-        },
+      },
+      target: {
+        from: null,
+        to: null,
       },
     });
   };
@@ -58,10 +51,16 @@ function Room() {
 
     const status = nextValue ? "ready" : "waiting";
 
+    const deck =
+      status === "ready" && selectedDeck()
+        ? selectedDeck().cards.map((card) => card.id)
+        : null;
+
     sendMessage({
       type: "status",
       params: {
         status,
+        deck,
       },
     });
   };
