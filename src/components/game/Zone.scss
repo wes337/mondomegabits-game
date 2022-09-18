@@ -47,8 +47,12 @@
   }
 
   &.drag-over {
-    outline: 4px solid $colorRed;
+    outline: 4px solid $colorTeal;
     z-index: 1;
-    filter: saturate(4);
+    background-color: rgba($colorTeal, 0.05);
+
+    &:after {
+      color: $colorTeal;
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { createSignal, For } from "solid-js";
+import { createMemo, For } from "solid-js";
 import MODAL_NAMES from "../../constants/modal";
 import useModal from "../../hooks/useModal";
 import useStore from "../../store";
@@ -9,8 +9,14 @@ function Lobby() {
   const { state, setState, sendMessage } = useStore();
   const modal = useModal();
 
+  const selectedDeck = createMemo(
+    () =>
+      state.user.decks.saved[0]?.cards.length > 0 &&
+      state.user.decks.saved[0].cards.map((card) => card.id)
+  );
+
   const createRoom = () => {
-    sendMessage({ type: "create" });
+    sendMessage({ type: "create", params: { deck: selectedDeck() } });
   };
 
   const openDeckBuilder = () => {
@@ -45,7 +51,7 @@ function Lobby() {
                   onClick={() => {
                     sendMessage({
                       type: "join",
-                      params: { roomCode: room.code },
+                      params: { roomCode: room.code, deck: selectedDeck() },
                     });
                   }}
                   color="red"
