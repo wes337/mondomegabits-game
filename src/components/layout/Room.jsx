@@ -10,10 +10,8 @@ function Room() {
 
   const selectedDeck = createMemo(
     () =>
-      state.user.decks.saved[0].cards.length > 0 && state.user.decks.saved[0]
+      state.user.decks.saved[0]?.cards.length > 0 && state.user.decks.saved[0]
   );
-
-  console.log(state.user);
 
   const allUsersAreReady = createMemo(
     () => !state.room?.users?.find((user) => user.status !== "ready")

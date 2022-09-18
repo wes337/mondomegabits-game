@@ -8,12 +8,14 @@
   background-color: rgba($colorBlack, 0.5);
   position: relative;
   z-index: 0;
+  user-select: none;
 
   img {
     border-radius: 0.25rem;
     content-visibility: auto;
     width: auto;
     max-height: 100%;
+    user-select: none;
   }
 
   &.in-deck {
