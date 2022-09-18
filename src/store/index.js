@@ -32,13 +32,13 @@ function useStore() {
 
     switch (type) {
       case "connected": {
-        setState({
+        setState((state) => ({
           user: {
+            ...state.user,
             name: "",
             id: params.id,
-            decks: [],
           },
-        });
+        }));
         break;
       }
       case "lobby": {

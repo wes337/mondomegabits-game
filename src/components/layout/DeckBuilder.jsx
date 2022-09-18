@@ -1,61 +1,37 @@
-import { createSignal, For, createMemo, onCleanup, Show } from "solid-js";
-import { debounce } from "@solid-primitives/scheduled";
-import { matchSorter } from "match-sorter";
+import { createSignal, For, createMemo, createEffect, Show } from "solid-js";
 import MODAL_NAMES from "../../constants/modal";
-import {
-  ALL_CARD_TYPES,
-  ALL_BASIC_CARDS,
-  CARD_RARITY_LEVELS,
-} from "../../constants/card";
+import { ALL_CARD_TYPES, CARD_RARITY_LEVELS } from "../../constants/card";
 import { uniqueArrayByKey } from "../../utils/array";
 import {
   getCardCountByKey,
   getCardCountByName,
   getCardCountByType,
 } from "../../utils/deck";
+import useModal from "../../hooks/useModal";
+import useDeckBuilder from "../../hooks/useDeckBuilder";
+import useCardFilter from "../../hooks/useCardFilter";
 import useStore from "../../store";
+import IconButton from "../shared/IconButton";
 import Checkbox from "../shared/Checkbox";
 import CircleButton from "../shared/CircleButton";
 import DeckBuilderCard from "../card/DeckBuilderCard";
 import CardSpotlight from "../card/CardSpotlight";
-import IconButton from "../shared/IconButton";
-import useModal from "../../hooks/useModal";
 import "./DeckBuilder.scss";
-import useDeckBuilder from "../../hooks/useDeckBuilder";
 
 function DeckBuilder() {
   const { state, setState, sendMessage } = useStore();
   const modal = useModal();
   const deckBuilder = useDeckBuilder();
+  const cardFilter = useCardFilter();
   const [deckPanel, setDeckPanel] = createSignal("");
   const [searchQuery, setSearchQuery] = createSignal("");
-  const [typeFilters, setTypeFilters] = createSignal([]);
-  const [rarityFilters, setRarityFilters] = createSignal([]);
 
   const deckDraft = createMemo(() => deckBuilder.draft());
 
-  const cards = createMemo(() => {
-    let cards = ALL_BASIC_CARDS;
-
-    if (searchQuery()) {
-      cards = matchSorter(cards, searchQuery(), {
-        keys: ["name", "faction", "bodyText"],
-        threshold: matchSorter.rankings.CONTAINS,
-      });
+  createEffect(() => {
+    if (searchQuery().length > 0) {
+      cardFilter.search(searchQuery());
     }
-
-    if (typeFilters().length > 0) {
-      cards = cards.filter((card) => {
-        return typeFilters().includes(card.type);
-      });
-    }
-
-    if (rarityFilters().length > 0) {
-      cards = cards.filter((card) => {
-        return rarityFilters().includes(card.rarity.toString());
-      });
-    }
-    return cards;
   });
 
   const onScroll = (event) => {
@@ -64,30 +40,6 @@ function DeckBuilder() {
     } else {
       event.target.classList.remove("sticky");
     }
-  };
-
-  const onChangeFilter = (event) => {
-    const filter = event.target.value;
-    const enabled = event.target.checked;
-
-    if (event.target.name === "type") {
-      if (enabled) {
-        setTypeFilters((filters) => [...new Set([...filters, filter])]);
-      } else {
-        setTypeFilters((filters) => filters.filter((f) => f !== filter));
-      }
-    } else if (event.target.name === "rarity") {
-      if (enabled) {
-        setRarityFilters((filters) => [...new Set([...filters, filter])]);
-      } else {
-        setRarityFilters((filters) => filters.filter((f) => f !== filter));
-      }
-    }
-  };
-
-  const clearAllFilters = () => {
-    setTypeFilters([]);
-    setSearchQuery("");
   };
 
   const goBack = () => {
@@ -131,16 +83,22 @@ function DeckBuilder() {
     return list;
   });
 
-  const debounceSetSearchQuery = debounce((event) => {
-    setSearchQuery(event.target.value);
-  }, 500);
+  const onChangeFilter = (event) => {
+    const { name, value, checked } = event.target;
 
-  onCleanup(() => {
-    debounceSetSearchQuery.clear();
-  });
+    if (checked) {
+      cardFilter.add(name, value);
+    } else {
+      cardFilter.remove(name, value);
+    }
+  };
+
+  const filterIsChecked = (filter, value) => {
+    return cardFilter.filters()?.[filter]?.includes(value.toString());
+  };
 
   const resetDeck = () => {
-    clearAllFilters();
+    cardFilter.reset();
     deckBuilder.reset();
   };
 
@@ -181,6 +139,7 @@ function DeckBuilder() {
               label="Save"
               color="teal"
               small
+              disabled={!deckBuilder.validate(deckDraft())}
               onClick={() => modal.open(MODAL_NAMES.DECK_SAVE)}
             />
             <CircleButton
@@ -199,7 +158,8 @@ function DeckBuilder() {
           <input
             type="text"
             placeholder="Card Search"
-            onKeyDown={debounceSetSearchQuery}
+            value={searchQuery()}
+            onKeyDown={(event) => setSearchQuery(event.target.value)}
           />
           <fieldset>
             <legend class="white">
@@ -212,6 +172,7 @@ function DeckBuilder() {
                   label={cardType}
                   value={cardType}
                   onChange={onChangeFilter}
+                  checked={filterIsChecked("type", cardType)}
                 />
               )}
             </For>
@@ -225,15 +186,19 @@ function DeckBuilder() {
                 <Checkbox
                   name="rarity"
                   label={`R${rarity}`}
-                  value={rarity}
+                  value={rarity.toString()}
                   onChange={onChangeFilter}
+                  checked={filterIsChecked("rarity", rarity)}
                 />
               )}
             </For>
           </fieldset>
           <CircleButton
             label="Clear"
-            onClick={clearAllFilters}
+            onClick={() => {
+              cardFilter.clear();
+              setSearchQuery("");
+            }}
             color="red"
             small
           />
@@ -244,13 +209,13 @@ function DeckBuilder() {
             <div class="header-text">
               <div class="label white">Cards</div>
               <div class="count bracket yellow">
-                <span class="teal">{cards().length}</span>
+                <span class="teal">{cardFilter.cards().length}</span>
               </div>
             </div>
             <hr class="tall" />
           </div>
           <div class="cards-list">
-            <For each={cards()}>
+            <For each={cardFilter.cards()}>
               {(card) => <DeckBuilderCard card={card} />}
             </For>
           </div>

@@ -10,6 +10,7 @@ function ModalDeckSave() {
 
   const saveDeck = (event) => {
     event.preventDefault();
+    deckBuilder.name(deckName());
     deckBuilder.save();
     modal.close();
   };

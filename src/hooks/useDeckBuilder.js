@@ -1,4 +1,4 @@
-import { createMemo, createSignal } from "solid-js";
+import { createMemo, createSignal, onMount } from "solid-js";
 import {
   MAX_COPIES_OF_CARD_PER_DECK,
   MINIMUM_DECK_SIZE,
@@ -7,17 +7,34 @@ import { getCardByName } from "../utils/card";
 import { getCardCountByKey } from "../utils/deck";
 import useStore from "../store";
 
-const { state, setState } = useStore();
-const myDecks = createMemo(() => state.user.decks);
-const defaultDeckDraftName = createMemo(
-  () => `${state.user.name}'s Untitled Deck`
-);
-const [deckDraft, setDeckDraft] = createSignal({
-  name: defaultDeckDraftName(),
-  cards: [],
-});
-
 function useDeckBuilder() {
+  const { state, setState } = useStore();
+  const deckDraft = createMemo(() => state.user.decks.draft);
+  const defaultDeckDraftName = createMemo(
+    () => `${state.user.name}'s Untitled Deck`
+  );
+
+  const updateDeckDraftName = (name) => {
+    setState((state) => ({
+      user: {
+        ...state.user,
+        decks: {
+          ...state.user.decks,
+          draft: {
+            ...state.user.decks.draft,
+            name,
+          },
+        },
+      },
+    }));
+  };
+
+  onMount(() => {
+    if (!deckDraft().name) {
+      updateDeckDraftName(defaultDeckDraftName());
+    }
+  });
+
   const isDeckValid = (newDeck) => {
     try {
       const notEnoughCardsInDeck = newDeck.cards.length < MINIMUM_DECK_SIZE;
@@ -44,7 +61,10 @@ function useDeckBuilder() {
     setState((state) => ({
       user: {
         ...state.user,
-        decks: [...myDecks(), newDeck],
+        decks: {
+          draft: newDeck,
+          saved: [...state.user.decks.saved, newDeck],
+        },
       },
     }));
   };
@@ -53,13 +73,16 @@ function useDeckBuilder() {
     setState((state) => ({
       user: {
         ...state.user,
-        decks: myDecks().map((deck) => {
-          if (deck.name !== newDeck.name) {
-            return deck;
-          }
+        decks: {
+          draft: newDeck,
+          saved: state.user.decks.saved.map((deck) => {
+            if (deck.name !== newDeck.name) {
+              return deck;
+            }
 
-          return newDeck;
-        }),
+            return newDeck;
+          }),
+        },
       },
     }));
   };
@@ -73,7 +96,9 @@ function useDeckBuilder() {
       return;
     }
 
-    const existingDeck = myDecks().find((deck) => deck.name === deck.name);
+    const existingDeck = state.user.decks.saved.find(
+      (deck) => deck.name === deck.name
+    );
     if (existingDeck) {
       updateDeck(deck);
     } else {
@@ -118,7 +143,15 @@ function useDeckBuilder() {
         return null;
       }
 
-      setDeckDraft(importedDeck);
+      setState((state) => ({
+        user: {
+          ...state.user,
+          decks: {
+            ...state.user.decks,
+            draft: importedDeck,
+          },
+        },
+      }));
     } catch (error) {
       console.error(error);
       // Do nothing
@@ -144,10 +177,15 @@ function useDeckBuilder() {
   };
 
   const resetDeckDraft = () => {
-    setDeckDraft({
-      name: defaultDeckDraftName(),
-      cards: [],
-    });
+    setState((state) => ({
+      deckBuilder: {
+        ...state.deckBuilder,
+        draft: {
+          name: defaultDeckDraftName(),
+          cards: [],
+        },
+      },
+    }));
   };
 
   const addOrRemoveCardFromDeckDraft = (card) => {
@@ -158,14 +196,33 @@ function useDeckBuilder() {
       const cards = [...deckDraft().cards];
       const index = cards.findIndex(({ id }) => id === card.id);
       cards.splice(index, 1);
-      setDeckDraft((deckDraft) => ({
-        ...deckDraft,
-        cards,
+      setState((state) => ({
+        user: {
+          ...state.user,
+          decks: {
+            ...state.user.decks,
+            draft: {
+              ...state.user.decks.draft,
+              cards,
+            },
+          },
+        },
       }));
     } else if (canAddToDeck) {
-      setDeckDraft((deckDraft) => ({
-        ...deckDraft,
-        cards: [...deckDraft.cards, { ...card, inDeck: true }],
+      setState((state) => ({
+        user: {
+          ...state.user,
+          decks: {
+            ...state.user.decks,
+            draft: {
+              ...state.user.decks.draft,
+              cards: [
+                ...state.user.decks.draft.cards,
+                { ...card, inDeck: true },
+              ],
+            },
+          },
+        },
       }));
     }
   };
@@ -178,6 +235,7 @@ function useDeckBuilder() {
     draft: deckDraft,
     reset: resetDeckDraft,
     addOrRemoveCard: addOrRemoveCardFromDeckDraft,
+    name: updateDeckDraftName,
   };
 }
 

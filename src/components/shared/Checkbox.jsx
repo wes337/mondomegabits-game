@@ -9,6 +9,7 @@ function Checkbox(props) {
         onChange={props.onChange}
         value={props.value}
         name={props.name}
+        checked={props.checked}
       />
       <span class="checkmark">[ ]</span>
     </label>

@@ -1,4 +1,4 @@
-import { createSignal, createMemo, For, Show } from "solid-js";
+import { createMemo, For, Show } from "solid-js";
 import useStore from "../../store";
 import Chat from "../shared/Chat";
 import CountDown from "../shared/CountDown";
@@ -6,8 +6,14 @@ import CircleButton from "../shared/CircleButton";
 import "./Room.scss";
 
 function Room() {
-  const [ready, setReady] = createSignal(false);
   const { state, setState, sendMessage } = useStore();
+
+  const selectedDeck = createMemo(
+    () =>
+      state.user.decks.saved[0].cards.length > 0 && state.user.decks.saved[0]
+  );
+
+  console.log(state.user);
 
   const allUsersAreReady = createMemo(
     () => !state.room?.users?.find((user) => user.status !== "ready")
@@ -24,10 +30,9 @@ function Room() {
   };
 
   const startGame = () => {
-    const deck =
-      state.user.decks[0]?.cards?.length > 0
-        ? state.user.decks[0].cards.map((card) => card.id)
-        : null;
+    const deck = selectedDeck()
+      ? selectedDeck().cards.map((card) => card.id)
+      : null;
 
     sendMessage({
       type: "start",
@@ -61,8 +66,6 @@ function Room() {
         status,
       },
     });
-
-    setReady(nextValue);
   };
 
   return (
@@ -109,12 +112,20 @@ function Room() {
         <hr class="bottom" />
       </div>
       <div class="footer panel">
-        <CircleButton
-          label={iAmReady() ? "Unready" : "Ready"}
-          onClick={toggleReady}
-          color="red"
-        />
-        <CircleButton label="Leave" onClick={leaveRoom} />
+        <div class="footer-buttons">
+          <CircleButton
+            label={iAmReady() ? "Unready" : "Ready"}
+            onClick={toggleReady}
+            color="red"
+          />
+          <CircleButton label="Leave" onClick={leaveRoom} />
+        </div>
+        <div class="deck-selected">
+          <div class="deck-selected-label">Deck Selected</div>
+          <div class="deck-selected-name white">
+            {selectedDeck().name || "Random Deck"}
+          </div>
+        </div>
       </div>
     </div>
   );

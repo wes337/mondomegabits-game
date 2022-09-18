@@ -2,7 +2,13 @@ export default {
   user: {
     id: "",
     name: "",
-    decks: [],
+    decks: {
+      draft: {
+        name: "",
+        cards: [],
+      },
+      saved: [],
+    },
   },
   connected: false,
   lobby: [],
