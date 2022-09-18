@@ -2,17 +2,13 @@ export default {
   user: {
     id: "",
     name: "",
+    decks: [],
   },
   connected: false,
   lobby: [],
   room: null,
   rooms: {},
   game: undefined,
-  deck: {
-    cards: [],
-    name: "",
-    open: false,
-  },
   focus: {
     current: null,
     hover: null,
@@ -22,6 +18,11 @@ export default {
     from: null,
     to: null,
   },
+  modal: {
+    name: null,
+    data: null,
+  },
+  deckBuilderOpen: false,
   chatExpanded: true,
   chatInput: "",
 };

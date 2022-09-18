@@ -9,7 +9,7 @@ function CardSpotlight() {
   const { state } = useStore();
   const cardSpotlight = useCardSpotlight();
   const card = createMemo(() => state.focus.spotlight);
-  const inDeckBuilder = createMemo(() => state.deck.open);
+  const inDeckBuilder = createMemo(() => state.deckBuilderOpen);
   const cardUuid = createMemo(() => card()?.uuid || generateKey());
   const cardImg = createMemo(() =>
     card() ? getCardImageById(card().id) : CardBackLarge

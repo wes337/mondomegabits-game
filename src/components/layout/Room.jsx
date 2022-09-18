@@ -24,10 +24,15 @@ function Room() {
   };
 
   const startGame = () => {
+    const deck =
+      state.user.decks[0]?.cards?.length > 0
+        ? state.user.decks[0].cards.map((card) => card.id)
+        : null;
+
     sendMessage({
       type: "start",
       params: {
-        deck: state.deck.cards,
+        deck,
       },
     });
 

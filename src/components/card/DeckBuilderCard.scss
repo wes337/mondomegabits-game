@@ -1,7 +1,7 @@
 @import "../../styles/colors.scss";
 @import "../../styles/animations.scss";
 
-.display-card {
+.deck-builder-card {
   border-radius: 0.25rem;
   outline: 2px solid transparent;
   transition: outline 0.2s;
@@ -67,7 +67,7 @@
 }
 
 @media only screen and (max-height: 500px) {
-  .display-card {
+  .deck-builder-card {
     img {
       width: 85px;
       height: 142px;

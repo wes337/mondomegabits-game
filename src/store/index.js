@@ -1,8 +1,8 @@
 import { createStore } from "solid-js/store";
 import initialState from "./initialState";
 
-const ws = new WebSocket("wss://mondo-megabits.herokuapp.com");
-// const ws = new WebSocket("ws://localhost:5000");
+// const ws = new WebSocket("wss://mondo-megabits.herokuapp.com");
+const ws = new WebSocket("ws://localhost:5000");
 
 function useStore() {
   const [state, setState] = createStore(initialState);
@@ -36,6 +36,7 @@ function useStore() {
           user: {
             name: "",
             id: params.id,
+            decks: [],
           },
         });
         break;

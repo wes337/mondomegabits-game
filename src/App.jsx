@@ -6,6 +6,7 @@ import Lobby from "./components/layout/Lobby";
 import Room from "./components/layout/Room";
 import GameBoard from "./components/game/GameBoard";
 import DeckBuilder from "./components/layout/DeckBuilder";
+import Modal from "./components/shared/modals/Modal";
 import "./App.scss";
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
   const { state } = useStore();
 
   const screenToShow = createMemo(() => {
-    const inDeckBuilder = state.deck.open;
+    const inDeckBuilder = state.deckBuilderOpen;
     if (inDeckBuilder) {
       return "deck";
     }
@@ -53,6 +54,7 @@ function App() {
             <Lobby />
           </Match>
         </Switch>
+        <Modal />
       </div>
       <div
         class={`orientation${

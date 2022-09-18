@@ -1,0 +1,36 @@
+@import "../../../styles/colors.scss";
+
+.modal {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($colorBlack, 0.5);
+
+  .modal-container {
+    padding: 2rem;
+  }
+
+  .modal-header {
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.25rem;
+  }
+
+  .modal-footer {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    gap: 1rem;
+
+    button {
+      flex: 50%;
+    }
+  }
+}

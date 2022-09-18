@@ -1,37 +1,17 @@
 import { createMemo, For, onCleanup } from "solid-js";
 import useCardSpotlight from "../../hooks/useCardSpotlight";
-import useStore from "../../store";
-import "./DisplayCard.scss";
+import useDeckBuilder from "../../hooks/useDeckBuilder";
+import "./DeckBuilderCard.scss";
 
-function DisplayCard(props) {
+function DeckBuilderCard(props) {
   let spotlightCard;
-  const { state, setState } = useStore();
+  const deckBuilder = useDeckBuilder();
   const cardSpotlight = useCardSpotlight();
   const canAddToDeck = createMemo(
     () =>
-      state.deck.cards.filter((card) => card.id === props.card.id).length < 3
+      deckBuilder.draft().cards.filter((card) => card.id === props.card.id)
+        .length < 3
   );
-
-  const addToOrRemoveFromDeck = () => {
-    if (props.card.inDeck) {
-      const cards = [...state.deck.cards];
-      const index = cards.findIndex((card) => card.id === props.card.id);
-      cards.splice(index, 1);
-      setState((state) => ({
-        deck: {
-          ...state.deck,
-          cards,
-        },
-      }));
-    } else if (canAddToDeck()) {
-      setState((state) => ({
-        deck: {
-          ...state.deck,
-          cards: [...state.deck.cards, { ...props.card, inDeck: true }],
-        },
-      }));
-    }
-  };
 
   const onClick = (event) => {
     const SINGLE_CLICK = 1;
@@ -42,11 +22,11 @@ function DisplayCard(props) {
         break;
       }
       case DOUBLE_CLICK: {
-        addToOrRemoveFromDeck();
+        deckBuilder.addOrRemoveCard(props.card);
         break;
       }
       default: {
-        addToOrRemoveFromDeck();
+        deckBuilder.addOrRemoveCard(props.card);
         break;
       }
     }
@@ -54,7 +34,7 @@ function DisplayCard(props) {
 
   const onTouchStart = () => {
     removeCardFromSpotlight();
-    addToOrRemoveFromDeck();
+    deckBuilder.addOrRemoveCard(props.card);
   };
 
   const addCardToSpotlight = () => {
@@ -73,7 +53,7 @@ function DisplayCard(props) {
   });
 
   const getClassName = () => {
-    let className = "display-card";
+    let className = "deck-builder-card";
 
     if (props.card.inDeck) {
       className += " in-deck";
@@ -122,4 +102,4 @@ function DisplayCard(props) {
   );
 }
 
-export default DisplayCard;
+export default DeckBuilderCard;
