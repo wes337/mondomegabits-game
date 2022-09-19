@@ -134,6 +134,14 @@ function Card(props) {
   const handleDoubleClick = () => {
     if (cardIsOnBoard()) {
       tapOrUntapCard();
+    } else if (cardIsInHand()) {
+      sendMessage({
+        type: "play",
+        params: {
+          cardUuid: props.card.uuid,
+          destination: "battle-zone",
+        },
+      });
     }
   };
 
