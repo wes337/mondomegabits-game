@@ -1,5 +1,7 @@
 import { Show } from "solid-js";
+import MODAL_NAMES from "../../constants/modal";
 import useStore from "../../store";
+import useModal from "../../hooks/useModal";
 import CardFocus from "../card/CardFocus";
 import CircleButton from "../shared/CircleButton";
 import Chat from "../shared/Chat";
@@ -7,10 +9,17 @@ import "./RightSideBar.scss";
 
 function RightSideBar() {
   const { state, setState, sendMessage } = useStore();
+  const modal = useModal();
 
   const leaveGame = () => {
-    sendMessage({
-      type: "leave-game",
+    modal.open(MODAL_NAMES.CONFIRM, {
+      header: "Leave game?",
+      body: "Are you sure you want to leave the game?",
+      confirm: "Leave",
+      cancel: "Stay",
+      callback: () => {
+        sendMessage({ type: "leave-game" });
+      },
     });
   };
 

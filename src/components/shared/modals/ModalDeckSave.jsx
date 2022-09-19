@@ -33,7 +33,7 @@ function ModalDeckSave() {
             minLength={2}
             maxLength={100}
             onChange={(event) =>
-              setDeckName(event.target.value.trim().slice(0, 200))
+              setDeckName(event.target.value.trim().slice(0, 100))
             }
           />
           <div class="modal-footer">

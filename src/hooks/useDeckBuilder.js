@@ -3,6 +3,7 @@ import {
   MAX_COPIES_OF_CARD_PER_DECK,
   MINIMUM_DECK_SIZE,
 } from "../constants/deck";
+import { arraysAreEqual } from "../utils/array";
 import { getCardByName } from "../utils/card";
 import { getCardCountByKey } from "../utils/deck";
 import useStore from "../store";
@@ -10,6 +11,8 @@ import useStore from "../store";
 function useDeckBuilder() {
   const { state, setState } = useStore();
   const deckDraft = createMemo(() => state.user.decks.draft);
+  const myDecks = createMemo(() => state.user.decks.saved);
+  const selectedDeck = createMemo(() => state.user.decks.selected);
   const defaultDeckDraftName = createMemo(
     () => `${state.user.name}'s Untitled Deck`
   );
@@ -63,6 +66,7 @@ function useDeckBuilder() {
         ...state.user,
         decks: {
           draft: newDeck,
+          selected: newDeck,
           saved: [...state.user.decks.saved, newDeck],
         },
       },
@@ -75,6 +79,7 @@ function useDeckBuilder() {
         ...state.user,
         decks: {
           draft: newDeck,
+          selected: newDeck,
           saved: state.user.decks.saved.map((deck) => {
             if (deck.name !== newDeck.name) {
               return deck;
@@ -97,8 +102,9 @@ function useDeckBuilder() {
     }
 
     const existingDeck = state.user.decks.saved.find(
-      (deck) => deck.name === deck.name
+      ({ name }) => deck.name === name
     );
+
     if (existingDeck) {
       updateDeck(deck);
     } else {
@@ -179,11 +185,14 @@ function useDeckBuilder() {
   const resetDeckDraft = () => {
     const name = defaultDeckDraftName();
     setState((state) => ({
-      deckBuilder: {
-        ...state.deckBuilder,
-        draft: {
-          name,
-          cards: [],
+      user: {
+        ...state.user,
+        decks: {
+          ...state.user.decks,
+          draft: {
+            name,
+            cards: [],
+          },
         },
       },
     }));
@@ -228,6 +237,63 @@ function useDeckBuilder() {
     }
   };
 
+  const draftHasUnsavedChanges = () => {
+    //   1. Deck draft has cards
+    //   2. There are no saved decks with this name
+    //   3. There is a saved deck with this name and different cards
+    const deckDraftHasNoCards = deckDraft().cards.length === 0;
+    if (deckDraftHasNoCards) {
+      return false;
+    }
+
+    const deckSavedWithThisName = myDecks().find(
+      ({ name }) => name === deckDraft().name
+    );
+
+    if (deckSavedWithThisName) {
+      const deckDraftCardIds = deckDraft().cards.map((card) => card.id);
+      const existingDeckCardIds = deckSavedWithThisName.cards.map(
+        (card) => card.id
+      );
+
+      const existingDeckWasChanged = !arraysAreEqual(
+        deckDraftCardIds,
+        existingDeckCardIds
+      );
+      return existingDeckWasChanged;
+    }
+
+    return true;
+  };
+
+  const removeSavedDeck = (name) => {
+    const updatedDecks = myDecks().filter((deck) => deck.name !== name);
+    setState((state) => ({
+      user: {
+        ...state.user,
+        decks: {
+          ...state.user.decks,
+          saved: updatedDecks,
+        },
+      },
+    }));
+  };
+
+  const loadSavedDeck = (deckName) => {
+    const deck = state.user.decks.saved.find(({ name }) => deckName === name);
+
+    setState((state) => ({
+      user: {
+        ...state.user,
+        decks: {
+          ...state.user.decks,
+          draft: deck,
+          selected: deck,
+        },
+      },
+    }));
+  };
+
   return {
     save: saveOrUpdateDeck,
     validate: isDeckValid,
@@ -237,6 +303,11 @@ function useDeckBuilder() {
     reset: resetDeckDraft,
     addOrRemoveCard: addOrRemoveCardFromDeckDraft,
     name: updateDeckDraftName,
+    myDecks,
+    hasUnsavedChanges: draftHasUnsavedChanges,
+    remove: removeSavedDeck,
+    load: loadSavedDeck,
+    selected: selectedDeck,
   };
 }
 

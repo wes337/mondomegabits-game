@@ -80,7 +80,7 @@
     .deck-selected {
       text-align: right;
       margin-left: auto;
-      margin-right: 2rem;
+      margin-right: 0.5rem;
 
       .deck-selected-label {
         text-transform: uppercase;
@@ -88,6 +88,10 @@
 
       .deck-selected-name {
         font-size: 1.6rem;
+      }
+
+      .deck-selector {
+        margin: 0.5rem 0;
       }
     }
   }

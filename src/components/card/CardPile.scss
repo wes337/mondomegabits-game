@@ -12,6 +12,10 @@
 
   .card-back {
     position: relative;
+    display: flex;
+    border-radius: 0.25rem;
+    outline: 1px solid rgba($colorGreen, 0.5);
+    margin: 0.25rem 0;
 
     .card-count {
       position: absolute;
@@ -28,6 +32,7 @@
     img {
       width: 50px;
       height: auto;
+      border-radius: 0.25rem;
 
       &.empty {
         opacity: 0.75;
@@ -36,8 +41,15 @@
   }
 
   &.drag-over {
-    outline: 4px solid $colorRed;
     z-index: 1;
     transform: scale(2);
+
+    .card-pile-label {
+      color: $colorTeal;
+    }
+
+    .card-back {
+      outline: 1px solid rgba($colorTeal, 1);
+    }
   }
 }

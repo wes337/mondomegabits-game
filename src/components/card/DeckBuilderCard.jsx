@@ -1,4 +1,4 @@
-import { createMemo, For, Show, onCleanup } from "solid-js";
+import { createMemo, For, Show } from "solid-js";
 import useCardSpotlight from "../../hooks/useCardSpotlight";
 import useDeckBuilder from "../../hooks/useDeckBuilder";
 import "./DeckBuilderCard.scss";
@@ -47,10 +47,6 @@ function DeckBuilderCard(props) {
     clearTimeout(spotlightCard);
     cardSpotlight.close();
   };
-
-  onCleanup(() => {
-    clearTimeout(spotlightCard);
-  });
 
   const getClassName = () => {
     let className = "deck-builder-card";

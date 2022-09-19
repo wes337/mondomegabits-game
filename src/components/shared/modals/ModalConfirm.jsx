@@ -4,8 +4,13 @@ import useModal from "../../../hooks/useModal";
 function ModalConfirm() {
   const modal = useModal();
 
-  const onClick = (event) => {
+  const onConfirm = (event) => {
     modal.data()?.callback?.(event);
+    modal.close();
+  };
+
+  const onClose = (event) => {
+    modal.data()?.closeCallback?.(event);
     modal.close();
   };
 
@@ -18,10 +23,10 @@ function ModalConfirm() {
       </Show>
       <div class="modal-body">{modal.data().body || "Are you sure?"}</div>
       <div class="modal-footer">
-        <button class="button" type="button" onClick={onClick}>
+        <button class="button" type="button" onClick={onConfirm}>
           {modal.data().confirm || "OK"}
         </button>
-        <button class="button" type="button" onClick={modal.close}>
+        <button class="button" type="button" onClick={onClose}>
           {modal.data().cancel || "Cancel"}
         </button>
       </div>

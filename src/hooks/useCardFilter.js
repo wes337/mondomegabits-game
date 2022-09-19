@@ -23,7 +23,7 @@ function useCardFilter() {
     }));
   };
 
-  const clearAllFilters = () => {
+  const resetAllFilters = () => {
     setFilters([]);
     setSearchQuery("");
   };
@@ -70,7 +70,7 @@ function useCardFilter() {
     cards: filteredCards,
     add: addFilter,
     remove: removeFilter,
-    clear: clearAllFilters,
+    reset: resetAllFilters,
     search: debounceSearchCards,
     searchQuery,
     filters,

@@ -5,8 +5,9 @@ import ModalJoinRoom from "./ModalRoomJoin";
 import ModalDeckSave from "./ModalDeckSave";
 import ModalDeckImport from "./ModalDeckImport";
 import ModalDeckExport from "./ModalDeckExport";
-import "./Modal.scss";
 import ModalConfirm from "./ModalConfirm";
+import ModalDeckManage from "./ModalDeckManage";
+import "./Modal.scss";
 
 function Modal() {
   const { current } = useModal();
@@ -24,6 +25,9 @@ function Modal() {
             </Match>
             <Match when={current() === MODAL_NAMES.DECK_SAVE}>
               <ModalDeckSave />
+            </Match>
+            <Match when={current() === MODAL_NAMES.DECK_MANAGE}>
+              <ModalDeckManage />
             </Match>
             <Match when={current() === MODAL_NAMES.DECK_IMPORT}>
               <ModalDeckImport />

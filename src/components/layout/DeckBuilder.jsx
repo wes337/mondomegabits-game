@@ -1,7 +1,7 @@
 import { createSignal, For, createMemo, createEffect, Show } from "solid-js";
 import MODAL_NAMES from "../../constants/modal";
 import { ALL_CARD_TYPES, CARD_RARITY_LEVELS } from "../../constants/card";
-import { uniqueArrayByKey, arraysAreEqual } from "../../utils/array";
+import { uniqueArrayByKey } from "../../utils/array";
 import {
   getCardCountByKey,
   getCardCountByName,
@@ -19,7 +19,7 @@ import CardSpotlight from "../card/CardSpotlight";
 import "./DeckBuilder.scss";
 
 function DeckBuilder() {
-  const { state, setState } = useStore();
+  const { setState } = useStore();
   const modal = useModal();
   const deckBuilder = useDeckBuilder();
   const cardFilter = useCardFilter();
@@ -27,7 +27,6 @@ function DeckBuilder() {
   const [searchQuery, setSearchQuery] = createSignal("");
 
   const deckDraft = createMemo(() => deckBuilder.draft());
-  const myDecks = createMemo(() => state.user.decks.saved);
 
   createEffect(() => {
     if (searchQuery().length > 0) {
@@ -82,35 +81,7 @@ function DeckBuilder() {
   const resetDeck = () => {
     cardFilter.reset();
     deckBuilder.reset();
-  };
-
-  const checkForUnsavedChanges = () => {
-    //   1. Deck draft has cards
-    //   2. There are no saved decks with this name
-    //   3. There is a saved deck with this name and different cards
-    const deckDraftHasNoCards = deckDraft().cards.length === 0;
-    if (deckDraftHasNoCards) {
-      return false;
-    }
-
-    const deckSavedWithThisName = myDecks().find(
-      ({ name }) => name === deckDraft().name
-    );
-
-    if (deckSavedWithThisName) {
-      const deckDraftCardIds = deckDraft().cards.map((card) => card.id);
-      const existingDeckCardIds = deckSavedWithThisName.cards.map(
-        (card) => card.id
-      );
-
-      const existingDeckWasChanged = !arraysAreEqual(
-        deckDraftCardIds,
-        existingDeckCardIds
-      );
-      return existingDeckWasChanged;
-    }
-
-    return true;
+    setSearchQuery("");
   };
 
   const goBack = () => {
@@ -120,7 +91,7 @@ function DeckBuilder() {
       });
     };
 
-    const unsavedChanges = checkForUnsavedChanges();
+    const unsavedChanges = deckBuilder.hasUnsavedChanges();
 
     if (unsavedChanges) {
       modal.open(MODAL_NAMES.CONFIRM, {
@@ -172,6 +143,12 @@ function DeckBuilder() {
               small
               disabled={!deckBuilder.validate(deckDraft())}
               onClick={() => modal.open(MODAL_NAMES.DECK_SAVE)}
+            />
+            <CircleButton
+              label="My Decks"
+              onClick={() => modal.open(MODAL_NAMES.DECK_MANAGE)}
+              color="teal"
+              small
             />
             <CircleButton
               label="Reset"
@@ -296,7 +273,7 @@ function DeckBuilder() {
                           ({getCardCountByType(deckDraft(), type)})
                         </span>
                       </span>
-                      <ul>
+                      <ul class="list">
                         <For each={Object.entries(cards)}>
                           {([card, count]) => (
                             <li>

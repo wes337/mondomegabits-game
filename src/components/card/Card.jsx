@@ -71,6 +71,7 @@ function Card(props) {
     if (props.opponent) {
       return;
     }
+    focusOnCard();
     event.dataTransfer.setData("text", props.card.uuid);
   };
 

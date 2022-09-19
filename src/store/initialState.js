@@ -8,6 +8,7 @@ export default {
         cards: [],
       },
       saved: [],
+      selected: null,
     },
   },
   connected: false,

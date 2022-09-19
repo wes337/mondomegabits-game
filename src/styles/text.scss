@@ -138,21 +138,3 @@ label {
     content: "』";
   }
 }
-
-ul.list {
-  list-style: none;
-  margin: 5px 0;
-  padding-left: 20px;
-  @include textColorAndShadow($colorGreen);
-  @include defaultTextSizing();
-
-  li {
-    margin: 5px 0;
-
-    &::before {
-      content: "\25C6";
-      color: $colorYellow;
-      margin-right: 10px;
-    }
-  }
-}

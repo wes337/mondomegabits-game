@@ -1,0 +1,19 @@
+@import "./colors.scss";
+@import "./text.scss";
+
+ul.list {
+  @include textColorAndShadow($colorGreen);
+  list-style: none;
+  margin: 5px 0;
+  padding-left: 20px;
+
+  li {
+    margin: 5px 0;
+
+    &::before {
+      content: "\25C6";
+      color: $colorYellow;
+      margin-right: 10px;
+    }
+  }
+}

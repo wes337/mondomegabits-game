@@ -174,20 +174,9 @@
       background-color: rgba($colorBlack, 0.8);
 
       ul {
-        list-style: none;
         margin: 0;
+        padding: 0;
         padding-left: 5px;
-        @include textColorAndShadow($colorGreen);
-
-        li {
-          margin: 5px 0;
-
-          &::before {
-            content: "\25C6";
-            color: $colorYellow;
-            margin-right: 10px;
-          }
-        }
       }
 
       .deck-list-type-label {
