@@ -86,9 +86,8 @@ function DeckBuilderCard(props) {
                 width="169"
                 height="284"
                 style={{
-                  transform: `translateY(${
-                    15 * (index() + 1)
-                  }px); z-index: ${-index()}`,
+                  transform: `translateY(${15 * (index() + 1)}px)`,
+                  "z-index": 0 - index(),
                 }}
               />
             )}
