@@ -10,3 +10,12 @@ export const uniqueArrayByKey = (array, key) => {
 
   return uniqueArray;
 };
+
+export const arraysAreEqual = (arrayOne, arrayTwo) => {
+  try {
+    return JSON.stringify(arrayOne.sort()) === JSON.stringify(arrayTwo.sort());
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};

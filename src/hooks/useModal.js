@@ -7,7 +7,7 @@ function useModal() {
   const currentModal = createMemo(() => state.modal.name);
   const currentData = createMemo(() => state.modal.data);
 
-  const openModal = (name, data = null) => {
+  const openModal = (name, data) => {
     setState({
       modal: {
         name,

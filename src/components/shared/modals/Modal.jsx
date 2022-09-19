@@ -6,6 +6,7 @@ import ModalDeckSave from "./ModalDeckSave";
 import ModalDeckImport from "./ModalDeckImport";
 import ModalDeckExport from "./ModalDeckExport";
 import "./Modal.scss";
+import ModalConfirm from "./ModalConfirm";
 
 function Modal() {
   const { current } = useModal();
@@ -15,6 +16,9 @@ function Modal() {
       <div class="modal">
         <div class="modal-container panel">
           <Switch>
+            <Match when={current() === MODAL_NAMES.CONFIRM}>
+              <ModalConfirm />
+            </Match>
             <Match when={current() === MODAL_NAMES.ROOM_JOIN}>
               <ModalJoinRoom />
             </Match>
