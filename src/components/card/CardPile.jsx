@@ -1,5 +1,5 @@
 import useStore from "../../store";
-import CardBack from "../../assets/card-back.png";
+import CardBack from "../../assets/card-back-small.png";
 import "./CardPile.scss";
 
 function CardPile(props) {
@@ -51,7 +51,7 @@ function CardPile(props) {
     >
       <div class="card-pile-label">{label()}</div>
       <div class="card-back">
-        <div class="card-count">{props.cards.length}</div>
+        <div class="card-count white">{props.cards.length}</div>
         <img class={props.cards.length === 0 ? "empty" : ""} src={CardBack} />
       </div>
     </div>

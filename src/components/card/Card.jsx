@@ -1,5 +1,5 @@
 import { Show } from "solid-js";
-import CardBack from "../../assets/card-back.png";
+import CardBack from "../../assets/card-back-small.png";
 import useCardSpotlight from "../../hooks/useCardSpotlight";
 import { getCardImageById } from "../../utils";
 import useStore from "../../store";

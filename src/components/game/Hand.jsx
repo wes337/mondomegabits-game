@@ -1,7 +1,6 @@
 import { createMemo, For } from "solid-js";
 import useStore from "../../store";
 import Card from "../card/Card";
-import CardBack from "../../assets/card-back.png";
 import "./Hand.scss";
 
 function Hand(props) {
