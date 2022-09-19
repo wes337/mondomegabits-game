@@ -17,7 +17,7 @@ function ModalDeckExport() {
         <span class="white">Export Deck</span>
       </div>
       <div class="modal-body">
-        <textarea rows={20} cols={80} style="resize: none;" readonly>
+        <textarea rows={20} cols={80} style={{ resize: "none" }} readonly>
           {deckString()}
         </textarea>
       </div>

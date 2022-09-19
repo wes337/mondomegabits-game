@@ -4,7 +4,7 @@ import "./CardPile.scss";
 
 function CardPile(props) {
   let cardPileRef;
-  const { state, sendMessage } = useStore();
+  const { sendMessage } = useStore();
 
   const onDragOver = (event) => {
     event.preventDefault();

@@ -1,6 +1,10 @@
 import "./CircleButton.scss";
 
 function CircleButton(props) {
+  const onClick = (event) => {
+    props.onClick(event);
+  };
+
   const getClassName = () => {
     let className = "circle-button button";
 
@@ -23,10 +27,10 @@ function CircleButton(props) {
     <button
       class={getClassName()}
       type="button"
-      onClick={props.onClick}
+      onClick={onClick}
       disabled={props.disabled}
     >
-      <div class="circle"></div>
+      <div class="circle" />
       <div class="label">{props.label}</div>
     </button>
   );

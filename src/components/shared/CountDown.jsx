@@ -1,9 +1,13 @@
-import { createSignal, onMount, onCleanup, Show } from "solid-js";
+import { createSignal, createEffect, onMount, onCleanup, Show } from "solid-js";
 import "./CountDown.scss";
 
 function CountDown(props) {
   const [timer, setTimer] = createSignal();
-  const [count, setCount] = createSignal(props.from);
+  const [count, setCount] = createSignal();
+
+  createEffect(() => {
+    setCount(props.from);
+  });
 
   const startTimer = () => {
     if (!timer() && count() > 0) {

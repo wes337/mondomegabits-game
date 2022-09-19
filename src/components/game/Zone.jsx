@@ -1,4 +1,4 @@
-import { createMemo } from "solid-js";
+import { createMemo, For } from "solid-js";
 import { hyphenToCamelCase } from "../../utils";
 import useStore from "../../store";
 import Card from "../card/Card";
@@ -66,9 +66,11 @@ function Zone(props) {
       onDragLeave={onDragLeave}
       onDrop={onDrop}
     >
-      {cardsInZone().map((card) => (
-        <Card card={card} opponent={props.opponent} location={props.name} />
-      ))}
+      <For each={cardsInZone()}>
+        {(card) => (
+          <Card card={card} opponent={props.opponent} location={props.name} />
+        )}
+      </For>
     </div>
   );
 }

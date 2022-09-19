@@ -1,4 +1,4 @@
-import { createMemo, createSignal } from "solid-js";
+import { createSignal } from "solid-js";
 import useDeckBuilder from "../../../hooks/useDeckBuilder";
 import useModal from "../../../hooks/useModal";
 
@@ -21,7 +21,7 @@ function ModalDeckImport() {
         <textarea
           rows={20}
           cols={80}
-          style="resize: none;"
+          style={{ resize: "none " }}
           onChange={(event) => setImportedDeck(event.target.value)}
         />
       </div>

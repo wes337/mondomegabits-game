@@ -1,4 +1,4 @@
-import { createMemo, createEffect } from "solid-js";
+import { createMemo, createEffect, Show } from "solid-js";
 import { getCardImageById } from "../../utils";
 import useStore from "../../store";
 import Card from "../card/Card";

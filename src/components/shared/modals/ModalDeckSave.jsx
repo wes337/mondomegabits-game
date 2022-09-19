@@ -1,4 +1,4 @@
-import { createMemo, createSignal } from "solid-js";
+import { createMemo, createSignal, createEffect } from "solid-js";
 import useDeckBuilder from "../../../hooks/useDeckBuilder";
 import useModal from "../../../hooks/useModal";
 
@@ -6,7 +6,11 @@ function ModalDeckSave() {
   const modal = useModal();
   const deckBuilder = useDeckBuilder();
   const newDeckName = createMemo(() => deckBuilder.draft().name);
-  const [deckName, setDeckName] = createSignal(newDeckName());
+  const [deckName, setDeckName] = createSignal("");
+
+  createEffect(() => {
+    setDeckName(newDeckName());
+  });
 
   const saveDeck = (event) => {
     event.preventDefault();

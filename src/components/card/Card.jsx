@@ -1,4 +1,4 @@
-import { Show } from "solid-js";
+import { Show, createMemo } from "solid-js";
 import CardBack from "../../assets/card-back-small.png";
 import useCardSpotlight from "../../hooks/useCardSpotlight";
 import { getCardImageById } from "../../utils";
@@ -8,18 +8,22 @@ import "./Card.scss";
 function Card(props) {
   const { state, setState, sendMessage } = useStore();
   const cardSpotlight = useCardSpotlight();
-  const cardIsOnBoard = [
-    "battle-zone",
-    "the-think-tank",
-    "buffer-zone",
-  ].includes(props.location);
-  const cardIsInHand = ["look-hand", "stowed-hand"].includes(props.location);
-  const faceDown = (cardIsInHand && props.opponent) || props.card.faceDown;
-  const canSpotlight = !cardIsInHand && !(faceDown && props.opponent);
-  const canTargetFrom = !props.opponent && !cardIsInHand;
+  const cardIsOnBoard = createMemo(() =>
+    ["battle-zone", "the-think-tank", "buffer-zone"].includes(props.location)
+  );
+  const cardIsInHand = createMemo(() =>
+    ["look-hand", "stowed-hand"].includes(props.location)
+  );
+  const faceDown = createMemo(
+    () => (cardIsInHand() && props.opponent) || props.card.faceDown
+  );
+  const canSpotlight = createMemo(
+    () => !cardIsInHand() && !(faceDown() && props.opponent)
+  );
+  const canTargetFrom = createMemo(() => !props.opponent && !cardIsInHand());
 
   const setTargetFromCard = (event) => {
-    if (!canTargetFrom) {
+    if (!canTargetFrom()) {
       return;
     }
 
@@ -71,7 +75,7 @@ function Card(props) {
   };
 
   const focusOnCard = () => {
-    if (props.opponent && faceDown) {
+    if (props.opponent && faceDown()) {
       return;
     }
 
@@ -88,7 +92,7 @@ function Card(props) {
   };
 
   const removeFocusOnCard = () => {
-    if (props.opponent && faceDown) {
+    if (props.opponent && faceDown()) {
       return;
     }
 
@@ -101,7 +105,7 @@ function Card(props) {
   };
 
   const onPointerEnter = () => {
-    if (props.opponent && faceDown) {
+    if (props.opponent && faceDown()) {
       return;
     }
 
@@ -114,7 +118,7 @@ function Card(props) {
   };
 
   const onPointerLeave = () => {
-    if (props.opponent && faceDown) {
+    if (props.opponent && faceDown()) {
       return;
     }
 
@@ -127,7 +131,7 @@ function Card(props) {
   };
 
   const handleDoubleClick = () => {
-    if (cardIsOnBoard) {
+    if (cardIsOnBoard()) {
       tapOrUntapCard();
     }
   };
@@ -185,12 +189,12 @@ function Card(props) {
       draggable
     >
       <div class="card-actions">
-        <Show when={canSpotlight}>
+        <Show when={canSpotlight()}>
           <button class="card-action-button" onClick={spotlightCard}>
             ⇱
           </button>
         </Show>
-        <Show when={canTargetFrom}>
+        <Show when={canTargetFrom()}>
           <button class="card-action-button" onClick={setTargetFromCard}>
             ⌖
           </button>
@@ -198,7 +202,7 @@ function Card(props) {
       </div>
       <img
         id={props.card.uuid}
-        src={faceDown ? CardBack : getCardImageById(props.card.id)}
+        src={faceDown() ? CardBack : getCardImageById(props.card.id)}
       />
     </div>
   );

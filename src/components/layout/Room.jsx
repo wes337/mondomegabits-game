@@ -68,7 +68,7 @@ function Room() {
   return (
     <div class="room">
       <div class="main">
-        <div className="header">
+        <div class="header">
           <div class="room-name">
             <hr class="dotted-double" />
             <h1 class="wide color-change">{state.room.code}</h1>

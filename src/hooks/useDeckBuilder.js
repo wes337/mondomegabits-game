@@ -1,4 +1,4 @@
-import { createMemo, createSignal, onMount } from "solid-js";
+import { createMemo, onMount } from "solid-js";
 import {
   MAX_COPIES_OF_CARD_PER_DECK,
   MINIMUM_DECK_SIZE,
@@ -177,11 +177,12 @@ function useDeckBuilder() {
   };
 
   const resetDeckDraft = () => {
+    const name = defaultDeckDraftName();
     setState((state) => ({
       deckBuilder: {
         ...state.deckBuilder,
         draft: {
-          name: defaultDeckDraftName(),
+          name,
           cards: [],
         },
       },

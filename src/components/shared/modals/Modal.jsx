@@ -1,4 +1,4 @@
-import { Show, Switch, For } from "solid-js";
+import { Show, Switch, Match } from "solid-js";
 import MODAL_NAMES from "../../../constants/modal";
 import useModal from "../../../hooks/useModal";
 import ModalJoinRoom from "./ModalRoomJoin";

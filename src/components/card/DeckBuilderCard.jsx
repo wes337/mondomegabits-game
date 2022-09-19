@@ -1,4 +1,4 @@
-import { createMemo, For, onCleanup } from "solid-js";
+import { createMemo, For, Show, onCleanup } from "solid-js";
 import useCardSpotlight from "../../hooks/useCardSpotlight";
 import useDeckBuilder from "../../hooks/useDeckBuilder";
 import "./DeckBuilderCard.scss";
@@ -83,18 +83,19 @@ function DeckBuilderCard(props) {
       <Show when={props.stackSize > 1}>
         <div class="card-stack">
           <For each={[...Array(props.stackSize - 1)]}>
-            {(_, i) => {
-              const offset = 15 * (i() + 1);
-              return (
-                <img
-                  id={`${props.card.id}-${i()}`}
-                  src={`images/cards/${props.card.fileStem}.jpg`}
-                  width="169"
-                  height="284"
-                  style={`transform: translateY(${offset}px); z-index: ${-i()}`}
-                />
-              );
-            }}
+            {(_, index) => (
+              <img
+                id={`${props.card.id}-${index()}`}
+                src={`images/cards/${props.card.fileStem}.jpg`}
+                width="169"
+                height="284"
+                style={{
+                  transform: `translateY(${
+                    15 * (index() + 1)
+                  }px); z-index: ${-index()}`,
+                }}
+              />
+            )}
           </For>
         </div>
       </Show>

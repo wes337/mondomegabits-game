@@ -1,3 +1,4 @@
+import { For } from "solid-js";
 import "./Plasma.scss";
 
 function Plasma() {
@@ -5,9 +6,9 @@ function Plasma() {
 
   return (
     <div class="plasma">
-      {[...Array(numberOfBubbles)].map((_, i) => (
-        <div class={`bubble x${i + 1}`} />
-      ))}
+      <For each={[...Array(numberOfBubbles)]}>
+        {(_, index) => <div class={`bubble x${index() + 1}`} />}
+      </For>
     </div>
   );
 }

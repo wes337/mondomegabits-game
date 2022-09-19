@@ -1,6 +1,10 @@
 import "./IconButton.scss";
 
 function IconButton(props) {
+  const onClick = (event) => {
+    props.onClick(event);
+  };
+
   const getClassName = () => {
     let className = "icon-button button";
 
@@ -23,7 +27,7 @@ function IconButton(props) {
     <button
       class={getClassName()}
       type="button"
-      onClick={props.onClick}
+      onClick={onClick}
       disabled={props.disabled}
     >
       <div class="icon">

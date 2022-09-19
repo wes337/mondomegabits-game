@@ -97,7 +97,7 @@ function CardTarget() {
     document.body.removeEventListener("resize", handleResize, true);
   });
 
-  return <div ref={cardTargetRef} class="card-target"></div>;
+  return <div ref={cardTargetRef} class="card-target" />;
 }
 
 export default CardTarget;
