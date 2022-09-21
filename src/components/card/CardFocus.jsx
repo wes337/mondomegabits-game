@@ -1,4 +1,4 @@
-import { createMemo, Show } from "solid-js";
+import { createMemo, For, Show } from "solid-js";
 import useStore from "../../store";
 import "./CardFocus.scss";
 
@@ -8,24 +8,34 @@ function CardFocus() {
 
   return (
     <div class="card-focus">
-      <div class="focused-card">
-        <Show when={card()}>
+      <Show when={card()}>
+        <div class="card-focus-header">
           <div class="name teal">{card().name}</div>
-          <div class="cost yellow">
-            <span class="white">Cost:</span> {card().cost}
+          <div class="cost yellow">{card().cost}</div>
+          <div class="type">{card().type}</div>
+          <div class="subtype">{card().subtype}</div>
+        </div>
+        <Show when={card().type === "Creature"}>
+          <div class="creature-stats">
+            <For each={Object.entries(card().stats)}>
+              {([stat, value]) => (
+                <div class="stat">
+                  <div class="stat-name">{stat}</div>
+                  <div class="stat-value">{value}</div>
+                </div>
+              )}
+            </For>
           </div>
-          <div class="type">
-            <span class="white">Type:</span> {card().type}
-          </div>
-          <div class="subtype">
-            <span class="white">Subtype:</span> {card().subType}
-          </div>
-          <div class="faction">
-            <span class="white">Faction:</span> {card().faction}
-          </div>
-          <div class="body-text">{card().bodyText}</div>
         </Show>
-      </div>
+        {/* <div class="faction">
+              <span class="white">Faction:</span> {card().faction}
+            </div> */}
+        <div class="card-body-outer">
+          <div class="card-body-inner">
+            <div class="body-text">{card().bodyText}</div>
+          </div>
+        </div>
+      </Show>
     </div>
   );
 }

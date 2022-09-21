@@ -1,59 +1,98 @@
 @import "../../styles/effects.scss";
 @import "../../styles/animations.scss";
+@import "../../styles/fonts.scss";
 
 .card-focus {
   display: flex;
-  flex-grow: 1;
-  padding: 0.5rem;
-  background-image: $noise;
-  animation: 0.15s linear infinite alternate noise;
-  background-color: $colorRed;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.5rem;
+  background-color: $colorBlack;
+  border-radius: 10px;
   overflow-x: hidden;
   overflow-y: auto;
+  flex-grow: 1;
 
-  border-radius: 10px;
+  border: 4px solid $colorGray;
+  border-top-color: $colorLightGray;
+  border-bottom-color: $colorDarkestGray;
 
-  .focused-card {
-    flex-grow: 1;
-    flex-shrink: 0;
-    height: calc(100% - 1rem);
-    max-width: 90%;
-    margin: 0.5rem 0;
+  background: linear-gradient(to bottom, $colorDarkGray, $colorBlack),
+    url(./assets/noise.svg);
 
-    background-color: $colorBlack;
-    background-image: $noise;
-    border-radius: 0.25rem;
-    box-shadow: 0px 0px 0.75rem 0.75rem $colorBlack;
-
+  .card-focus-header {
     display: grid;
     grid-template-columns: 1fr auto;
-    justify-content: flex-start;
-    overflow-y: auto;
+    padding: 0 1rem;
+    font-size: 18px;
+
+    .name {
+      font-size: 18px;
+      white-space: nowrap;
+      font-weight: 600;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .cost,
+    .subtype {
+      text-align: right;
+      white-space: nowrap;
+    }
+  }
+
+  .creature-stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    align-items: flex-start;
+    text-align: center;
+    font-family: $headerFont;
+    padding: 0 1rem;
+
+    .stat-name {
+      font-size: 0.6rem;
+      color: $colorWhite;
+    }
+
+    .stat-value {
+      font-size: 0.9rem;
+      text-shadow: 2px 1px 1px $colorBlack;
+    }
+  }
+
+  .card-body-outer {
+    display: flex;
+    flex-grow: 1;
+    padding: 0.5rem;
+    background-image: $noise;
+    animation: 0.15s linear infinite alternate noise;
+    background-color: $colorRed;
+    justify-content: center;
+    align-items: flex-start;
     overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-color: $colorDarkGray $colorDarkestGray;
+    border-radius: 10px;
 
-    grid-auto-rows: max-content;
-  }
+    .card-body-inner {
+      flex-grow: 1;
+      flex-shrink: 0;
+      height: calc(100% - 1rem);
+      max-width: 90%;
+      margin: 0.5rem 0;
 
-  .name {
-    font-weight: 600;
-  }
+      background-color: $colorBlack;
+      background-image: $noise;
+      border-radius: 0.25rem;
+      box-shadow: 0px 0px 0.75rem 0.75rem $colorBlack;
 
-  .cost {
-    margin-left: auto;
-    font-weight: 600;
-  }
+      display: flex;
 
-  .type,
-  .subtype {
-  }
-
-  .faction {
-    grid-column: span 2;
-  }
-
-  .body-text {
-    grid-column: span 2;
+      justify-content: flex-start;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
   }
 }

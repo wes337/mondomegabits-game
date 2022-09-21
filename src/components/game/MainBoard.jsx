@@ -25,7 +25,11 @@ function MainBoard() {
         </Show>
         <Zone name="active-zone" />
       </div>
-      <div class="main-board-right panel light-grunge">
+      <div
+        class={`main-board-right panel light-grunge${
+          soloPlay() ? " solo-play" : ""
+        }`}
+      >
         <Show when={!soloPlay()}>
           <SideZone name="the-think-tank" opponent />
         </Show>
