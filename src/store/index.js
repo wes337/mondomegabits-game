@@ -129,6 +129,11 @@ function useStore() {
         setState({ target });
         break;
       }
+      case "message": {
+        const { message } = params;
+        setState({ snackbar: message });
+        break;
+      }
       default: {
         console.log("Got unknown message type: ", type);
         break;

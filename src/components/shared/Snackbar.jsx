@@ -9,17 +9,21 @@ function Snackbar() {
   createEffect(() => {
     if (snackbar.message()) {
       snackbarRef.classList.add("show");
-      // setTimeout(() => {
-      //   snackbar.clear();
-      //   snackbarRef.classList.remove("show");
-      // }, snackbar.duration());
+      setTimeout(() => {
+        snackbar.clear();
+        snackbarRef.classList.remove("show");
+      }, snackbar.duration());
     }
   });
 
   return (
     <div ref={snackbarRef} class="snackbar">
       <div class="snackbar-outer">
-        <div class="snackbar-inner">{snackbar.message()}</div>
+        <div class="snackbar-inner">
+          <hr class="top" />
+          {snackbar.message()}
+          <hr class="bottom" />
+        </div>
       </div>
     </div>
   );

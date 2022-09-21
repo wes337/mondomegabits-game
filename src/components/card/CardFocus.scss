@@ -44,12 +44,20 @@
   .creature-stats {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.75rem;
+    justify-content: space-between;
+
     align-items: flex-start;
     text-align: center;
     font-family: $headerFont;
     padding: 0 1rem;
+    border-radius: 1rem;
+    margin: 0.5rem;
+    box-shadow: inset 0 10px 15px rgba($colorBlack, 0.7);
+    outline: 2px ridge rgba($colorLightGray, 0.5);
+
+    .stat {
+      margin: auto;
+    }
 
     .stat-name {
       font-size: 0.6rem;

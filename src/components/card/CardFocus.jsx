@@ -16,7 +16,7 @@ function CardFocus() {
           <div class="subtype">{card().subtype}</div>
         </div>
         <Show when={card().type === "Creature"}>
-          <div class="creature-stats">
+          <div class="creature-stats grunge">
             <For each={Object.entries(card().stats)}>
               {([stat, value]) => (
                 <div class="stat">
