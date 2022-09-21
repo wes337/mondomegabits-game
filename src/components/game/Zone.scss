@@ -6,6 +6,8 @@
   flex-grow: 1;
   overflow: clip;
   min-height: 25px;
+  padding: 1rem;
+  gap: 1rem;
 
   &:after {
     top: 0;
@@ -14,35 +16,17 @@
     position: absolute;
   }
 
-  &.the-think-tank {
+  &.active-zone {
     background-color: $colorGray;
 
     &:after {
-      content: "The Think Tank";
-    }
-
-    &.opponent {
-    }
-  }
-
-  &.buffer-zone {
-    background-color: rgba($colorGray, 0.5);
-    &:after {
-      content: "Buffer Zone";
-    }
-
-    &.opponent {
-    }
-  }
-
-  &.battle-zone {
-    background-color: rgba($colorGray, 0.05);
-
-    &:after {
       content: "Active Zone";
+      text-transform: uppercase;
+      text-shadow: 2px 1px 1px $colorBlack;
     }
 
     &.opponent {
+      background-color: rgba($colorGray, 0.05);
     }
   }
 

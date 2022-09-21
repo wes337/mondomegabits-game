@@ -15,9 +15,13 @@ function Zone(props) {
         : puppetMaster.id === state.user.id
     );
     const zoneKey = hyphenToCamelCase(props.name);
-    const cards = puppetMaster.board[zoneKey];
+    const cards = puppetMaster[zoneKey];
 
-    return cards || [];
+    if (Array.isArray(cards)) {
+      return cards || [];
+    }
+
+    return puppetMaster[zoneKey] ? [puppetMaster[zoneKey]] : [];
   });
 
   const onDragOver = (event) => {

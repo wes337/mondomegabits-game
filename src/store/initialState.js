@@ -32,4 +32,5 @@ export default {
   deckBuilderOpen: false,
   chatExpanded: true,
   chatInput: "",
+  snackbar: "",
 };

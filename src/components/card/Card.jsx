@@ -9,7 +9,7 @@ function Card(props) {
   const { state, setState, sendMessage } = useStore();
   const cardSpotlight = useCardSpotlight();
   const cardIsOnBoard = createMemo(() =>
-    ["battle-zone", "the-think-tank", "buffer-zone"].includes(props.location)
+    ["active-zone", "the-think-tank"].includes(props.location)
   );
   const cardIsInHand = createMemo(() =>
     ["look-hand", "stowed-hand"].includes(props.location)
@@ -139,7 +139,7 @@ function Card(props) {
         type: "play",
         params: {
           cardUuid: props.card.uuid,
-          destination: "battle-zone",
+          destination: "active-zone",
         },
       });
     }

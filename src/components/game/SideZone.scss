@@ -1,0 +1,47 @@
+@import "../../styles/colors.scss";
+
+.side-zone {
+  display: flex;
+  text-align: center;
+
+  legend {
+    text-align: center;
+    text-shadow: 2px 1px 1px $colorBlack;
+  }
+
+  fieldset {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    border: 1px solid $colorGreen;
+    color: $colorGreen;
+    margin: 0.5rem;
+    opacity: 0.75;
+    background-color: rgba($colorGreen, 0.1);
+    text-transform: uppercase;
+  }
+
+  &.filled {
+    background-color: rgba($colorTeal, 0.25);
+
+    fieldset {
+      color: $colorWhite;
+      font-weight: 600;
+      border: 1px solid $colorTeal;
+      box-shadow: 0px 0px 0.75rem 0.75rem rgba($colorTeal, 0.25);
+    }
+
+    &.opponent {
+    }
+  }
+
+  &.drag-over {
+    fieldset {
+      border: 1px solid $colorTeal;
+      color: $colorTeal;
+      background-color: rgba($colorTeal, 0.1);
+      z-index: 1;
+      filter: saturate(4);
+    }
+  }
+}

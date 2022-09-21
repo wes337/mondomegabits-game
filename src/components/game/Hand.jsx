@@ -16,10 +16,10 @@ function Hand(props) {
     });
 
     if (props.stowed) {
-      return puppetMaster.hand.stowed;
+      return puppetMaster.stowedHand;
     }
 
-    return puppetMaster.hand.look;
+    return puppetMaster.lookHand;
   });
 
   const onDragOver = (event) => {

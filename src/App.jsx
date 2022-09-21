@@ -7,6 +7,7 @@ import Room from "./components/layout/Room";
 import GameBoard from "./components/game/GameBoard";
 import DeckBuilder from "./components/layout/DeckBuilder";
 import Modal from "./components/shared/modals/Modal";
+import Snackbar from "./components/shared/Snackbar";
 import "./App.scss";
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
           </Match>
         </Switch>
         <Modal />
+        <Snackbar />
       </div>
       <div
         class={`orientation${

@@ -1,0 +1,45 @@
+@import "../../styles/colors.scss";
+@import "../../styles/effects.scss";
+@import "../../styles/animations.scss";
+
+.snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  text-align: center;
+  color: $colorWhite;
+  position: fixed;
+  z-index: 0;
+  left: 50%;
+  bottom: 30px;
+
+  .snackbar-outer {
+    display: flex;
+    border-radius: 10px;
+    padding: 0.5rem;
+    background-image: $noise;
+    animation: 0.15s linear infinite alternate noise;
+    justify-content: center;
+    background-color: $colorRed;
+    border: 4px ridge rgba($colorRed, 0.5);
+    box-shadow: 0px 0px 0.25rem 0.25rem rgba($colorRed, 0.2);
+  }
+
+  .snackbar-inner {
+    flex-grow: 1;
+    flex-shrink: 0;
+    height: calc(100% - 1rem);
+    max-width: 90%;
+    margin: 0.5rem 0;
+
+    background-color: $colorBlack;
+    background-image: $noise;
+    border-radius: 0.25rem;
+    box-shadow: 0px 0px 0.75rem 0.75rem $colorBlack;
+  }
+
+  &.show {
+    visibility: visible;
+    animation: slideUp 0.5s, slideDown 0.5s 2.5s;
+  }
+}
