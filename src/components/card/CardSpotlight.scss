@@ -16,8 +16,10 @@
 
   img {
     position: absolute;
-    height: 95%;
+    height: auto;
+    max-height: 95%;
     width: auto;
+    max-width: 50vw;
 
     transform: perspective(400px) rotateX(0deg) rotateY(0deg);
     transform-style: preserve-3d;

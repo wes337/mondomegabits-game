@@ -1,5 +1,5 @@
 import { createMemo, Switch, Match } from "solid-js";
-import useDeviceOrientation from "./hooks/useDeviceOrientation";
+import { isMobileDevice } from "./utils";
 import useStore from "./store";
 import Connect from "./components/layout/Connect";
 import Lobby from "./components/layout/Lobby";
@@ -11,7 +11,6 @@ import Snackbar from "./components/shared/Snackbar";
 import "./App.scss";
 
 function App() {
-  const deviceOrientation = useDeviceOrientation();
   const { state } = useStore();
 
   const screenToShow = createMemo(() => {
@@ -40,7 +39,7 @@ function App() {
 
   return (
     <>
-      <div class={`app${deviceOrientation() === "portrait" ? " hide" : ""}`}>
+      <div class="app">
         <Switch fallback={<Connect />}>
           <Match when={screenToShow() === "deck"}>
             <DeckBuilder />
@@ -58,13 +57,19 @@ function App() {
         <Modal />
         <Snackbar />
       </div>
-      <div
-        class={`orientation${
-          deviceOrientation() === "portrait" ? " show" : ""
-        }`}
-      >
-        <img src="images/icons/mobile.svg" width={64} height={64} />
-        <h3>Please turn your device sideways to landscape mode.</h3>
+      <div class="orientation">
+        {isMobileDevice() ? (
+          <>
+            <img src="images/icons/mobile.svg" width={64} height={64} />
+            <h3>Please turn your device sideways to landscape mode.</h3>
+          </>
+        ) : (
+          <>
+            Window size is too small!
+            <br />
+            Please expand this window.
+          </>
+        )}
       </div>
     </>
   );

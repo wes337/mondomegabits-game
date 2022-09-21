@@ -37,10 +37,10 @@ export const hyphenToCamelCase = (hyphenString) => {
 
 export const isMobileDevice = () => {
   if (window.navigator?.userAgentData) {
-    if (window.navigator.userAgent.mobile) {
-      return window.navigator.userAgentData.mobile;
-    }
+    return window.navigator.userAgentData.mobile;
+  }
 
+  if (window.navigator?.userAgent) {
     const mobileUserAgents = [
       /Android/i,
       /webOS/i,
@@ -54,6 +54,7 @@ export const isMobileDevice = () => {
       /Playbook/i,
       /Silk/i,
     ];
+
     return mobileUserAgents.some((mobileUserAgent) => {
       return window.navigator.userAgent.match(mobileUserAgent);
     });
