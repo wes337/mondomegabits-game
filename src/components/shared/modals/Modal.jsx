@@ -9,6 +9,7 @@ import ModalConfirm from "./ModalConfirm";
 import ModalDeckManage from "./ModalDeckManage";
 import ModalCardNotes from "./ModalCardNotes";
 import "./Modal.scss";
+import ModalFindRoom from "./ModalFindRoom";
 
 function Modal() {
   const { current } = useModal();
@@ -26,6 +27,9 @@ function Modal() {
             </Match>
             <Match when={current() === MODAL_NAMES.ROOM_JOIN}>
               <ModalJoinRoom />
+            </Match>
+            <Match when={current() === MODAL_NAMES.ROOM_FIND}>
+              <ModalFindRoom />
             </Match>
             <Match when={current() === MODAL_NAMES.DECK_SAVE}>
               <ModalDeckSave />

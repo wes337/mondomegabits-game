@@ -2,13 +2,14 @@ import { createMemo, Switch, Match } from "solid-js";
 import { isMobileDevice } from "./utils";
 import useStore from "./store";
 import Connect from "./components/layout/Connect";
-import Lobby from "./components/layout/Lobby";
+// import Lobby from "./components/layout/Lobby";
 import Room from "./components/layout/Room";
 import GameBoard from "./components/game/GameBoard";
 import DeckBuilder from "./components/layout/DeckBuilder";
 import Modal from "./components/shared/modals/Modal";
 import Snackbar from "./components/shared/Snackbar";
 import "./App.scss";
+import Menu from "./components/layout/Menu";
 
 function App() {
   const { state } = useStore();
@@ -51,7 +52,7 @@ function App() {
             <Room />
           </Match>
           <Match when={screenToShow() === "lobby"}>
-            <Lobby />
+            <Menu />
           </Match>
         </Switch>
         <Modal />

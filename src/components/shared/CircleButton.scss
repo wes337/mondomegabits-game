@@ -46,6 +46,11 @@
   &.disabled,
   &:disabled,
   &[disabled] {
+    cursor: default;
+
+    .circle {
+      @include textColorAndShadow($colorLightGray);
+    }
     &:hover {
       .circle {
         &:before {
