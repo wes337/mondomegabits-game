@@ -1,4 +1,5 @@
 @import "../../styles/colors.scss";
+@import "../../styles/fonts.scss";
 
 .card-pile {
   display: flex;
@@ -24,9 +25,13 @@
       align-items: center;
       width: 100%;
       height: 100%;
-      font-size: 2rem;
+      font-size: 1.2rem;
       z-index: 1;
-      text-shadow: 2px 1px 1px $colorBlack;
+      color: $colorWhite;
+      font-family: $headerFont;
+      -webkit-text-stroke: 2px rgba($colorBlack, 0.25);
+      text-shadow: 2px 2px rgba($colorBlack, 0.75),
+        -2px -2px rgba($colorBlack, 0.75);
     }
 
     img {
