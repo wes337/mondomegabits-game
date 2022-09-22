@@ -1,4 +1,3 @@
-import { Show } from "solid-js";
 import MODAL_NAMES from "../../constants/modal";
 import useStore from "../../store";
 import useModal from "../../hooks/useModal";
@@ -8,7 +7,7 @@ import Chat from "../shared/Chat";
 import "./RightSideBar.scss";
 
 function RightSideBar() {
-  const { state, setState, sendMessage } = useStore();
+  const { sendMessage } = useStore();
   const modal = useModal();
 
   const leaveGame = () => {
@@ -24,24 +23,13 @@ function RightSideBar() {
   };
 
   return (
-    <div
-      class={`right-side-bar grunge${
-        state.chatExpanded ? " chat-expanded" : ""
-      }`}
-    >
+    <div class="right-side-bar grunge">
       <div class="options">
-        <CircleButton
-          label={state.chatExpanded ? "Hide Chat" : "Show Chat"}
-          onClick={() => setState({ chatExpanded: !state.chatExpanded })}
-          small
-        />
         <CircleButton label="Leave" onClick={leaveGame} color="red" small />
       </div>
       <CardFocus />
       <div class="game-chat">
-        <Show when={state.chatExpanded}>
-          <Chat small />
-        </Show>
+        <Chat small />
       </div>
     </div>
   );

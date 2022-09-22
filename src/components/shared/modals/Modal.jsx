@@ -7,6 +7,7 @@ import ModalDeckImport from "./ModalDeckImport";
 import ModalDeckExport from "./ModalDeckExport";
 import ModalConfirm from "./ModalConfirm";
 import ModalDeckManage from "./ModalDeckManage";
+import ModalCardNotes from "./ModalCardNotes";
 import "./Modal.scss";
 
 function Modal() {
@@ -19,6 +20,9 @@ function Modal() {
           <Switch>
             <Match when={current() === MODAL_NAMES.CONFIRM}>
               <ModalConfirm />
+            </Match>
+            <Match when={current() === MODAL_NAMES.CARD_NOTES}>
+              <ModalCardNotes />
             </Match>
             <Match when={current() === MODAL_NAMES.ROOM_JOIN}>
               <ModalJoinRoom />

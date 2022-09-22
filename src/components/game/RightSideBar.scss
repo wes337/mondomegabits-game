@@ -6,10 +6,6 @@
   max-height: 100vh;
   overflow: clip;
 
-  &.chat-expanded {
-    grid-template-rows: auto 1fr 2fr;
-  }
-
   .options {
     display: flex;
     margin-left: auto;
@@ -18,10 +14,7 @@
   .game-chat {
     display: flex;
     flex-direction: column;
-    max-height: 30%;
-
-    .expand-button {
-      margin-left: auto;
-    }
+    min-height: 30%;
+    height: 30%;
   }
 }

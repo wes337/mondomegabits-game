@@ -30,7 +30,6 @@ export default {
     data: null,
   },
   deckBuilderOpen: false,
-  chatExpanded: true,
   chatInput: "",
   snackbar: "",
 };

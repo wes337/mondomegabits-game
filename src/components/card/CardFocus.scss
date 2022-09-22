@@ -19,6 +19,16 @@
   background: linear-gradient(to bottom, $colorDarkGray, $colorBlack),
     url(./assets/noise.svg);
 
+  .card-focus-back {
+    display: flex;
+    height: 100%;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
   .card-focus-header {
     display: grid;
     grid-template-columns: 1fr auto;

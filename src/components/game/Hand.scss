@@ -35,9 +35,9 @@
     cursor: grab;
 
     &:hover {
-      transform: translateY(-75px);
+      transform: translateY(-20%);
 
-      img {
+      .card-img {
         outline: 2px solid $colorRed;
       }
     }
@@ -58,7 +58,7 @@
       &:hover {
         transform: translateY(-1rem);
 
-        img {
+        .card-img {
           outline: 2px solid $colorRed;
         }
       }

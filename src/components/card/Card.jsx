@@ -1,13 +1,17 @@
 import { Show, createMemo } from "solid-js";
+import MODAL_NAMES from "../../constants/modal";
 import CardBack from "../../assets/card-back-small.png";
 import useCardSpotlight from "../../hooks/useCardSpotlight";
 import { getCardImageById } from "../../utils";
 import useStore from "../../store";
 import "./Card.scss";
+import useModal from "../../hooks/useModal";
 
 function Card(props) {
   const { state, setState, sendMessage } = useStore();
+  const modal = useModal();
   const cardSpotlight = useCardSpotlight();
+
   const cardIsOnBoard = createMemo(() =>
     ["active-zone", "the-think-tank"].includes(props.location)
   );
@@ -170,6 +174,11 @@ function Card(props) {
     cardSpotlight.open(props.card);
   };
 
+  const editCardNotes = (event) => {
+    event.stopPropagation();
+    modal.open(MODAL_NAMES.CARD_NOTES, { card: props.card });
+  };
+
   const cardClassName = () => {
     let className = "card";
 
@@ -208,9 +217,18 @@ function Card(props) {
             ⌖
           </button>
         </Show>
+        <Show when={cardIsOnBoard()}>
+          <button
+            class="card-action-button edit-button"
+            onClick={editCardNotes}
+          >
+            <img src="images/icons/edit.svg" width={12} height={12} />
+          </button>
+        </Show>
       </div>
       <img
         id={props.card.uuid}
+        class="card-img"
         src={faceDown() ? CardBack : getCardImageById(props.card.id)}
       />
     </div>

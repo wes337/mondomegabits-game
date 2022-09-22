@@ -14,7 +14,7 @@ function CardTarget() {
   let cardTargetRef;
   let line;
   let tempLine;
-  const { state } = useStore();
+  const { state, setState } = useStore();
 
   const isChoosingCardToTarget = createMemo(
     () => state.target.from && !state.target.to
@@ -36,6 +36,17 @@ function CardTarget() {
   const handleResize = () => {
     line?.position?.();
     tempLine?.position?.();
+  };
+
+  const onKeyDown = (event) => {
+    if (event.key === "Escape") {
+      setState({
+        target: {
+          from: null,
+          to: null,
+        },
+      });
+    }
   };
 
   createEffect(() => {
@@ -88,6 +99,7 @@ function CardTarget() {
     line?.remove?.();
     tempLine?.remove?.();
     document.body.addEventListener("resize", handleResize, true);
+    document.body.addEventListener("keydown", onKeyDown, true);
   });
 
   onCleanup(() => {
@@ -95,6 +107,7 @@ function CardTarget() {
     tempLine?.remove?.();
     document.body.removeEventListener("mousemove", moveTarget, true);
     document.body.removeEventListener("resize", handleResize, true);
+    document.body.removeEventListener("keydown", onKeyDown, true);
   });
 
   return <div ref={cardTargetRef} class="card-target" />;

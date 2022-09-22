@@ -1,4 +1,5 @@
 import { createMemo, For, Show } from "solid-js";
+import CardBackLarge from "../../assets/card-back-large.png";
 import useStore from "../../store";
 import "./CardFocus.scss";
 
@@ -8,7 +9,14 @@ function CardFocus() {
 
   return (
     <div class="card-focus">
-      <Show when={card()}>
+      <Show
+        when={card()}
+        fallback={
+          <div class="card-focus-back">
+            <img src={CardBackLarge} />
+          </div>
+        }
+      >
         <div class="card-focus-header">
           <div class="name teal">{card().name}</div>
           <div class="cost yellow">{card().cost}</div>

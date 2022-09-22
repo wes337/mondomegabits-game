@@ -29,8 +29,8 @@
   .snackbar-inner {
     flex-grow: 1;
     flex-shrink: 0;
-    height: calc(100% - 1rem);
-    max-width: 90%;
+    height: 100%;
+    max-width: 95%;
     margin: 0.5rem 0;
 
     background-color: $colorBlack;

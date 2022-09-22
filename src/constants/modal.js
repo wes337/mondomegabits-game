@@ -5,4 +5,5 @@ export default {
   DECK_EXPORT: "deck-export",
   ROOM_JOIN: "room-join",
   CONFIRM: "confirm",
+  CARD_NOTES: "card-notes",
 };

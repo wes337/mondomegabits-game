@@ -23,6 +23,7 @@ function ModalDeckImport() {
           cols={80}
           style={{ resize: "none " }}
           onChange={(event) => setImportedDeck(event.target.value)}
+          onPaste={(event) => setImportedDeck(event.target.value)}
         />
       </div>
       <div class="modal-footer">
