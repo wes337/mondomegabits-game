@@ -22,10 +22,12 @@
     "vite-plugin-solid": "^2.3.0"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.6",
     "@solid-primitives/scheduled": "^1.0.1",
     "leader-line2": "^1.0.7",
     "match-sorter": "^6.3.1",
     "sass": "^1.54.8",
+    "shepherd.js": "^10.0.1",
     "solid-js": "^1.5.1"
   }
 }

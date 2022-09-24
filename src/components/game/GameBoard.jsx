@@ -1,4 +1,6 @@
+import { onCleanup, onMount, createEffect, Show } from "solid-js";
 import useStore from "../../store";
+import useKeyboard from "../../hooks/useKeyboard";
 import CardSpotlight from "../card/CardSpotlight";
 import CardTarget from "../card/CardTarget";
 import GameHeader from "./GameHeader";
@@ -7,8 +9,13 @@ import RightSideBar from "./RightSideBar";
 import MainBoard from "./MainBoard";
 import GameFooter from "./GameFooter";
 import "./GameBoard.scss";
+import Tooltip from "../shared/Tooltip";
+import useTutorial from "../../hooks/useTutorial";
 
-function GameBoard() {
+function GameBoard(props) {
+  let mainBoardRef;
+  const keyboard = useKeyboard();
+  const tutorial = useTutorial();
   const { state, setState } = useStore();
 
   const onClick = (event) => {
@@ -31,17 +38,62 @@ function GameBoard() {
     }
   };
 
+  onMount(() => {
+    if (props.isTutorial) {
+      document.addEventListener("keydown", keyboard.tutorialControls);
+      tutorial.reset();
+    } else {
+      document.addEventListener("keydown", keyboard.controls);
+    }
+  });
+
+  onCleanup(() => {
+    if (props.isTutorial) {
+      document.removeEventListener("keydown", keyboard.tutorialControls);
+    } else {
+      document.removeEventListener("keydown", keyboard.controls);
+    }
+  });
+
+  createEffect(() => {
+    if (tutorial.started() && tutorial.current()) {
+      tutorial.current().effect?.();
+    }
+  });
+
   return (
     <>
       <div class="game-board" onClick={onClick}>
         <GameHeader />
         <LeftSideBar />
-        <MainBoard />
+        <MainBoard ref={mainBoardRef} />
         <RightSideBar />
         <GameFooter />
       </div>
       <CardSpotlight />
       <CardTarget />
+      <Show when={tutorial.started() && tutorial.current()}>
+        <Tooltip
+          position={tutorial.current().position?.()}
+          placement={tutorial.current().placement}
+        >
+          {tutorial.current().content}
+          <Show when={tutorial.current().showNextButton}>
+            <button
+              class="button tooltip-button"
+              onClick={() => {
+                if (tutorial.number() === 16) {
+                  tutorial.end();
+                } else {
+                  tutorial.next();
+                }
+              }}
+            >
+              Next
+            </button>
+          </Show>
+        </Tooltip>
+      </Show>
     </>
   );
 }

@@ -51,6 +51,10 @@ function CardSpotlight() {
       "perspective(400px) rotateY(0deg) rotateX(0deg)";
   };
 
+  const onKeyDown = () => {
+    cardSpotlight.close();
+  };
+
   const getClassName = () => {
     let className = "card-spotlight";
 
@@ -66,7 +70,11 @@ function CardSpotlight() {
   };
 
   return (
-    <div class={getClassName()} onClick={cardSpotlight.close}>
+    <div
+      class={getClassName()}
+      onClick={cardSpotlight.close}
+      onKeyDown={onKeyDown}
+    >
       <img
         id={`${cardUuid()}-spotlight`}
         src={cardImg()}

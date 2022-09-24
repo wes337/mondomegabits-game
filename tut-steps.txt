@@ -1,0 +1,37 @@
+[This tutorial will teach you how to perform all of the basic game mechanics. 
+Please note that no rules are enforced, as they are still under development. This is a Sandbox game -- all players can draw, move, and interact with cards and the board freely.]
+
+[Start by pressing Ctrl +S to shuffle your deck.]
+[Notice that your action was recorded in the chat. All actions performed by players will be shown in the chat.]
+
+[To draw a card, press Ctrl + D or click on your deck.]
+[Draw 5 cards.]
+[Focus on a card by clicking on it once, or hovering over it. You will then be able to see the card cost, stats, and other details on the panel to the right.]
+
+[To play a card, drag it onto the board or double click it.]
+[Play 3 cards from your hand.]
+
+[Decrease your funding by pressing Ctrl + # / Ctrl + 3, or by pressing the '-' button next to your funding amount.]
+[Increase your funding by pressing Ctrl + $ / Ctrl + 4, or by pressing the '+' button next to your funding amount.]
+
+[Double click a card on the board to tap it.]
+[Press Ctrl + U to untap all cards on the board.]
+
+[You can move a card by dragging and dropping it to any desired zone. Try moving a card from your Look Hand into your Stowed Hand.]
+
+[Move the card on the board to the discard pile by dragging and dropping it onto the discard pile.]
+
+[You can draw lines between cards to help communicate with other players.
+Hover over a card in the active zone, and click the ⌖ button. Then click on another card, or press the Escape key to cancel.]
+
+[To turn a card face down or face up, hover over a card and click the ↴ button.]
+[Hover over a card and press the ⇱ button to view it in its full-size.]
+
+[Decrease your narrative by pressing Ctrl + + or by pressing the '-' button next to your narrative amount.]
+[Increase your funding by pressing Ctrl + -, or by pressing the '+' button next to your narrative amount.]
+
+
+
+
+
+

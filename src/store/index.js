@@ -27,6 +27,14 @@ function useStore() {
     });
   };
 
+  const gameLogToChatMessage = (log) => {
+    return {
+      message: log.event,
+      date: log.date,
+      user: "SYSTEM",
+    };
+  };
+
   ws.onmessage = (event) => {
     const { type, params } = JSON.parse(event.data);
 
@@ -50,13 +58,14 @@ function useStore() {
         break;
       }
       case "join": {
-        const { roomCode, users } = params;
+        const { roomCode, users, status } = params;
         setState((state) => ({
           lobby: state.lobby.filter((user) => user.id !== state.user.id),
           room: {
             code: roomCode,
             users,
             chatMessages: state.room?.chatMessages || [],
+            status,
           },
         }));
         break;
@@ -121,7 +130,16 @@ function useStore() {
       }
       case "game": {
         const { game } = params;
-        setState({ game });
+        setState((state) => ({
+          game,
+          room: {
+            ...state.room,
+            chatMessages: [
+              ...(state.room?.chatMessages || []),
+              gameLogToChatMessage(game.log[game.log.length - 1]),
+            ],
+          },
+        }));
         break;
       }
       case "target": {

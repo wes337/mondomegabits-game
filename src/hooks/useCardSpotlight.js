@@ -1,7 +1,23 @@
 import useStore from "../store";
+import useTutorial from "./useTutorial";
 
 function useCardSpotlight() {
-  const { setState } = useStore();
+  const { state, setState } = useStore();
+  const tutorial = useTutorial();
+
+  const handleTutorialStep = () => {
+    if (!tutorial.started()) {
+      return;
+    }
+
+    if (tutorial.number() === 13) {
+      const spotlightClosed = !state.focus.spotlight;
+      if (spotlightClosed) {
+        tutorial.next();
+      }
+      return;
+    }
+  };
 
   const closeCardSpotlight = () => {
     setState((state) => ({
@@ -10,6 +26,8 @@ function useCardSpotlight() {
         spotlight: null,
       },
     }));
+
+    handleTutorialStep();
   };
 
   const openCardSpotlight = (card) => {

@@ -31,7 +31,7 @@
     .stat-number {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
       margin-top: 0.25rem;
       padding: 0.5rem;
       font-size: 1.4rem;
@@ -43,6 +43,22 @@
       -webkit-text-stroke: 2px rgba($colorBlack, 0.25);
       text-shadow: 2px 2px rgba($colorBlack, 0.75),
         -2px -2px rgba($colorBlack, 0.75);
+    }
+
+    .stat-button {
+      cursor: pointer;
+      background: none;
+      border: 0;
+      font-size: 1.4rem;
+      color: $colorGreen;
+
+      &:hover {
+        background-color: rgba($colorGreen, 0.25);
+      }
+
+      &:active {
+        background-color: rgba($colorGreen, 0.5);
+      }
     }
   }
 

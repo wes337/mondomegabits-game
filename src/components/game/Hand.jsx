@@ -23,7 +23,7 @@ function Hand(props) {
   });
 
   const onDragOver = (event) => {
-    if (props.opponent || !props.stowed) {
+    if (props.opponent) {
       return;
     }
 
@@ -32,7 +32,7 @@ function Hand(props) {
   };
 
   const onDragLeave = () => {
-    if (props.opponent || !props.stowed) {
+    if (props.opponent) {
       return;
     }
 
@@ -40,7 +40,7 @@ function Hand(props) {
   };
 
   const onDrop = (event) => {
-    if (props.opponent || !props.stowed) {
+    if (props.opponent) {
       return;
     }
 
@@ -50,7 +50,7 @@ function Hand(props) {
     const cardUuid = event.dataTransfer.getData("text");
 
     sendMessage({
-      type: "play",
+      type: "move-card",
       params: {
         cardUuid,
         destination: props.stowed ? "stowed-hand" : "look-hand",

@@ -56,7 +56,7 @@ function SideZone(props) {
     const cardUuid = event.dataTransfer.getData("text");
 
     sendMessage({
-      type: "play",
+      type: "move-card",
       params: {
         cardUuid,
         destination: props.name,

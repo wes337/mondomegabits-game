@@ -1,10 +1,12 @@
 import { createMemo, Show } from "solid-js";
+import useGameControls from "../../hooks/useGameControls";
 import useStore from "../../store";
 import CardPile from "../card/CardPile";
 import "./LeftSideBar.scss";
 
 function LeftSideBar() {
-  const { state, sendMessage } = useStore();
+  const { state } = useStore();
+  const gameControls = useGameControls();
 
   const me = createMemo(() =>
     state.game.puppetMasters.find(({ id }) => id === state.user.id)
@@ -32,9 +34,7 @@ function LeftSideBar() {
   });
 
   const endTurn = () => {
-    sendMessage({
-      type: "end-turn",
-    });
+    gameControls.endTurn();
   };
 
   return (
@@ -81,11 +81,47 @@ function LeftSideBar() {
           <div class="stats">
             <div class="stat panel">
               <div class="stat-label">Narrative</div>
-              <div class="stat-number">{me().narrative}</div>
+              <div class="stat-number">
+                <button
+                  class="stat-button"
+                  onClick={() =>
+                    gameControls.increaseOrDecreaseStat("narrative", -1)
+                  }
+                >
+                  -
+                </button>
+                {me().narrative}
+                <button
+                  class="stat-button"
+                  onClick={() =>
+                    gameControls.increaseOrDecreaseStat("narrative", 1)
+                  }
+                >
+                  +
+                </button>
+              </div>
             </div>
             <div class="stat panel">
               <div class="stat-label">Funding</div>
-              <div class="stat-number">{me().funding}</div>
+              <div class="stat-number">
+                <button
+                  class="stat-button"
+                  onClick={() =>
+                    gameControls.increaseOrDecreaseStat("funding", -1)
+                  }
+                >
+                  -
+                </button>
+                {me().funding}
+                <button
+                  class="stat-button"
+                  onClick={() =>
+                    gameControls.increaseOrDecreaseStat("funding", 1)
+                  }
+                >
+                  +
+                </button>
+              </div>
             </div>
           </div>
         </fieldset>

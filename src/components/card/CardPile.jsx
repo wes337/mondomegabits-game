@@ -1,10 +1,10 @@
-import useStore from "../../store";
 import CardBack from "../../assets/card-back-small.png";
+import useGameControls from "../../hooks/useGameControls";
 import "./CardPile.scss";
 
 function CardPile(props) {
   let cardPileRef;
-  const { sendMessage } = useStore();
+  const gameControls = useGameControls();
 
   const onDragOver = (event) => {
     event.preventDefault();
@@ -21,13 +21,24 @@ function CardPile(props) {
     cardPileRef.classList.remove("drag-over");
     const cardUuid = event.dataTransfer.getData("text");
 
-    sendMessage({
-      type: "move",
-      params: {
-        cardUuid,
-        destination: props.name,
-      },
-    });
+    gameControls.moveCard(cardUuid, props.name);
+  };
+
+  const onClick = (event) => {
+    const SINGLE_CLICK = 1;
+    const DOUBLE_CLICK = 2;
+
+    switch (event.detail) {
+      case SINGLE_CLICK: {
+        if (props.name === "deck") {
+          gameControls.drawCards(1);
+        }
+        break;
+      }
+      case DOUBLE_CLICK: {
+        break;
+      }
+    }
   };
 
   const label = () => {
@@ -48,6 +59,7 @@ function CardPile(props) {
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}
       onDrop={onDrop}
+      onClick={onClick}
     >
       <div class="card-pile-label">{label()}</div>
       <div class="card-back">

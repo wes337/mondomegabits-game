@@ -6,11 +6,15 @@ import { getCardImageById } from "../../utils";
 import useStore from "../../store";
 import "./Card.scss";
 import useModal from "../../hooks/useModal";
+import useTutorial from "../../hooks/useTutorial";
+import useGameControls from "../../hooks/useGameControls";
 
 function Card(props) {
   const { state, setState, sendMessage } = useStore();
   const modal = useModal();
+  const tutorial = useTutorial();
   const cardSpotlight = useCardSpotlight();
+  const gameControls = useGameControls();
 
   const cardIsOnBoard = createMemo(() =>
     ["active-zone", "the-think-tank"].includes(props.location)
@@ -25,6 +29,35 @@ function Card(props) {
     () => !cardIsInHand() && !(faceDown() && props.opponent)
   );
   const canTargetFrom = createMemo(() => !props.opponent && !cardIsInHand());
+
+  const handleTutorialStep = () => {
+    if (!tutorial.started()) {
+      return;
+    }
+
+    if (tutorial.number() === 4) {
+      // focus step
+      tutorial.next();
+      return;
+    }
+
+    if (tutorial.number() === 6) {
+      const cardsInActiveZone = state.game.puppetMasters[0].activeZone.length;
+      if (cardsInActiveZone >= 3) {
+        tutorial.next();
+      }
+
+      return;
+    }
+
+    if (tutorial.number() === 12) {
+      const cardsInSpotlight = state.focus.spotlight;
+      if (cardsInSpotlight) {
+        tutorial.next();
+      }
+      return;
+    }
+  };
 
   const setTargetFromCard = (event) => {
     if (!canTargetFrom()) {
@@ -50,12 +83,7 @@ function Card(props) {
     };
 
     setState({ target });
-    sendMessage({
-      type: "target",
-      params: {
-        target,
-      },
-    });
+    gameControls.targetCard(target.from, target.to);
   };
 
   const tapOrUntapCard = () => {
@@ -63,12 +91,7 @@ function Card(props) {
       return;
     }
 
-    sendMessage({
-      type: "tap",
-      params: {
-        cardUuid: props.card.uuid,
-      },
-    });
+    gameControls.tapOrUntapCard(props.card.uuid);
   };
 
   const onDragStart = (event) => {
@@ -94,6 +117,8 @@ function Card(props) {
         },
       }));
     }
+
+    handleTutorialStep();
   };
 
   const removeFocusOnCard = () => {
@@ -139,13 +164,7 @@ function Card(props) {
     if (cardIsOnBoard()) {
       tapOrUntapCard();
     } else if (cardIsInHand()) {
-      sendMessage({
-        type: "play",
-        params: {
-          cardUuid: props.card.uuid,
-          destination: "active-zone",
-        },
-      });
+      gameControls.moveCard(props.card.uuid, "active-zone");
     }
   };
 
@@ -172,11 +191,22 @@ function Card(props) {
   const spotlightCard = (event) => {
     event.stopPropagation();
     cardSpotlight.open(props.card);
+    handleTutorialStep();
   };
 
   const editCardNotes = (event) => {
     event.stopPropagation();
     modal.open(MODAL_NAMES.CARD_NOTES, { card: props.card });
+  };
+
+  const flipCard = (event) => {
+    event.stopPropagation();
+    sendMessage({
+      type: "flip-card",
+      params: {
+        cardUuid: props.card.uuid,
+      },
+    });
   };
 
   const cardClassName = () => {
@@ -215,6 +245,11 @@ function Card(props) {
         <Show when={canTargetFrom()}>
           <button class="card-action-button" onClick={setTargetFromCard}>
             ⌖
+          </button>
+        </Show>
+        <Show when={cardIsOnBoard()}>
+          <button class="card-action-button flip-button" onClick={flipCard}>
+            ↴
           </button>
         </Show>
         <Show when={cardIsOnBoard()}>

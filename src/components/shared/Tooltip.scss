@@ -1,0 +1,58 @@
+@import "../../styles/colors.scss";
+@import "../../styles/effects.scss";
+@import "../../styles/animations.scss";
+@import "../../styles/text.scss";
+
+.tooltip {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+
+  .tooltip-outer {
+    display: flex;
+    border-radius: 10px;
+    padding: 0.5rem;
+    background-image: $noise;
+    animation: 0.15s linear infinite alternate noise;
+    justify-content: center;
+    background-color: $colorRed;
+    border: 4px ridge rgba($colorRed, 0.5);
+    box-shadow: 0px 0px 0.25rem 0.25rem rgba($colorRed, 0.2);
+  }
+
+  .tooltip-inner {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 0;
+    height: 100%;
+    max-width: 95%;
+    margin: 0.5rem 0;
+
+    background-color: $colorBlack;
+    background-image: $noise;
+    border-radius: 0.25rem;
+    box-shadow: 0px 0px 0.75rem 0.75rem $colorBlack;
+
+    @include defaultTextSizing();
+    font-size: 1.4rem;
+  }
+
+  .tooltip-button {
+    padding: 0.5rem 2rem;
+    align-self: center;
+  }
+}
+
+.tooltip-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($colorBlack, 0.5);
+  z-index: 1;
+  opacity: 1;
+}

@@ -18,6 +18,15 @@ function Menu() {
     });
   };
 
+  const startTutorial = () => {
+    sendMessage({
+      type: "create",
+      params: {
+        tutorial: true,
+      },
+    });
+  };
+
   const joinGame = () => {
     modal.open(MODAL_NAMES.ROOM_FIND);
   };
@@ -49,13 +58,13 @@ function Menu() {
       </div>
       <div class="menu-options panel">
         <CircleButton label="New Game" onClick={createRoom} />
-        <CircleButton label="Join Game" onClick={joinGame} />
+        <CircleButton label="Join Game" onClick={joinGame} color="red" />
         <CircleButton
           label="Deck Builder"
           color="teal"
           onClick={openDeckBuilder}
         />
-        <CircleButton label="Tutorial" disabled />
+        <CircleButton label="Tutorial" onClick={startTutorial} color="pink" />
       </div>
     </div>
   );

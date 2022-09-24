@@ -25,6 +25,11 @@ function App() {
       return "lobby";
     }
 
+    const inTutorial = !!state.game && state.room?.status === "tutorial";
+    if (inTutorial) {
+      return "tutorial";
+    }
+
     const inGame = !!state.game;
     if (inGame) {
       return "game";
@@ -44,6 +49,9 @@ function App() {
         <Switch fallback={<Connect />}>
           <Match when={screenToShow() === "deck"}>
             <DeckBuilder />
+          </Match>
+          <Match when={screenToShow() === "tutorial"}>
+            <GameBoard isTutorial />
           </Match>
           <Match when={screenToShow() === "game"}>
             <GameBoard />

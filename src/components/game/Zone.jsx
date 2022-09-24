@@ -1,12 +1,14 @@
 import { createMemo, For } from "solid-js";
 import { hyphenToCamelCase } from "../../utils";
+import useGameControls from "../../hooks/useGameControls";
 import useStore from "../../store";
 import Card from "../card/Card";
 import "./Zone.scss";
 
 function Zone(props) {
   let zoneRef;
-  const { state, sendMessage } = useStore();
+  const { state } = useStore();
+  const gameControls = useGameControls();
 
   const cardsInZone = createMemo(() => {
     const puppetMaster = state.game.puppetMasters.find((puppetMaster) =>
@@ -51,13 +53,7 @@ function Zone(props) {
     zoneRef.classList.remove("drag-over");
     const cardUuid = event.dataTransfer.getData("text");
 
-    sendMessage({
-      type: "play",
-      params: {
-        cardUuid,
-        destination: props.name,
-      },
-    });
+    gameControls.moveCard(cardUuid, props.name);
   };
 
   return (
