@@ -1,11 +1,13 @@
 import { createMemo, For } from "solid-js";
+import useGameControls from "../../hooks/useGameControls";
 import useStore from "../../store";
 import Card from "../card/Card";
 import "./Hand.scss";
 
 function Hand(props) {
   let handRef;
-  const { state, sendMessage } = useStore();
+  const { state } = useStore();
+  const gameControls = useGameControls();
 
   const hand = createMemo(() => {
     const puppetMaster = state.game.puppetMasters.find(({ id }) => {
@@ -16,10 +18,10 @@ function Hand(props) {
     });
 
     if (props.stowed) {
-      return puppetMaster.stowedHand;
+      return puppetMaster?.stowedHand;
     }
 
-    return puppetMaster.lookHand;
+    return puppetMaster?.lookHand;
   });
 
   const onDragOver = (event) => {
@@ -49,13 +51,7 @@ function Hand(props) {
     handRef.classList.remove("drag-over");
     const cardUuid = event.dataTransfer.getData("text");
 
-    sendMessage({
-      type: "move-card",
-      params: {
-        cardUuid,
-        destination: props.stowed ? "stowed-hand" : "look-hand",
-      },
-    });
+    gameControls.moveCard(cardUuid, props.stowed ? "stowed-hand" : "look-hand");
   };
 
   const getClassName = () => {

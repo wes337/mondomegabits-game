@@ -10,8 +10,10 @@ const tutorialSteps = [
           mechanics.
         </p>
         <p>
+          <span class="yellow">[[</span>
           Please note that this is a sandbox game. All players can draw, move,
           and interact with cards and the board freely.
+          <span class="yellow">]]</span>
         </p>
       </div>
     ),
@@ -24,7 +26,10 @@ const tutorialSteps = [
           You can press <span class="yellow">Ctrl + S</span> to shuffle your
           deck.
         </p>
-        <p>Shuffle your deck.</p>
+        <p>
+          <span class="yellow">[[</span>Shuffle your deck.
+          <span class="yellow">]]</span>
+        </p>
       </div>
     ),
     showNextButton: false,
@@ -53,7 +58,10 @@ const tutorialSteps = [
           To draw a card, press <span class="yellow">Ctrl + D</span> or{" "}
           <span class="yellow">click on your deck</span>.
         </p>
-        <p>Draw 5 cards.</p>
+        <p>
+          <span class="yellow">[[</span>Draw 5 cards.
+          <span class="yellow">]]</span>
+        </p>
       </div>
     ),
     showNextButton: false,
@@ -71,7 +79,10 @@ const tutorialSteps = [
     content: (
       <div class="tutorial-text">
         <p class="white">Focus on a card by clicking on it once.</p>
-        <p>Focus on a card in your Look Hand.</p>
+        <p>
+          <span class="yellow">[[</span>Focus on a card in your Look Hand.
+          <span class="yellow">]]</span>
+        </p>
       </div>
     ),
     showNextButton: false,
@@ -113,7 +124,10 @@ const tutorialSteps = [
           To play a card, <span class="yellow">drag it onto the board</span> or{" "}
           <span class="yellow">double click it</span>.
         </p>
-        <p>Play 3 cards from your Look Hand.</p>
+        <p>
+          <span class="yellow">[[</span>Play 3 cards from your Look Hand.
+          <span class="yellow">]]</span>
+        </p>
       </div>
     ),
     showNextButton: false,
@@ -148,7 +162,10 @@ const tutorialSteps = [
           </span>
           .
         </p>
-        <p>Decrease your funding by 3 points.</p>
+        <p>
+          <span class="yellow">[[</span>Decrease your funding by 3 points.
+          <span class="yellow">]]</span>
+        </p>
       </div>
     ),
     showNextButton: false,
@@ -182,7 +199,10 @@ const tutorialSteps = [
           </span>
           .
         </p>
-        <p>Increase your narrative by 3 points.</p>
+        <p>
+          <span class="yellow">[[</span>Increase your narrative by 3 points.
+          <span class="yellow">]]</span>
+        </p>
       </div>
     ),
     showNextButton: false,
@@ -195,7 +215,10 @@ const tutorialSteps = [
         <p class="white">
           To tap a card, <span class="yellow">double click</span> it.
         </p>
-        <p>Tap a card in the active zone.</p>
+        <p>
+          <span class="yellow">[[</span>Tap a card in the active zone.
+          <span class="yellow">]]</span>
+        </p>
       </div>
     ),
     showNextButton: false,
@@ -219,7 +242,10 @@ const tutorialSteps = [
           You can untap all cards in your active zone by pressing{" "}
           <span class="yellow">Ctrl + U</span>.
         </p>
-        <p>Untap all of your cards in the active zone.</p>
+        <p>
+          <span class="yellow">[[</span>Untap all of your cards in the active
+          zone.<span class="yellow">]]</span>
+        </p>
       </div>
     ),
     showNextButton: false,
@@ -239,7 +265,10 @@ const tutorialSteps = [
           <span class="yellow">click the ⌖ button</span>. Then,{" "}
           <span class="yellow">click on another card</span> to target it.
         </p>
-        <p>Create a line between 2 cards.</p>
+        <p>
+          <span class="yellow">[[</span>Create a line between 2 cards.
+          <span class="yellow">]]</span>
+        </p>
       </div>
     ),
     showNextButton: false,
@@ -255,7 +284,10 @@ const tutorialSteps = [
           <span class="yellow">press the ⇱ button</span> to view it in its full
           size.
         </p>
-        <p>View a card in its full size.</p>
+        <p>
+          <span class="yellow">[[</span>View a card in its full size.
+          <span class="yellow">]]</span>
+        </p>
       </div>
     ),
     showNextButton: false,
@@ -270,7 +302,10 @@ const tutorialSteps = [
           <span class="yellow">Click anywhere</span> or{" "}
           <span class="yellow">press any key</span> to close the card spotlight.
         </p>
-        <p>Close the card spotlight.</p>
+        <p>
+          <span class="yellow">[[</span>Close the card spotlight.
+          <span class="yellow">]]</span>
+        </p>
       </div>
     ),
     showNextButton: false,
@@ -286,7 +321,10 @@ const tutorialSteps = [
           <span class="yellow">dragging and dropping</span> them to any desired
           zone.
         </p>
-        <p>Move a card to your discard pile.</p>
+        <p>
+          <span class="yellow">[[</span>Move a card to your discard pile.
+          <span class="yellow">]]</span>
+        </p>
       </div>
     ),
     showNextButton: false,
@@ -305,7 +343,10 @@ const tutorialSteps = [
           Click the <span class="yellow">End My Turn</span> button to end your
           turn.
         </p>
-        <p>End your turn.</p>
+        <p>
+          <span class="yellow">[[</span>End your turn.
+          <span class="yellow">]]</span>
+        </p>
       </div>
     ),
     showNextButton: false,
@@ -327,7 +368,10 @@ const tutorialSteps = [
           That's all you need to know to get started! Click next to end the
           tutorial.
         </p>
-        <p>End the tutorial.</p>
+        <p>
+          <span class="yellow">[[</span>End the tutorial.
+          <span class="yellow">]]</span>
+        </p>
       </div>
     ),
     showNextButton: true,

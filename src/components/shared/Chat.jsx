@@ -1,4 +1,4 @@
-import { onMount, createEffect, For } from "solid-js";
+import { onMount, createEffect, For, Switch, Match } from "solid-js";
 import useStore from "../../store";
 import "./Chat.scss";
 
@@ -57,15 +57,42 @@ function Chat(props) {
     setState({ chatInput: "" });
   };
 
-  const systemMessage = (message) => {
+  const SystemMessage = (props) => {
     return (
       <div class="message system">
         <p class="red italic">
           <span class="white">[ </span>
-          {message.message}
+          {props.message.message}
           <span class="white"> ]</span>
         </p>
-        <div class="message-date yellow">{message.date}</div>
+        <div class="message-date yellow">{props.message.date}</div>
+      </div>
+    );
+  };
+
+  const GameMessage = (props) => {
+    return (
+      <div class="message game">
+        <p class="white">{props.message.message}</p>
+        <div class="message-date yellow">{props.message.date}</div>
+      </div>
+    );
+  };
+
+  const UserMessage = (props) => {
+    return (
+      <div class="message">
+        <p>
+          <span
+            class={`message-user ${
+              props.message.user.id === state.user.id ? "teal" : "white"
+            }`}
+          >
+            {props.message.user.name}
+          </span>{" "}
+          {props.message.message}
+        </p>
+        <div class="message-date yellow">{props.message.date}</div>
       </div>
     );
   };
@@ -74,25 +101,16 @@ function Chat(props) {
     <div class={`chat${props.small ? " small" : ""}`}>
       <div class="messages grunge" ref={messagesRef}>
         <For each={state.room.chatMessages}>
-          {(message) =>
-            message.user.id === "SYSTEM" ? (
-              systemMessage(message)
-            ) : (
-              <div class="message">
-                <p>
-                  <span
-                    class={`message-user ${
-                      message.user.id === state.user.id ? "teal" : "white"
-                    }`}
-                  >
-                    {message.user.name}
-                  </span>{" "}
-                  {message.message}
-                </p>
-                <div class="message-date yellow">{message.date}</div>
-              </div>
-            )
-          }
+          {(message) => (
+            <Switch fallback={<UserMessage message={message} />}>
+              <Match when={message.user.id === "SYSTEM"}>
+                <SystemMessage message={message} />
+              </Match>
+              <Match when={message.user.id === "GAME"}>
+                <GameMessage message={message} />
+              </Match>
+            </Switch>
+          )}
         </For>
       </div>
       <form class={props.small ? "small" : ""} onSubmit={sendChatMessage}>

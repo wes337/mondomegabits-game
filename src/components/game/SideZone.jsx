@@ -3,10 +3,12 @@ import { getCardImageById, hyphenToCamelCase } from "../../utils";
 import useStore from "../../store";
 import Card from "../card/Card";
 import "./SideZone.scss";
+import useGameControls from "../../hooks/useGameControls";
 
 function SideZone(props) {
   let sizeZoneRef;
-  const { state, sendMessage } = useStore();
+  const { state } = useStore();
+  const gameControls = useGameControls();
 
   const me = createMemo(() =>
     state.game.puppetMasters.find(({ id }) => id === state.user.id)
@@ -55,13 +57,7 @@ function SideZone(props) {
     sizeZoneRef.classList.remove("drag-over");
     const cardUuid = event.dataTransfer.getData("text");
 
-    sendMessage({
-      type: "move-card",
-      params: {
-        cardUuid,
-        destination: props.name,
-      },
-    });
+    gameControls.moveCard(cardUuid, props.name);
   };
 
   const getClassName = () => {

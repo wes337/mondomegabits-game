@@ -17,7 +17,11 @@ function Zone(props) {
         : puppetMaster.id === state.user.id
     );
     const zoneKey = hyphenToCamelCase(props.name);
-    const cards = puppetMaster[zoneKey];
+    const cards = puppetMaster?.[zoneKey];
+
+    if (!cards) {
+      return [];
+    }
 
     if (Array.isArray(cards)) {
       return cards || [];

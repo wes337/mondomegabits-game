@@ -8,9 +8,9 @@ import LeftSideBar from "./LeftSideBar";
 import RightSideBar from "./RightSideBar";
 import MainBoard from "./MainBoard";
 import GameFooter from "./GameFooter";
-import "./GameBoard.scss";
 import Tooltip from "../shared/Tooltip";
 import useTutorial from "../../hooks/useTutorial";
+import "./GameBoard.scss";
 
 function GameBoard(props) {
   let mainBoardRef;

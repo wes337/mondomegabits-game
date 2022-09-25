@@ -61,6 +61,10 @@ label {
   @include textColorAndShadow($colorBlue);
 }
 
+.light-blue {
+  @include textColorAndShadow($colorLightBlue);
+}
+
 .glow {
   @include textColorAndShadow($colorTeal);
   letter-spacing: 2.5px;

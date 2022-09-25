@@ -36,17 +36,10 @@ function Card(props) {
     }
 
     if (tutorial.number() === 4) {
-      // focus step
-      tutorial.next();
-      return;
-    }
-
-    if (tutorial.number() === 6) {
-      const cardsInActiveZone = state.game.puppetMasters[0].activeZone.length;
-      if (cardsInActiveZone >= 3) {
+      const cardsInFocus = state.focus.current;
+      if (cardsInFocus) {
         tutorial.next();
       }
-
       return;
     }
 

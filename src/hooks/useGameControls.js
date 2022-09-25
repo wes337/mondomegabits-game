@@ -27,6 +27,9 @@ function useGameControls() {
 
     if (tutorial.number() === 6) {
       setTimeout(() => {
+        if (tutorial.number() !== 6) {
+          return;
+        }
         const cardsInActiveZone = me().activeZone.length;
         if (tutorial.number() === 6 && cardsInActiveZone >= 3) {
           tutorial.next();
@@ -35,27 +38,38 @@ function useGameControls() {
     }
 
     if (tutorial.number() === 7) {
-      if (me().funding <= 18) {
-        tutorial.next();
-      }
+      setTimeout(() => {
+        if (tutorial.number() !== 7) {
+          return;
+        }
+        if (me().funding <= 17) {
+          tutorial.next();
+        }
+      }, 1000);
     }
 
     if (tutorial.number() === 8) {
-      if (me().narrative >= 2) {
-        tutorial.next();
-      }
+      setTimeout(() => {
+        if (tutorial.number() !== 8) {
+          return;
+        }
+        if (me().narrative >= 3) {
+          tutorial.next();
+        }
+      }, 1000);
     }
 
     if (tutorial.number() === 9) {
-      tutorial.next();
-    }
-
-    if (tutorial.number() === 10) {
-      const allCardsAreUntapped =
-        me().activeZone.filter(({ tapped }) => tapped).length === 1;
-      if (allCardsAreUntapped) {
-        tutorial.next();
-      }
+      setTimeout(() => {
+        if (tutorial.number() !== 9) {
+          return;
+        }
+        const cardWasTapped =
+          me().activeZone.filter(({ tapped }) => tapped).length === 0;
+        if (cardWasTapped) {
+          tutorial.next();
+        }
+      }, 1000);
     }
 
     if (tutorial.number() === 11) {
@@ -67,7 +81,11 @@ function useGameControls() {
 
     if (tutorial.number() === 14) {
       setTimeout(() => {
-        if (tutorial.number() === 14 && me().discardPile.length === 1) {
+        if (tutorial.number() !== 14) {
+          return;
+        }
+
+        if (me().discardPile.length >= 1) {
           tutorial.next();
         }
       }, 1000);
@@ -75,7 +93,11 @@ function useGameControls() {
 
     if (tutorial.number() === 15) {
       setTimeout(() => {
-        if (tutorial.number() === 15 && state.game.turn.number === 2) {
+        if (tutorial.number() !== 15) {
+          return;
+        }
+
+        if (state.game.turn.number >= 2) {
           tutorial.next();
         }
       }, 1000);
@@ -103,6 +125,14 @@ function useGameControls() {
   };
 
   const tapOrUntapCard = (cardUuid) => {
+    if (
+      tutorial.started() &&
+      tutorial.number() !== 9 &&
+      tutorial.number() !== 10
+    ) {
+      return;
+    }
+
     sendMessage({
       type: "tap-card",
       params: {
@@ -118,7 +148,9 @@ function useGameControls() {
       type: "untap-all-cards",
     });
 
-    handleTutorialStep();
+    if (tutorial.started() && tutorial.number() === 10) {
+      tutorial.next();
+    }
   };
 
   const targetCard = (fromCardUuid, toCardUuid) => {

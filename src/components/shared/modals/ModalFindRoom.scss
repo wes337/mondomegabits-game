@@ -16,20 +16,22 @@
       fieldset {
         max-height: 50vh;
         overflow: hidden;
-        padding: 1rem 1.5rem;
         overflow-x: hidden;
         overflow-y: auto;
+        background-color: $colorDarkestGray;
+        background-image: url("../../../assets/subtle-grunge.png");
+        background-blend-mode: overlay;
       }
+    }
+
+    .no-games-found {
+      padding: 2rem;
     }
 
     .room-list {
       width: 100%;
       text-align: left;
       border-spacing: 10px;
-      background-color: $colorDarkestGray;
-      background-image: url("../../../assets/subtle-grunge.png");
-      background-blend-mode: overlay;
-      outline: 4px solid rgba($colorLightGray, 0.5);
 
       th,
       td {
@@ -48,27 +50,6 @@
 
       .room-join button {
         margin-left: auto;
-      }
-    }
-  }
-
-  .join-code {
-    form {
-      display: flex;
-      gap: 0.5rem;
-      padding: 0.5rem;
-
-      input {
-        flex-grow: 1;
-        outline: 0;
-
-        &:focus {
-          outline: 2px solid rgba($colorGreen, 0.5);
-        }
-      }
-
-      button {
-        padding: 0.25rem 1rem;
       }
     }
   }

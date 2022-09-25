@@ -32,6 +32,16 @@
         }
       }
 
+      &.game {
+        margin-left: auto;
+        gap: 1rem;
+
+        p {
+          text-align: right;
+          word-break: keep-all;
+        }
+      }
+
       p {
         margin-top: 0;
         word-break: break-all;

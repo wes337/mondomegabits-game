@@ -1,4 +1,5 @@
 import { createStore } from "solid-js/store";
+import { gameLogToChatMessage } from "./gameLog";
 import initialState from "./initialState";
 
 const ws = new WebSocket("wss://mondo-megabits.herokuapp.com");
@@ -25,14 +26,6 @@ function useStore() {
     setState({
       connected: false,
     });
-  };
-
-  const gameLogToChatMessage = (log) => {
-    return {
-      message: log.event,
-      date: log.date,
-      user: "SYSTEM",
-    };
   };
 
   ws.onmessage = (event) => {
