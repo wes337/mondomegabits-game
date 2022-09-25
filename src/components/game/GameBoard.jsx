@@ -77,7 +77,6 @@ function GameBoard(props) {
           position={tutorial.current().position?.()}
           placement={tutorial.current().placement}
         >
-          {tutorial.number()}
           {tutorial.current().content}
           <Show when={tutorial.current().showNextButton}>
             <button

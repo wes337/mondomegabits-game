@@ -52,6 +52,14 @@ function useTutorial() {
       }
     }
 
+    if (tutorialStep() === 4) {
+      const cardsInFocus = state.focus.current;
+      if (cardsInFocus) {
+        nextStep();
+      }
+      return;
+    }
+
     if (tutorialStep() === 6) {
       const cardsInActiveZone = me().activeZone.length;
       if (cardsInActiveZone >= 3) {
@@ -92,6 +100,22 @@ function useTutorial() {
       if (cardsWereTargeted) {
         nextStep();
       }
+    }
+
+    if (tutorialStep() === 12) {
+      const cardsInSpotlight = state.focus.spotlight;
+      if (cardsInSpotlight) {
+        nextStep();
+      }
+      return;
+    }
+
+    if (tutorialStep() === 13) {
+      const spotlightClosed = !state.focus.spotlight;
+      if (spotlightClosed) {
+        nextStep();
+      }
+      return;
     }
 
     if (tutorialStep() === 14) {

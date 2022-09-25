@@ -6,13 +6,11 @@ import { getCardImageById } from "../../utils";
 import useStore from "../../store";
 import "./Card.scss";
 import useModal from "../../hooks/useModal";
-import useTutorial from "../../hooks/useTutorial";
 import useGameControls from "../../hooks/useGameControls";
 
 function Card(props) {
   const { state, setState, sendMessage } = useStore();
   const modal = useModal();
-  const tutorial = useTutorial();
   const cardSpotlight = useCardSpotlight();
   const gameControls = useGameControls();
 
@@ -29,28 +27,6 @@ function Card(props) {
     () => !cardIsInHand() && !(faceDown() && props.opponent)
   );
   const canTargetFrom = createMemo(() => !props.opponent && !cardIsInHand());
-
-  const handleTutorialStep = () => {
-    if (!tutorial.started()) {
-      return;
-    }
-
-    if (tutorial.number() === 4) {
-      const cardsInFocus = state.focus.current;
-      if (cardsInFocus) {
-        tutorial.next();
-      }
-      return;
-    }
-
-    if (tutorial.number() === 12) {
-      const cardsInSpotlight = state.focus.spotlight;
-      if (cardsInSpotlight) {
-        tutorial.next();
-      }
-      return;
-    }
-  };
 
   const setTargetFromCard = (event) => {
     if (!canTargetFrom()) {
@@ -110,8 +86,6 @@ function Card(props) {
         },
       }));
     }
-
-    handleTutorialStep();
   };
 
   const removeFocusOnCard = () => {
@@ -184,7 +158,6 @@ function Card(props) {
   const spotlightCard = (event) => {
     event.stopPropagation();
     cardSpotlight.open(props.card);
-    handleTutorialStep();
   };
 
   const editCardNotes = (event) => {
