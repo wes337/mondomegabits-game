@@ -1,8 +1,10 @@
 import { createMemo } from "solid-js";
 import useStore from "../store";
+import useTutorial from "./useTutorial";
 
 function useGameControls() {
   const { state, setState, sendMessage } = useStore();
+  const tutorial = useTutorial();
 
   const me = createMemo(() =>
     state.game.puppetMasters.find(({ id }) => id === state.user.id)
@@ -22,6 +24,10 @@ function useGameControls() {
     sendMessage({
       type: "shuffle-deck",
     });
+
+    if (tutorial.started() && tutorial.number() === 1) {
+      tutorial.next();
+    }
   };
 
   const tapOrUntapCard = (cardUuid) => {

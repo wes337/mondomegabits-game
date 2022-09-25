@@ -41,11 +41,6 @@ function useTutorial() {
       return;
     }
 
-    if (tutorialStep() === 1) {
-      // shuffle deck
-      nextStep();
-    }
-
     if (tutorialStep() === 3) {
       if (me().lookHand.length === 5) {
         nextStep();
