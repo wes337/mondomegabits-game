@@ -133,6 +133,7 @@ function useStore() {
             ],
           },
         }));
+
         break;
       }
       case "target": {
