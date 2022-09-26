@@ -108,8 +108,8 @@ function useKeyboard() {
   };
 
   return {
-    controls: keyboardControls,
-    tutorialControls: tutorialKeyboardControls,
+    controls: () =>
+      tutorial.started() ? tutorialKeyboardControls : keyboardControls,
   };
 }
 

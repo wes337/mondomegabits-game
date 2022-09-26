@@ -1,18 +1,18 @@
-import { onCleanup, onMount, createEffect, Show } from "solid-js";
+import { onCleanup, onMount, Show } from "solid-js";
 import useStore from "../../store";
 import useKeyboard from "../../hooks/useKeyboard";
+import useTutorial from "../../hooks/useTutorial";
 import CardSpotlight from "../card/CardSpotlight";
 import CardTarget from "../card/CardTarget";
+import Tutorial from "../tutorial/Tutorial";
 import GameHeader from "./GameHeader";
 import LeftSideBar from "./LeftSideBar";
 import RightSideBar from "./RightSideBar";
 import MainBoard from "./MainBoard";
 import GameFooter from "./GameFooter";
-import Tooltip from "../shared/Tooltip";
-import useTutorial from "../../hooks/useTutorial";
 import "./GameBoard.scss";
 
-function GameBoard(props) {
+function GameBoard() {
   let mainBoardRef;
   const keyboard = useKeyboard();
   const tutorial = useTutorial();
@@ -39,26 +39,13 @@ function GameBoard(props) {
   };
 
   onMount(() => {
-    if (props.isTutorial) {
-      document.addEventListener("keydown", keyboard.tutorialControls);
-      tutorial.reset();
-    } else {
-      document.addEventListener("keydown", keyboard.controls);
-    }
+    const keyboardControls = keyboard.controls();
+    document.addEventListener("keydown", keyboardControls);
   });
 
   onCleanup(() => {
-    if (props.isTutorial) {
-      document.removeEventListener("keydown", keyboard.tutorialControls);
-    } else {
-      document.removeEventListener("keydown", keyboard.controls);
-    }
-  });
-
-  createEffect(() => {
-    if (tutorial.started() && tutorial.current()) {
-      tutorial.current().effect?.();
-    }
+    const keyboardControls = keyboard.controls();
+    document.removeEventListener("keydown", keyboardControls);
   });
 
   return (
@@ -72,27 +59,8 @@ function GameBoard(props) {
       </div>
       <CardSpotlight />
       <CardTarget />
-      <Show when={tutorial.started() && tutorial.current()}>
-        <Tooltip
-          position={tutorial.current().position?.()}
-          placement={tutorial.current().placement}
-        >
-          {tutorial.current().content}
-          <Show when={tutorial.current().showNextButton}>
-            <button
-              class="button tooltip-button"
-              onClick={() => {
-                if (tutorial.number() === 16) {
-                  tutorial.end();
-                } else {
-                  tutorial.next();
-                }
-              }}
-            >
-              Next
-            </button>
-          </Show>
-        </Tooltip>
+      <Show when={tutorial.started()}>
+        <Tutorial />
       </Show>
     </>
   );

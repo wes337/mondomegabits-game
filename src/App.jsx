@@ -50,10 +50,7 @@ function App() {
           <Match when={screenToShow() === "deck"}>
             <DeckBuilder />
           </Match>
-          <Match when={screenToShow() === "tutorial"}>
-            <GameBoard isTutorial />
-          </Match>
-          <Match when={screenToShow() === "game"}>
+          <Match when={["game", "tutorial"].includes(screenToShow())}>
             <GameBoard />
           </Match>
           <Match when={screenToShow() === "room"}>

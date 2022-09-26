@@ -2,11 +2,13 @@ import useStore from "../../store";
 import MODAL_NAMES from "../../constants/modal";
 import useModal from "../../hooks/useModal";
 import CircleButton from "../shared/CircleButton";
+import useTutorial from "../../hooks/useTutorial";
 import "./Menu.scss";
 
 function Menu() {
   const { state, setState, sendMessage } = useStore();
   const modal = useModal();
+  const tutorial = useTutorial();
 
   const createRoom = () => {
     sendMessage({ type: "create" });
@@ -19,6 +21,7 @@ function Menu() {
   };
 
   const startTutorial = () => {
+    tutorial.reset();
     sendMessage({
       type: "create",
       params: {

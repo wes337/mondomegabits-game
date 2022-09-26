@@ -3,14 +3,14 @@
 @import "../../styles/animations.scss";
 @import "../../styles/text.scss";
 
-.tooltip {
+.tutorial-guide {
   position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 4;
 
-  .tooltip-outer {
+  .tutorial-guide-outer {
     display: flex;
     border-radius: 10px;
     padding: 0.5rem;
@@ -22,7 +22,7 @@
     box-shadow: 0px 0px 0.25rem 0.25rem rgba($colorRed, 0.2);
   }
 
-  .tooltip-inner {
+  .tutorial-guide-inner {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -39,14 +39,9 @@
     @include defaultTextSizing();
     font-size: 1.4rem;
   }
-
-  .tooltip-button {
-    padding: 0.5rem 2rem;
-    align-self: center;
-  }
 }
 
-.tooltip-overlay {
+.tutorial-guide-overlay {
   position: fixed;
   top: 0;
   left: 0;

@@ -1,8 +1,8 @@
 import { children, createEffect, onMount, onCleanup } from "solid-js";
-import "./Tooltip.scss";
+import "./TutorialGuide.scss";
 
-function Tooltip(props) {
-  let tooltipRef;
+function TutorialGuide(props) {
+  let tutorialGuideRef;
   const c = children(() => props.children);
 
   const calculatePosition = () => {
@@ -10,25 +10,25 @@ function Tooltip(props) {
       return;
     }
 
-    tooltipRef.style.top = `${
+    tutorialGuideRef.style.top = `${
       props.position.top + props.position.height / 2
     }px`;
     if (props.placement === "top") {
-      tooltipRef.style.top = `${
+      tutorialGuideRef.style.top = `${
         props.position.top - props.position.height / 2
       }px`;
     }
 
     if (props.placement === "left") {
-      tooltipRef.style.left = `${
+      tutorialGuideRef.style.left = `${
         props.position.left - props.position.width / 2 - 100
       }px`;
     } else if (props.placement === "right") {
-      tooltipRef.style.left = `${
+      tutorialGuideRef.style.left = `${
         props.position.left + props.position.width * 4
       }px`;
     } else {
-      tooltipRef.style.left = `${
+      tutorialGuideRef.style.left = `${
         props.position.left + props.position.width / 2
       }px`;
     }
@@ -48,14 +48,14 @@ function Tooltip(props) {
 
   return (
     <>
-      <div ref={tooltipRef} class="tooltip">
-        <div class="tooltip-outer">
-          <div class="tooltip-inner">{c()}</div>
+      <div ref={tutorialGuideRef} class="tutorial-guide">
+        <div class="tutorial-guide-outer">
+          <div class="tutorial-guide-inner">{c()}</div>
         </div>
       </div>
-      <div class="tooltip-overlay" />
+      <div class="tutorial-guide-overlay" />
     </>
   );
 }
 
-export default Tooltip;
+export default TutorialGuide;
