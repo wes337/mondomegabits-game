@@ -41,6 +41,14 @@ function useTutorial() {
       return;
     }
 
+    if (tutorialStep() === 1) {
+      const deckWasShuffled =
+        state.game.log[state.game.log.length - 1].event === "shuffle-deck";
+      if (deckWasShuffled) {
+        nextStep();
+      }
+    }
+
     if (tutorialStep() === 3) {
       if (me().lookHand.length === 5) {
         nextStep();
