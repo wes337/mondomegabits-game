@@ -2,7 +2,7 @@ import { createStore } from "solid-js/store";
 import { gameLogToChatMessage } from "./gameLog";
 import initialState from "./initialState";
 
-const ws = new WebSocket("wss://mondo-megabits.herokuapp.com");
+const ws = new WebSocket("wss://mondomegabits.fly.dev");
 // const ws = new WebSocket("ws://localhost:5000");
 
 function useStore() {

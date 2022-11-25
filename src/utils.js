@@ -11,7 +11,7 @@ export const getCardByName = (cardName) => {
 };
 
 export const getCardImage = (card) => {
-  return `https://mondomegabits.com/card/img/95/${card.fileStem}.jpg`;
+  return `https://cdn2.mondomegabits.com/cards/95/${card.fileStem}.jpg`;
 };
 
 export const getCardImageById = (cardId) => {
