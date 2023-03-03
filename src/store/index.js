@@ -1,35 +1,30 @@
+import { onCleanup, onMount } from "solid-js";
 import { createStore } from "solid-js/store";
+import { io } from "socket.io-client";
 import { gameLogToChatMessage } from "./gameLog";
 import initialState from "./initialState";
 
-const ws = new WebSocket("wss://mondomegabits.fly.dev");
-// const ws = new WebSocket("ws://localhost:5000");
+const socket = io("wss://mondomegabits.fly.dev");
+//const socket = io("ws://localhost:8080");
 
 const [state, setState] = createStore(initialState);
 
-function useStore() {
-  const sendMessage = (message) => {
-    ws.send(JSON.stringify(message));
-  };
+socket.on("connect", () => {
+  setState({
+    connected: true,
+  });
+});
 
-  ws.onopen = () => {
-    setState({
-      connected: true,
-    });
+socket.on("disconnect", () => {
+  setState({
+    connected: false,
+  });
+});
 
-    setInterval(() => {
-      sendMessage({ type: "ping" });
-    }, 40000);
-  };
-
-  ws.onclose = () => {
-    setState({
-      connected: false,
-    });
-  };
-
-  ws.onmessage = (event) => {
-    const { type, params } = JSON.parse(event.data);
+// eslint-disable-next-line solid/reactivity
+socket.on("message", (event) => {
+  try {
+    const { type, params } = JSON.parse(event);
 
     switch (type) {
       case "connected": {
@@ -151,7 +146,27 @@ function useStore() {
         break;
       }
     }
+  } catch {
+    return;
+  }
+});
+
+function useStore() {
+  let pingInterval;
+
+  const sendMessage = (message) => {
+    socket.send(JSON.stringify(message));
   };
+
+  onMount(() => {
+    pingInterval = setInterval(() => {
+      sendMessage({ type: "ping" });
+    }, 40000);
+  });
+
+  onCleanup(() => {
+    clearInterval(pingInterval);
+  });
 
   return { state, setState, sendMessage };
 }
