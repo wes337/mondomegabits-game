@@ -3,10 +3,13 @@ import useTutorial from "./useTutorial";
 
 function useKeyboard() {
   const tutorial = useTutorial();
-
   const gameControls = useGameControls();
 
   const tutorialKeyboardControls = (event) => {
+    if (!tutorial.started()) {
+      return;
+    }
+
     event.preventDefault();
     const { key, ctrlKey } = event;
 

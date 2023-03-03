@@ -5,9 +5,9 @@ import initialState from "./initialState";
 const ws = new WebSocket("wss://mondomegabits.fly.dev");
 // const ws = new WebSocket("ws://localhost:5000");
 
-function useStore() {
-  const [state, setState] = createStore(initialState);
+const [state, setState] = createStore(initialState);
 
+function useStore() {
   const sendMessage = (message) => {
     ws.send(JSON.stringify(message));
   };

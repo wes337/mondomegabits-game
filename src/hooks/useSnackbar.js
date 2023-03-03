@@ -1,9 +1,10 @@
 import { createMemo, createSignal } from "solid-js";
 import useStore from "../store";
 
+const [snackbarDuration, setSnackbarDuration] = createSignal(3000);
+
 function useSnackbar() {
   const { state, setState } = useStore();
-  const [snackbarDuration, setSnackbarDuration] = createSignal(3000);
 
   const message = createMemo(() => state.snackbar);
 

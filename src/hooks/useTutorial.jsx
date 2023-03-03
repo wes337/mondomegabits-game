@@ -18,6 +18,9 @@ const tutorialSteps = [
       </div>
     ),
     showNextButton: true,
+    effect: () => {
+      document.querySelector("#leave-game-button").style.zIndex = "2";
+    },
   },
   {
     content: (

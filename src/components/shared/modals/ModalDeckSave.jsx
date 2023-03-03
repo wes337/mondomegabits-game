@@ -32,7 +32,7 @@ function ModalDeckSave() {
             value={deckName()}
             minLength={2}
             maxLength={100}
-            onChange={(event) =>
+            onInput={(event) =>
               setDeckName(event.target.value.trim().slice(0, 100))
             }
           />

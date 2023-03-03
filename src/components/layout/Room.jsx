@@ -1,17 +1,19 @@
 import { createMemo, For, Show } from "solid-js";
 import MODAL_NAMES from "../../constants/modal";
 import useStore from "../../store";
+import useModal from "../../hooks/useModal";
+import useDeckBuilder from "../../hooks/useDeckBuilder";
+import useGameControls from "../../hooks/useGameControls";
 import Chat from "../shared/Chat";
 import CountDown from "../shared/CountDown";
 import CircleButton from "../shared/CircleButton";
-import useModal from "../../hooks/useModal";
 import "./Room.scss";
-import useDeckBuilder from "../../hooks/useDeckBuilder";
 
 function Room() {
-  const { state, setState, sendMessage } = useStore();
+  const { state, sendMessage } = useStore();
   const modal = useModal();
   const deckBuilder = useDeckBuilder();
+  const gameControls = useGameControls();
 
   const allUsersAreReady = createMemo(
     () => !state.room?.users?.find((user) => user.status !== "ready")
@@ -25,25 +27,6 @@ function Room() {
 
   const leaveRoom = () => {
     sendMessage({ type: "leave" });
-  };
-
-  const startGame = () => {
-    sendMessage({
-      type: "start",
-    });
-
-    // Clear cards in focus
-    setState({
-      focus: {
-        current: null,
-        hover: null,
-        spotlight: null,
-      },
-      target: {
-        from: null,
-        to: null,
-      },
-    });
   };
 
   const toggleReady = () => {
@@ -75,7 +58,7 @@ function Room() {
             <hr class="dotted-double" />
           </div>
           <Show when={allUsersAreReady()}>
-            <CountDown from={3} callback={startGame} />
+            <CountDown from={3} callback={() => gameControls.startGame()} />
           </Show>
         </div>
         <Chat />

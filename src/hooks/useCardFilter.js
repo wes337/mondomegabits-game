@@ -3,10 +3,10 @@ import { debounce } from "@solid-primitives/scheduled";
 import { matchSorter } from "match-sorter";
 import { ALL_BASIC_CARDS } from "../constants/card";
 
-function useCardFilter() {
-  const [searchQuery, setSearchQuery] = createSignal("");
-  const [filters, setFilters] = createSignal({});
+const [searchQuery, setSearchQuery] = createSignal("");
+const [filters, setFilters] = createSignal({});
 
+function useCardFilter() {
   const addFilter = (filterName, filterValue) => {
     setFilters((filters) => ({
       ...filters,

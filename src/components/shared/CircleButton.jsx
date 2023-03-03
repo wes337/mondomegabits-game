@@ -25,6 +25,7 @@ function CircleButton(props) {
 
   return (
     <button
+      id={props.id}
       class={getClassName()}
       type="button"
       onClick={onClick}

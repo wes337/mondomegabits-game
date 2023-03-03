@@ -1,11 +1,13 @@
 import { createMemo } from "solid-js";
 import useStore from "../store";
+import useTutorial from "./useTutorial";
 
 function useGameControls() {
+  const tutorial = useTutorial();
   const { state, setState, sendMessage } = useStore();
 
   const me = createMemo(() =>
-    state.game.puppetMasters.find(({ id }) => id === state.user.id)
+    state.game?.puppetMasters.find(({ id }) => id === state.user.id)
   );
 
   const increaseOrDecreaseStat = (stat, amount) => {
@@ -89,6 +91,35 @@ function useGameControls() {
     });
   };
 
+  const startGame = () => {
+    sendMessage({
+      type: "start",
+    });
+
+    // Clear cards in focus
+    setState({
+      focus: {
+        current: null,
+        hover: null,
+        spotlight: null,
+      },
+      target: {
+        from: null,
+        to: null,
+      },
+    });
+  };
+
+  const leaveGame = () => {
+    if (tutorial.started()) {
+      tutorial.end();
+    } else {
+      sendMessage({
+        type: "leave-game",
+      });
+    }
+  };
+
   return {
     increaseOrDecreaseStat,
     shuffleDeck,
@@ -98,6 +129,8 @@ function useGameControls() {
     moveCard,
     drawCards,
     endTurn,
+    startGame,
+    leaveGame,
   };
 }
 
