@@ -10,18 +10,9 @@
 
   align-items: center;
   justify-content: center;
-
-  .video {
-    position: absolute;
-    filter: hue-rotate(275deg);
-    opacity: 0.5;
-
-    video {
-      pointer-events: none;
-      image-rendering: pixelated;
-      mix-blend-mode: lighten;
-    }
-  }
+  opacity: 0;
+  animation: 0.5s ease forwards fadeIn;
+  animation-delay: 1s;
 
   form {
     display: grid;

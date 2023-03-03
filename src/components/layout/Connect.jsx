@@ -36,20 +36,6 @@ function Connect() {
 
   return (
     <div class="connect">
-      <div class="video">
-        <video
-          autoplay="true"
-          loop="true"
-          playsinline="true"
-          muted
-          tabIndex={-1}
-        >
-          <source
-            type='video/mp4; codecs="av01.0.13M.10"'
-            src="https://cdn.mondomegabits.com/logo/Mondo flashing logo_r3 - strobe.mp4"
-          />
-        </video>
-      </div>
       <form
         class={`puppet-master-handle-input${error() ? " error" : ""}`}
         onSubmit={connect}

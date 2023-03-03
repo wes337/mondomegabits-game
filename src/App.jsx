@@ -8,8 +8,9 @@ import GameBoard from "./components/game/GameBoard";
 import DeckBuilder from "./components/layout/DeckBuilder";
 import Modal from "./components/shared/modals/Modal";
 import Snackbar from "./components/shared/Snackbar";
-import "./App.scss";
 import Menu from "./components/layout/Menu";
+import Background from "./components/layout/Background";
+import "./App.scss";
 
 function App() {
   const { state } = useStore();
@@ -46,6 +47,7 @@ function App() {
   return (
     <>
       <div class="app">
+        <Background />
         <Switch fallback={<Connect />}>
           <Match when={screenToShow() === "deck"}>
             <DeckBuilder />

@@ -1,0 +1,36 @@
+@import "../../styles/colors.scss";
+@import "../../styles/text.scss";
+@import "../../styles/animations.scss";
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+
+  video {
+    pointer-events: none;
+  }
+
+  .logo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: scale-down;
+    image-rendering: pixelated;
+    mix-blend-mode: lighten;
+    opacity: 0.75;
+  }
+
+  .backdrop {
+    width: 100%;
+    height: 100%;
+    opacity: 0.75;
+    object-fit: cover;
+  }
+}

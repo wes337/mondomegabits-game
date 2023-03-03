@@ -3,16 +3,21 @@
   "homepage": "http://wes337.github.io/mondomegabits-game",
   "version": "0.0.0",
   "description": "",
+  "main": "main.js",
   "scripts": {
     "start": "vite",
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "start-electron": "electron ."
   },
   "license": "MIT",
   "devDependencies": {
+    "concurrently": "^7.6.0",
+    "electron": "^23.1.1",
+    "electron-reload": "^2.0.0-alpha.1",
     "eslint": "^8.23.1",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-solid": "^0.7.3",

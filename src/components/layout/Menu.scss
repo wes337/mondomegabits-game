@@ -8,19 +8,6 @@
   gap: 0.5rem;
   height: 100%;
 
-  .video {
-    position: absolute;
-    filter: hue-rotate(275deg);
-    opacity: 0.5;
-    z-index: -1;
-
-    video {
-      pointer-events: none;
-      image-rendering: pixelated;
-      mix-blend-mode: lighten;
-    }
-  }
-
   .menu-header {
     .puppet-master-name {
       display: flex;
