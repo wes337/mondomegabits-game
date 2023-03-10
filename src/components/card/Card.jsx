@@ -2,11 +2,11 @@ import { Show, createMemo } from "solid-js";
 import MODAL_NAMES from "../../constants/modal";
 import CardBack from "../../assets/card-back-small.png";
 import useCardSpotlight from "../../hooks/useCardSpotlight";
-import { getCardImageById } from "../../utils";
+import { getCardFileStemById, getCardImageById } from "../../utils";
 import useStore from "../../store";
-import "./Card.scss";
 import useModal from "../../hooks/useModal";
 import useGameControls from "../../hooks/useGameControls";
+import "./Card.scss";
 
 function Card(props) {
   const { state, setState, sendMessage } = useStore();
@@ -68,6 +68,16 @@ function Card(props) {
       return;
     }
     focusOnCard();
+
+    const img = new Image();
+    img.src = getCardImageById(props.card.id);
+
+    const ctx = document.createElement("canvas").getContext("2d");
+    ctx.canvas.width = 169;
+    ctx.canvas.height = img.height * (169 / img.width);
+    ctx.drawImage(img, 0, 0, img.width, img.height);
+
+    event.dataTransfer.setDragImage(ctx.canvas, 0, 0);
     event.dataTransfer.setData("text", props.card.uuid);
   };
 
@@ -112,6 +122,10 @@ function Card(props) {
         hover: props.card,
       },
     }));
+
+    const video = document.getElementById(props.card.uuid);
+    video.muted = false;
+    video.volume = 1;
   };
 
   const onPointerLeave = () => {
@@ -125,6 +139,10 @@ function Card(props) {
         hover: null,
       },
     }));
+
+    const video = document.getElementById(props.card.uuid);
+    video.muted = true;
+    video.volume = 0;
   };
 
   const handleDoubleClick = () => {
@@ -227,11 +245,24 @@ function Card(props) {
           </button>
         </Show>
       </div>
-      <img
-        id={props.card.uuid}
-        class="card-img"
-        src={faceDown() ? CardBack : getCardImageById(props.card.id)}
-      />
+
+      {faceDown() ? (
+        <img id={props.card.uuid} class="card-img" src={CardBack} />
+      ) : (
+        <>
+          <video
+            id={props.card.uuid}
+            class="card-img"
+            autoPlay={true}
+            muted={true}
+            loop={true}
+            width={169}
+            height={284}
+            src={`/cards/small/${getCardFileStemById(props.card.id)}.mp4`}
+          />
+          <img class="card-drag" src={getCardImageById(props.card.id)} />
+        </>
+      )}
     </div>
   );
 }

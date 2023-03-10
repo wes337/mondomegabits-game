@@ -1,6 +1,6 @@
-import { createMemo } from "solid-js";
+import { createMemo, Show } from "solid-js";
 import CardBackLarge from "../../assets/card-back-large.png";
-import { generateKey, getCardImageById } from "../../utils";
+import { generateKey } from "../../utils";
 import useStore from "../../store";
 import useCardSpotlight from "../../hooks/useCardSpotlight";
 import "./CardSpotlight.scss";
@@ -11,9 +11,6 @@ function CardSpotlight() {
   const card = createMemo(() => state.focus.spotlight);
   const inDeckBuilder = createMemo(() => state.deckBuilderOpen);
   const cardUuid = createMemo(() => card()?.uuid || generateKey());
-  const cardImg = createMemo(() =>
-    card() ? getCardImageById(card().id) : CardBackLarge
-  );
 
   const onPointerMove = (event) => {
     const transformAmount = 5;
@@ -75,13 +72,22 @@ function CardSpotlight() {
       onClick={cardSpotlight.close}
       onKeyDown={onKeyDown}
     >
-      <img
-        id={`${cardUuid()}-spotlight`}
-        src={cardImg()}
-        onPointerMove={onPointerMove}
-        onPointerEnter={onPointerEnter}
-        onPointerLeave={onPointerLeave}
-      />
+      <Show
+        when={card()}
+        fallback={<img id={`${cardUuid()}-spotlight`} src={CardBackLarge} />}
+      >
+        <video
+          id={`${cardUuid()}-spotlight`}
+          autoPlay={true}
+          muted={false}
+          loop={true}
+          onPointerMove={onPointerMove}
+          onPointerEnter={onPointerEnter}
+          onPointerLeave={onPointerLeave}
+        >
+          <source src={`/cards/full/${card().fileStem}.mp4`} />
+        </video>
+      </Show>
     </div>
   );
 }

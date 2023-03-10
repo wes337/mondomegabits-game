@@ -1,5 +1,11 @@
 import { allCards } from "./allCards";
 
+export const getCardFileStemById = (cardId) => {
+  const card = allCards.find((card) => card.id === cardId);
+
+  return card.fileStem;
+};
+
 export const getCardByName = (cardName) => {
   const card = allCards.find(
     (card) =>

@@ -34,3 +34,17 @@
     object-fit: cover;
   }
 }
+
+.copyright {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  font-family: $altFont;
+  color: $colorWhite;
+  font-size: 20px;
+  letter-spacing: -2px;
+  @include textColorAndShadow($colorWhite);
+  margin: 24px 0;
+  z-index: -1;
+}

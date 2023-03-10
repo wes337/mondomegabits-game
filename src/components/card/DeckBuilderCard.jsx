@@ -70,12 +70,16 @@ function DeckBuilderCard(props) {
       onPointerEnter={addCardToSpotlight}
       onPointerLeave={removeCardFromSpotlight}
     >
-      <img
+      <video
         id={props.card.id}
-        src={`images/cards/${props.card.fileStem}.jpg`}
         width="169"
         height="284"
-      />
+        autoPlay={true}
+        muted={true}
+        loop={true}
+      >
+        <source src={`/cards/small/${props.card.fileStem}.mp4`} />
+      </video>
       <Show when={props.stackSize > 1}>
         <div class="card-stack">
           <For each={[...Array(props.stackSize - 1)]}>

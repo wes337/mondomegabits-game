@@ -29,3 +29,9 @@ export const getCardTypesMap = () => {
 export const getCardTypeSubtypes = (cardType) => {
   return getCardTypesMap()[cardType];
 };
+
+export const getCardFileStemById = (cardId) => {
+  const card = allCards.find((card) => card.id === cardId);
+
+  return card.fileStem;
+};
