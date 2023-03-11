@@ -85,7 +85,7 @@ function CardSpotlight() {
           onPointerEnter={onPointerEnter}
           onPointerLeave={onPointerLeave}
         >
-          <source src={`/cards/full/${card().fileStem}.mp4`} />
+          <source src={`./cards/full/${card().fileStem}.mp4`} />
         </video>
       </Show>
     </div>

@@ -31,7 +31,7 @@ function IconButton(props) {
       disabled={props.disabled}
     >
       <div class="icon">
-        <img src={`images/icons/${props.icon}.svg`} height={16} width={16} />
+        <img src={`./images/icons/${props.icon}.svg`} height={16} width={16} />
       </div>
     </button>
   );

@@ -78,7 +78,7 @@ function DeckBuilderCard(props) {
         muted={true}
         loop={true}
       >
-        <source src={`/cards/small/${props.card.fileStem}.mp4`} />
+        <source src={`./cards/small/${props.card.fileStem}.mp4`} />
       </video>
       <Show when={props.stackSize > 1}>
         <div class="card-stack">
@@ -86,7 +86,7 @@ function DeckBuilderCard(props) {
             {(_, index) => (
               <img
                 id={`${props.card.id}-${index()}`}
-                src={`images/cards/${props.card.fileStem}.jpg`}
+                src={`./images/cards/${props.card.fileStem}.jpg`}
                 width="169"
                 height="284"
                 style={{

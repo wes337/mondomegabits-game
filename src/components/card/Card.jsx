@@ -241,7 +241,7 @@ function Card(props) {
             class="card-action-button edit-button"
             onClick={editCardNotes}
           >
-            <img src="images/icons/edit.svg" width={12} height={12} />
+            <img src="./images/icons/edit.svg" width={12} height={12} />
           </button>
         </Show>
       </div>
@@ -258,7 +258,7 @@ function Card(props) {
             loop={true}
             width={169}
             height={284}
-            src={`/cards/small/${getCardFileStemById(props.card.id)}.mp4`}
+            src={`./cards/small/${getCardFileStemById(props.card.id)}.mp4`}
           />
           <img class="card-drag" src={getCardImageById(props.card.id)} />
         </>
