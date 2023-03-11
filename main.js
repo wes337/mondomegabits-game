@@ -1,17 +1,13 @@
-const path = require("path");
 const { app, BrowserWindow, Menu } = require("electron");
-
-require("electron-reload")(__dirname, {
-  electron: path.join(__dirname, "node_modules", ".bin", "electron"),
-});
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow();
 
   // mainWindow.maximize();
   // mainWindow.loadURL("http://localhost:3000");
-  mainWindow.setFullScreen(true);
-  mainWindow.setResizable(false);
+
+  // mainWindow.setFullScreen(true);
+  // mainWindow.setResizable(false);
   mainWindow.loadFile("dist/index.html");
 
   Menu.setApplicationMenu(null);

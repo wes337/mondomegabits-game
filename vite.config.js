@@ -3,7 +3,7 @@ import solidPlugin from "vite-plugin-solid";
 import eslint from "vite-plugin-eslint";
 
 export default defineConfig({
-  base: "/mondomegabits-game/",
+  base: "./",
   plugins: [eslint(), solidPlugin()],
   server: {
     port: 3000,
