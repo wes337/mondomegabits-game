@@ -34,6 +34,10 @@ function Menu() {
     modal.open(MODAL_NAMES.ROOM_FIND);
   };
 
+  const quitApp = () => {
+    window.close();
+  };
+
   return (
     <div class="menu">
       <div class="menu-header">
@@ -54,6 +58,7 @@ function Menu() {
           onClick={openDeckBuilder}
         />
         <CircleButton label="Tutorial" onClick={startTutorial} color="pink" />
+        <CircleButton label="Quit" onClick={quitApp} />
       </div>
     </div>
   );

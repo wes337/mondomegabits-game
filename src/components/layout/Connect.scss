@@ -32,6 +32,11 @@
       @include defaultTextSizing();
       padding: 0.25rem;
       width: 100%;
+      background-color: rgba($colorGreen, 0.15);
+    }
+
+    .quit {
+      background-color: rgba($colorGreen, 0.05);
     }
 
     &.error {

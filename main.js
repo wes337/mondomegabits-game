@@ -1,7 +1,9 @@
 const { app, BrowserWindow, Menu } = require("electron");
 
 const createWindow = () => {
-  const mainWindow = new BrowserWindow();
+  const mainWindow = new BrowserWindow({
+    icon: "./icon.png",
+  });
 
   // mainWindow.maximize();
   // mainWindow.loadURL("http://localhost:3000");

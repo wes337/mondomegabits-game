@@ -34,6 +34,11 @@ function Connect() {
     }));
   };
 
+  const quitApp = (event) => {
+    event.stopPropagation();
+    window.close();
+  };
+
   return (
     <div class="connect">
       <form
@@ -51,6 +56,13 @@ function Connect() {
         />
         <button class="connect-button button" type="submit">
           Connect
+        </button>
+        <button
+          class="connect-button button quit"
+          type="button"
+          onClick={quitApp}
+        >
+          Quit
         </button>
       </form>
     </div>
