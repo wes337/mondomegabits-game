@@ -8,7 +8,7 @@ const createWindow = () => {
 
   // mainWindow.setFullScreen(true);
   // mainWindow.setResizable(false);
-  mainWindow.loadFile("dist/index.html");
+  mainWindow.loadFile("./dist/index.html");
 
   Menu.setApplicationMenu(null);
 
