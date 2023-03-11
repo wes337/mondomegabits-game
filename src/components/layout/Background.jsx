@@ -12,7 +12,7 @@ function Background() {
           muted
           tabIndex={-1}
         >
-          <source src="https://cdn2.mondomegabits.com/videos/web/backdrop-purp.mp4" />
+          <source src="/videos/backdrop-purp.mp4" />
         </video>
         <video
           class="logo"
@@ -22,7 +22,7 @@ function Background() {
           muted
           tabIndex={-1}
         >
-          <source src="https://cdn2.mondomegabits.com/videos/web/logo-purplegreen.mp4" />
+          <source src="/videos/logo-purplegreen.mp4" />
         </video>
       </div>
       <div class="copyright">
