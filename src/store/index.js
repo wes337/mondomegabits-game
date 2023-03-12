@@ -4,8 +4,8 @@ import { io } from "socket.io-client";
 import { gameLogToChatMessage } from "./gameLog";
 import initialState from "./initialState";
 
-const socket = io("wss://mondomegabits.fly.dev");
-// const socket = io("ws://localhost:8080");
+const socket = io("https://mondomegabits.fly.dev");
+//const socket = io("http://localhost:8080");
 
 const [state, setState] = createStore(initialState);
 
