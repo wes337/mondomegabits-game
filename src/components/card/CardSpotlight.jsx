@@ -1,6 +1,6 @@
 import { createMemo, Show } from "solid-js";
 import CardBackLarge from "../../assets/card-back-large.png";
-import { generateKey } from "../../utils";
+import { getCardFileStemById, generateKey } from "../../utils";
 import useStore from "../../store";
 import useCardSpotlight from "../../hooks/useCardSpotlight";
 import "./CardSpotlight.scss";
@@ -85,7 +85,7 @@ function CardSpotlight() {
           onPointerEnter={onPointerEnter}
           onPointerLeave={onPointerLeave}
         >
-          <source src={`./cards/full/${card().fileStem}.mp4`} />
+          <source src={`./cards/full/${getCardFileStemById(card().id)}.mp4`} />
         </video>
       </Show>
     </div>
