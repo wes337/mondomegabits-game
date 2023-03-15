@@ -14,7 +14,8 @@
     "start-electron": "electron .",
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "installer": "node ./build-installer.js"
   },
   "license": "MIT",
   "devDependencies": {
@@ -25,6 +26,7 @@
     "@electron-forge/maker-zip": "^6.0.5",
     "concurrently": "^7.6.0",
     "electron": "^23.1.1",
+    "electron-wix-msi": "^5.0.0",
     "eslint": "^8.23.1",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-solid": "^0.7.3",
